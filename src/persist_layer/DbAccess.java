@@ -52,15 +52,15 @@ public class DbAccess {
 	}
 	
 	public static int delete(String query){
-		return updateAndDelete(query);
+		return updateOrDelete(query);
 	}
 	
 	public static int update(String query){
-		return updateAndDelete(query);
+		return updateOrDelete(query);
 	}
 	
 	// Logic to update or delete row
-	private static int updateAndDelete(String query) {
+	private static int updateOrDelete(String query) {
 		int rows=0;
 		
 		try{
