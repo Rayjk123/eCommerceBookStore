@@ -15,5 +15,14 @@ Apache Tomcat 9.0
 4. Find repo directory and click ok
 5. Add src package to Java Resources if red ! appears
 
+**In case of Java Objects being Invalid**<br>
+1. Right Click Projects and go to Properties -> Java Build Path
+2. Click the Libraries Tab
+3. Remove JRE System Library
+4. Select Class Path
+5. Click Add Library -> JRE System Library -> Next -> Workspace Default JRE
+6. Apply the changes
+
+
 ## Running
 Currently there is only an index homepage which can be run by going to index.html under the WebContent directory and clicking the green run button.
