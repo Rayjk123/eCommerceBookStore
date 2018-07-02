@@ -92,6 +92,20 @@ body {
     -webkit-animation-timing-function: linear;
 }
 
+.center-text {
+	text-align: center;
+}
+
+.center-div {
+    margin: 0 auto;
+    width: 25%;
+}
+
+.input-field, .login-button {
+    width: 300px;
+}
+
+
 @-webkit-keyframes fontfix {
     from { opacity: 1; }
     to   { opacity: 1; }
