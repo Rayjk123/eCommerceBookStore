@@ -101,10 +101,25 @@ body {
     width: 25%;
 }
 
+.half-width {
+    width: 25%;
+}
+
 .input-field, .login-button {
     width: 300px;
 }
 
+.reg-label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: left;
+}
+
+.reg-input {
+    display: inline-block;
+    float: right;
+}
 
 @-webkit-keyframes fontfix {
     from { opacity: 1; }
