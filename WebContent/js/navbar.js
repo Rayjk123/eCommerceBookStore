@@ -46,6 +46,9 @@ $(document).ready(function(){
         "        <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n" +
         "    </form>\n" +
         "\n" +
+        "    <div class=\"login-area\">\n" +
+        "        <a class=\"nav-item\"><img src=\"images/login-logo.png\" width=\"30\" height=\"30\"/></a>\n" +
+        "    </div>\n" +
         "    <div class=\"cart-area\">\n" +
         "        <a class=\"nav-item\"><img src=\"images/shopping-bag.png\" width=\"30\" height=\"30\"/></a>\n" +
         "    </div>\n" +
