@@ -42,6 +42,11 @@ $(document).ready(function(){
         "\n" +
         "    <!--Search Bar-->\n" +
         "    <form method=\"post\" action=\"/search\" class=\"form-inline\">\n" +
+        "        <select class=\"form-control\" name=\"category\">\n" +
+        "            <option value=\"Book Title\">Book Title</option>\n" +
+        "            <option value=\"Author\">Author</option>\n" +
+        "            <option value=\"ISBN\">ISBN</option>\n" +
+        "        </select>\n" +
         "        <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n" +
         "        <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n" +
         "    </form>\n" +
