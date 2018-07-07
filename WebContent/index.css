@@ -1,5 +1,16 @@
 body {
     margin: 0;
+    /* Work Around to Enable Google Fonts */
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-name: fontfix;
+    -webkit-animation-duration: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+}
+
+table, tr, td {
+    margin: 0;
+    padding: 0;
 }
 
 /* Header Div CSS */
@@ -83,15 +94,6 @@ body {
     margin-top: -1px;
 }
 
-/* Work Around to Enable Google Fonts */
-body {
-    -webkit-animation-delay: 0.1s;
-    -webkit-animation-name: fontfix;
-    -webkit-animation-duration: 0.1s;
-    -webkit-animation-iteration-count: 1;
-    -webkit-animation-timing-function: linear;
-}
-
 .center-text {
 	text-align: center;
 }
@@ -135,6 +137,38 @@ body {
 
 .half-height {
     height: 50%;
+}
+
+.ul-style-none {
+    list-style-type: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.cart-div-height {
+    height: 200px;
+    line-height: 200px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.ul-fit-div {
+    height: 100%;
+    width: 100%;
+}
+
+.shopping-cart-img {
+    height: 100%;
+    width: auto;
+    display: block;
+    margin: auto;
+}
+
+.float-right {
+    float: right;
 }
 
 @-webkit-keyframes fontfix {
