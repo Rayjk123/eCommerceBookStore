@@ -8,7 +8,7 @@ body {
     height: 450pt;
     width: 100%;
     text-align: center;
-    background-image: url("images/AwesomeBookImage.jpg");
+    background-image: url("https://s3.us-east-2.amazonaws.com/csci4050/AwesomeBookImage.jpg");
     background-repeat: no-repeat;
     background-size: 100% 100%;
     position: relative;
@@ -123,6 +123,18 @@ body {
 
 .margin-50 {
     margin: 50px;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
+.overflow {
+    overflow: scroll;
+}
+
+.half-height {
+    height: 50%;
 }
 
 @-webkit-keyframes fontfix {
