@@ -155,7 +155,12 @@ table, tr, td {
     overflow: hidden;
 }
 
-.ul-fit-div {
+.cart-delete-button {
+    height: 100px;
+    width: 120px;
+}
+
+.fit-div {
     height: 100%;
     width: 100%;
 }
@@ -169,6 +174,10 @@ table, tr, td {
 
 .float-right {
     float: right;
+}
+
+.submit-button {
+    font-size: 12px;
 }
 
 @-webkit-keyframes fontfix {
