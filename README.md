@@ -1,6 +1,9 @@
 # eCommerceBookStore
 An eCommerce Book Store Website for a UGA assignment. Currently meant to be used with Tomcat 9.0 servers and Eclipse.
 
+## User Stories:
+[User Stories Board](https://ugacsci4050.myjetbrains.com/youtrack/agiles)
+
 ## Installation
 ### Required Technologies
 Eclipse for Java EE Developers or add in the Java EE portion
@@ -26,3 +29,8 @@ Apache Tomcat 9.0
 
 ## Running
 Currently there is only an index homepage which can be run by going to index.html under the WebContent directory and clicking the green run button.
+
+## Where to Find Images:
+Images are stored remotely and grabbed remotely from an Amazon S3 bucket. This is done in order to remove a large amount of bulk from the project itself. The bucket is: 
+* [Amazon S3 Image Bucket](https://s3.console.aws.amazon.com/s3/buckets/csci4050/?region=us-east-2&tab=overview)
+* Need an AWS account to view bucket. It's free and you can use any email.
