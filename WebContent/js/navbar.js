@@ -13,7 +13,7 @@ $(document).ready(function(){
         "\n" +
         "        <ul class=\"navbar-nav mr-auto\">\n" +
         "            <li class=\"nav-item active\">\n" +
-        "                <a class=\"nav-link\" href=\"#\">Home <span class=\"sr-only\">(current)</span></a>\n" +
+        "                <a class=\"nav-link\" href=\"index.html\">Home <span class=\"sr-only\">(current)</span></a>\n" +
         "            </li>\n" +
         "            <!--Dropdown Menu Link-->\n" +
         "            <li class=\"nav-item dropdown\">\n" +
