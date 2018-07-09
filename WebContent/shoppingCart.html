@@ -88,9 +88,12 @@
             </td>
         </tr>
     </table>
-    <form action="CheckoutServlet" method="post">
-        <input class="login-button float-right" type="submit" value="Proceed To Checkout"><br>
-    </form>
+    <div class="float-right">
+        <p id="total-price">Total Price: $8.50</p>
+        <form action="CheckoutServlet" method="post">
+            <input type="submit" value="Proceed To Checkout"><br>
+        </form>
+    </div>
 </div>
 
 </body>
