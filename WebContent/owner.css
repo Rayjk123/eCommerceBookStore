@@ -1,0 +1,186 @@
+body {
+    margin: 0;
+    /* Work Around to Enable Google Fonts */
+    -webkit-animation-delay: 0.1s;
+    -webkit-animation-name: fontfix;
+    -webkit-animation-duration: 0.1s;
+    -webkit-animation-iteration-count: 1;
+    -webkit-animation-timing-function: linear;
+}
+
+table, tr, td {
+    margin: 0;
+    padding: 0;
+}
+
+/* Header Div CSS */
+#header-content {
+    max-height: 30%;
+    height: 450pt;
+    width: 100%;
+    text-align: center;
+    background-image: url("http://authorearnings.com/wp-content/uploads/2014/02/The_Data_-_A_Look_at_Author_Earnings_pages2.png");
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    position: relative;
+}
+
+/* Center the Header Information in the Header */
+.header-info {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Logo Font Setting*/
+.fancy-font {
+    font-family: 'BioRhyme Expanded', sans-serif, serif;
+}
+
+/* Logo Size and Color*/
+.logo-font {
+    font-size: 25px;
+    color: black;
+}
+
+/* Header Area Font on Index*/
+.header-font {
+    font-size: 60px;
+    color: whitesmoke;
+}
+
+/* Cart Area Icon */
+.cart-area {
+    text-align: center;
+    border-left: 1px solid black;
+    margin-left: 10px;
+    padding: 0;
+}
+
+/* Section Padding */
+.section-padding-80 {
+    padding-top: 80px;
+    padding-bottom: 80px;
+}
+
+/* Left Margin 15 to All Nav Items*/
+.nav-item {
+    margin-left: 15px;
+}
+
+/* Centering Navbar Content */
+.navbar-nav {
+    float:none;
+    margin:0 auto;
+    display: block;
+    text-align: center;
+}
+
+.navbar-nav > li {
+    display: inline-block;
+    float:none;
+}
+
+.item {
+    max-width: 100%;
+    height: auto;
+    width: auto;
+}
+
+.sub-menu {
+    top: 0;
+    left: 100%;
+    margin-top: -1px;
+}
+
+.center-text {
+	text-align: center;
+}
+
+.center-div {
+    margin: 0 auto;
+    width: 25%;
+}
+
+.half-width {
+    width: 25%;
+}
+
+.input-field, .login-button {
+    width: 300px;
+}
+
+.reg-label {
+    display: inline-block;
+    float: left;
+    clear: left;
+    text-align: left;
+}
+
+.reg-input {
+    display: inline-block;
+    float: right;
+}
+
+.margin-50 {
+    margin: 50px;
+}
+
+.margin-top-50 {
+    margin-top: 50px;
+}
+
+.overflow {
+    overflow: scroll;
+}
+
+.half-height {
+    height: 50%;
+}
+
+.ul-style-none {
+    list-style-type: none;
+}
+
+.display-block {
+    display: block;
+}
+
+.cart-div-height {
+    height: 200px;
+    line-height: 200px;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+}
+
+.cart-delete-button {
+    height: 100px;
+    width: 120px;
+}
+
+.fit-div {
+    height: 100%;
+    width: 100%;
+}
+
+.shopping-cart-img {
+    height: 100%;
+    width: auto;
+    display: block;
+    margin: auto;
+}
+
+.float-right {
+    float: right;
+}
+
+.submit-button {
+    font-size: 12px;
+}
+
+@-webkit-keyframes fontfix {
+    from { opacity: 1; }
+    to   { opacity: 1; }
+}
