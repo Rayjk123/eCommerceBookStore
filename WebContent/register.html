@@ -32,19 +32,19 @@
 
 <h1 class="center-text">Create account</h1>
 <div class="center-div half-width">
-    All inputs are required
+    * inputs are required
     <form action="SignUpServlet" method="post">
-        <label class="reg-label">Email:</label><input class="reg-input" type="text" name="email" required><br>
-        <label class="reg-label">Password: </label><input class="reg-input" type="password" name="password"
-                                                          required><br>
-        <label class="reg-label">First name: </label><input class="reg-input" type="text" name="firstname" required><br>
-        <label class="reg-label">Last name: </label><input class="reg-input" type="text" name="lastname" required><br>
+        <label class="reg-label">* Email:</label><input class="reg-input" type="text" name="email" required><br>
+        <label class="reg-label">* Password: </label><input class="reg-input" type="password" name="password" required><br>
+        <label class="reg-label">*     Repeat: </label><input class="reg-input" type="password" name="password" required><br>
+        <label class="reg-label">* First name: </label><input class="reg-input" type="text" name="firstname" required><br>
+        <label class="reg-label">* Last name: </label><input class="reg-input" type="text" name="lastname" required><br>
         <br>
         <br>
-        Shipping Address:<br>
-        <label class="reg-label">Street: </label><input class="reg-input" type="text" name="street" required><br>
-        <label class="reg-label">City: </label><input class="reg-input" type="text" name="city" required><br>
-        <label class="reg-label">State: </label>
+        <b>Shipping Address:</b><br>
+        <label class="reg-label">* Street: </label><input class="reg-input" type="text" name="street" required><br>
+        <label class="reg-label">* City: </label><input class="reg-input" type="text" name="city" required><br>
+        <label class="reg-label">* State: </label>
         <select class="reg-input" name="state" required>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -99,7 +99,22 @@
             <option value="WY">Wyoming</option>
         </select>
         <br>
-        <label class="reg-label">Zip Code: </label><input class="reg-input" type="text" name="zip" required>
+        <label class="reg-label">* Zip Code: </label><input class="reg-input" type="text" name="zip" required>
+        <br>
+        <br>
+        <br>
+        <b>Payment Method</b>
+        <br>
+        <label class="reg-label">Select to Store Credit Card</label><input class="reg-input" type="checkbox" name="paymentLater">
+        <br>
+        <br>
+        <br>
+        <label class="reg-label">Credit Card Number</label><input class="reg-input" type="text" name="ccNumber"><br>
+        <label class="reg-label">Expiration: </label><input class="reg-input" type="text" name="ccExpiration"><br>
+        <br>
+        <b>Billing Address:</b>
+        <br>
+        <label class="reg-label">Same as Shipping</label><input class="reg-input" type="checkbox" name="sameAsBilling" checked>
         <br>
         <br>
         <br>
