@@ -32,18 +32,19 @@
 
 <h1 class="center-text">Edit Profile</h1>
 <div class="center-div half-width">
-    All inputs are required
+    * inputs are required
     <form action="SignUpServlet" method="post">
-        <label class="reg-label">Email:</label><input class="reg-input" type="text" name="email" value="djtrump@somedomain.com" required><br>
-        <label class="reg-label">Password: </label><input class="reg-input" type="password" name="password" value="*********" required><br>
-        <label class="reg-label">First name: </label><input class="reg-input" type="text" name="firstname" value="Donald" required><br>
-        <label class="reg-label">Last name: </label><input class="reg-input" type="text" name="lastname" value="Trump" required><br>
+        <label class="reg-label">* Email:</label><input class="reg-input" type="text" name="email" value="djtrump@somedomain.com" required><br>
+        <label class="reg-label">* Password: </label><input class="reg-input" type="password" name="password" value="*********" required><br>
+        <label class="reg-label">* Repeat Password: </label><input class="reg-input" type="password" name="password" required><br>
+        <label class="reg-label">* First name: </label><input class="reg-input" type="text" name="firstname" value="Donald" required><br>
+        <label class="reg-label">* Last name: </label><input class="reg-input" type="text" name="lastname" value="Trump" required><br>
         <br>
         <br>
         Shipping Address:<br>
-        <label class="reg-label">Street: </label><input class="reg-input" type="text" name="street" value="1600 Pennsylvania Ave NW" required><br>
-        <label class="reg-label">City: </label><input class="reg-input" type="text" name="city" value="Washington" required><br>
-        <label class="reg-label">State: </label>
+        <label class="reg-label">* Street: </label><input class="reg-input" type="text" name="street" value="1600 Pennsylvania Ave NW" required><br>
+        <label class="reg-label">* City: </label><input class="reg-input" type="text" name="city" value="Washington" required><br>
+        <label class="reg-label">* State: </label>
         <select class="reg-input" name="state" required>
             <option value="AL">Alabama</option>
             <option value="AK">Alaska</option>
@@ -99,7 +100,22 @@
             <option selected="selected">DC</option>
         </select>
         <br>
-        <label class="reg-label">Zip Code: </label><input class="reg-input" type="text" name="zip" value="20500" required>
+        <label class="reg-label">* Zip Code: </label><input class="reg-input" type="text" name="zip" value="20500" required>
+        <br>
+        <br>
+        <br>
+        <b>Payment Method</b>
+        <br>
+        <label class="reg-label">Select to Store Credit Card</label><input class="reg-input" type="checkbox" name="paymentLater">
+        <br>
+        <br>
+        <br>
+        <label class="reg-label">Credit Card Number</label><input class="reg-input" type="text" name="ccNumber" value="****-****-****-1234" required><br>
+        <label class="reg-label">Expiration: </label><input class="reg-input" type="text" name="ccExpiration" value="01/2021" required><br>
+        <br>
+        <b>Billing Address:</b>
+        <br>
+        <label class="reg-label">Same as Shipping</label><input class="reg-input" type="checkbox" name="sameAsBilling" checked>
         <br>
         <br>
         <br>
