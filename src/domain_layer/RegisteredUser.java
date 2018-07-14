@@ -7,10 +7,11 @@ public class RegisteredUser {
 	private String email;
 	private String dateOfBirth;
 	private String password;
+	private int permLevel;
 	
 	RegisteredUser(int accountID, String firstName, 
 			String lastName, String email, String dateOfBirth,
-			String password) {
+			String password, int permLevel) {
 		setAccountID(accountID);
 		setFirstName(firstName);
 		setLastName(lastName);
@@ -76,5 +77,10 @@ public class RegisteredUser {
 		this.password = password;
 	} 
 
-	
+	public int getPermLevel() {
+		return permLevel;
+	}
+	public void setPermLevel(int permLevel) {
+		this.permLevel = permLevel;
+	}
 }
