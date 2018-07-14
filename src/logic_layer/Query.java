@@ -5,11 +5,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
-public class query {
+public class Query {
 	/*
 	 * This method is called from the Login_Servlet, and it creates a query to that is executed to enter a new user into the database.
 	 */
-	public static int insert_new_user(HttpServletRequest request, HttpServletResponse response, String name, String email, String password) {
+	public static int insertNewUser(HttpServletRequest request, HttpServletResponse response, String name, String email, String password) {
+		// TODO Update Not Correct
 		String query = "INSERT INTO users (name, email, password) Values('"+name+"', '"+email+"', '"+password+"')";
 		int r = 0;
 		try{
