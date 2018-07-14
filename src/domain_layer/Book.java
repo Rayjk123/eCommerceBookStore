@@ -1,4 +1,4 @@
-package persist_layer;
+package domain_layer;
 
 public class Book 
 {
