@@ -13,9 +13,7 @@ public class Book
 	private String promoCode;
 	private float promoPrice;
 	
-	Book(int isbn, float price, String title, String author,
-			String genre, String publisher, String vendor,
-			int stock, String promoCode, float promoPrice){
+	Book(int isbn, float price, String title, String author,String genre, String publisher, String vendor,int stock, String promoCode, float promoPrice){
 		setISBN(isbn);
 		setPrice(price);
 		setTitle(title);

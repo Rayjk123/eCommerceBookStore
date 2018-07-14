@@ -4,11 +4,8 @@ public class ElevatedUser extends RegisteredUser {
 	
 	private int elevatedID;
 	
-	public ElevatedUser(int accountID, String firstName, 
-			String lastName, String email, String dateOfBirth,
-			String password, int elevatedID) {
-		super(accountID, firstName, lastName, email, 
-				dateOfBirth, password);
+	public ElevatedUser(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, int elevatedID) {
+		super(accountID, firstName, lastName, email, dateOfBirth, password, permLevel);
 		setElevatedID(elevatedID);
 	}
 

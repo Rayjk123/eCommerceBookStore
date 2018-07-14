@@ -8,21 +8,15 @@ public class Customer extends RegisteredUser {
 	private boolean subscripion;
 	
 	//constructor for only address as it will be required
-	public Customer(int accountID, String firstName, 
-			String lastName, String email, String dateOfBirth,
-			String password, String address) {
-		super(accountID, firstName, lastName, email, 
-				dateOfBirth, password);
+	public Customer(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, String address) {
+		super(accountID, firstName, lastName, email, dateOfBirth, password, permLevel);
 		setAddress(address);
 	}
 	
 	//constructor for included optional cc information
-	public Customer(int accountID, String firstName, 
-			String lastName, String email, String dateOfBirth,
-			String password, String address, int ccNumber, 
-			String ccExpiration, boolean subscription){
+	public Customer(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, String address, int ccNumber, String ccExpiration, boolean subscription){
 		super(accountID, firstName, lastName, email, 
-				dateOfBirth, password);
+				dateOfBirth, password, permLevel);
 		setAddress(address);
 		setCcNumber(ccNumber);
 		setCcExpiration(ccExpiration);
