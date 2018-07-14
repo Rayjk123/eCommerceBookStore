@@ -1,4 +1,4 @@
-package persist_layer;
+package dataAccess_layer;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
