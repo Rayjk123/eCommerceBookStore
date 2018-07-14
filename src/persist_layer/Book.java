@@ -13,6 +13,21 @@ public class Book
 	private String promoCode;
 	private float promoPrice;
 	
+	Book(int isbn, float price, String title, String author,
+			String genre, String publisher, String vendor,
+			int stock, String promoCode, float promoPrice){
+		setISBN(isbn);
+		setPrice(price);
+		setTitle(title);
+		setAuthor(author);
+		setGenre(genre);
+		setPublisher(publisher);
+		setVendor(vendor);
+		setStock(stock);
+		setPromoCode(promoCode);
+		setPromoPrice(promoPrice);
+	}
+	
 	public String displayInfo()
 	{
 		return String.format(getTitle() + ".%n" + 
@@ -96,13 +111,27 @@ public class Book
 		this.promoCode = promoCode;
 	}
 
-	public float getPromoPrice() {
-		return promoPrice;
+	//compare inputted promoCode with recorded promoCode and
+	//return the appropriate price
+	public float getPromoPrice(String promoCode) {
+		if (promoCode == getPromoCode()){
+			return promoPrice;
+		}
+		else
+			return getPrice();
 	}
 
 	public void setPromoPrice(float promoPrice) {
 		this.promoPrice = promoPrice;
 	}
 	
+	public boolean checkInfo()
+	{
+		return true;
+	}
 	
+	public boolean soldOut()
+	{
+		return false;
+	}
 }
