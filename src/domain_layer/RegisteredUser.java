@@ -80,6 +80,7 @@ public class RegisteredUser {
 	public int getPermLevel() {
 		return permLevel;
 	}
+	
 	public void setPermLevel(int permLevel) {
 		this.permLevel = permLevel;
 	}
