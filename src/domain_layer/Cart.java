@@ -29,7 +29,7 @@ public class Cart {
 		return tempCart; //contents after adding to the array
 	}
 	
-	public void removeFromCart(Book book) {
+	public Book[] removeFromCart(Book book) {
 		Book[] tempCart = new Book[getContents().length-1];
 		
 		for (int i = 1; i < getContents().length; i++){
@@ -40,5 +40,7 @@ public class Cart {
 				j++;
 			}
 		}
+		
+		return tempCart;
 	}
 }
