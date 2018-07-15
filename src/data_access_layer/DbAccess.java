@@ -16,13 +16,13 @@ public class DbAccess {
 	
 	static final String DB_CONNECTION_PASSWORD = "csci4050uga";
 	
-	public static Connection connect() {
-		Connection con = null;
-		
+	Connection connection;
+	
+	public DbAccess() {
 		try {
 			Class.forName(DRIVE_NAME);
 			String jdbcUrl = "jdbc:mysql://" + HOST_NAME + ":" + "3306" + "/" + "bookStore" + "?user=" + "root" + "&password=" + "emanSaleh17";
-		    con = DriverManager.getConnection(jdbcUrl);
+		    connection = DriverManager.getConnection(jdbcUrl);
 			
 			System.out.println("Established a connection.");
 		} catch (ClassNotFoundException e) {
@@ -30,18 +30,30 @@ public class DbAccess {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		return con;
+	}
+	
+	public Connection connect() {
+		try {
+			Class.forName(DRIVE_NAME);
+			String jdbcUrl = "jdbc:mysql://" + HOST_NAME + ":" + "3306" + "/" + "bookStore" + "?user=" + "root" + "&password=" + "emanSaleh17";
+		    connection = DriverManager.getConnection(jdbcUrl);
+			
+			System.out.println("Established a connection.");
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return connection;
 	}
 	
 	//If rows = 0 after the code is ran, that means 0 rows were updated.
-	public static int insert (String query){
+	public int insert (String query){
 		int rows = 0;
 		
 		try {
-			Connection con = connect();
-			java.sql.PreparedStatement stmt = con.prepareStatement(query);
+			java.sql.PreparedStatement stmt = connection.prepareStatement(query);
 			rows = stmt.executeUpdate();
-			disconnect(con);
 			
 			return rows;
 		} catch (SQLException e) {
@@ -51,23 +63,21 @@ public class DbAccess {
 		return rows;
 	}
 	
-	public static int delete(String query){
-		return updateOrDelete(query);
+	public int delete(String query){
+		return updateAndDelete(query);
 	}
 	
-	public static int update(String query){
-		return updateOrDelete(query);
+	public int update(String query){
+		return updateAndDelete(query);
 	}
 	
 	// Logic to update or delete row
-	private static int updateOrDelete(String query) {
-		int rows=0;
+	private int updateAndDelete(String query) {
+		int rows = 0;
 		
 		try{
-			Connection con = connect();
-			java.sql.PreparedStatement stmt = con.prepareStatement(query);
-			rows=stmt.executeUpdate();
-			disconnect(con);
+			java.sql.PreparedStatement stmt = connection.prepareStatement(query);
+			rows = stmt.executeUpdate();
 			
 			return rows;
 		}catch (SQLException e) {
@@ -78,11 +88,11 @@ public class DbAccess {
 	}
 	
 	// select query stuff
-	public static ResultSet retrieve (Connection con, String query) {
+	public ResultSet retrieve (String query) {
 		ResultSet rset = null;
 		
 		try {
-			Statement stmt = con.createStatement();
+			Statement stmt = connection.createStatement();
 			rset = stmt.executeQuery(query);
 			
 			return rset;
@@ -93,10 +103,10 @@ public class DbAccess {
 		return rset;
 	}
 	
-	public static void disconnect(Connection con) {
+	public void disconnect() {
 		try {
-			if (con != null) {
-				con.close();
+			if (connection != null) {
+				connection.close();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
