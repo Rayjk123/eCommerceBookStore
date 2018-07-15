@@ -9,6 +9,46 @@ public class Order {
 		setOrderID(orderID);
 		setOrderContents(orderContents);
 	}
+	
+	public void checkout() {
+		
+	}
+	
+	public boolean cardDeclined() {
+		return false;
+	}
+	
+	public boolean holdOrder() {
+		return false;
+	}
+	
+	public void usePromotion() {
+		
+	}
+	
+	public boolean missingInfo() {
+		return false;
+	}
+	
+	public void createOrder() {
+		
+	}
+	
+	public void displayOrder() {
+		
+	}
+	
+	public void editOrder() {
+
+	}
+	
+	public void cancelOrder() {
+		
+	}
+	
+	public void searchOrder() {
+		
+	}
 
 	public int getOrderID() {
 		return orderID;

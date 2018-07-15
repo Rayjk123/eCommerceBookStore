@@ -3,7 +3,7 @@ package domain_layer;
 public class Book 
 {
 	private int isbn;
-	private float price;
+	private double price;
 	private String title;
 	private String author;
 	private String genre;
@@ -11,9 +11,9 @@ public class Book
 	private String vendor;
 	private int stock;
 	private String promoCode;
-	private float promoPrice;
+	private double promoPrice;
 	
-	Book(int isbn, float price, String title, String author,String genre, String publisher, String vendor,int stock, String promoCode, float promoPrice){
+	Book(int isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice){
 		setISBN(isbn);
 		setPrice(price);
 		setTitle(title);
@@ -26,15 +26,27 @@ public class Book
 		setPromoPrice(promoPrice);
 	}
 	
-	public String displayInfo()
+	public String displayCustomerInfo()
 	{
-		return String.format(getTitle() + ".%n" + 
-				getAuthor() + ".%n" + 
-				"%.2f", getPrice() + ".%n" + 
-				getGenre() + ".%n" + 
-				getISBN() + ".%n" +
-				getPublisher() + ".%n" + 
-				getVendor() + ".%n");
+		String p = String.format("%.2f", getPrice());
+		return String.format(getTitle() + "%n" + getAuthor() + "%n" + p + "%n" + getGenre() + "%n" + getISBN() + "%n" + getPublisher() + "%n" + getVendor() + "%n%n");
+	}
+	
+	public String displayAdminInfo()
+	{
+		String p = String.format("%.2f", getPrice());
+		String pp = String.format("%.2f", getPromoPrice());
+		return String.format(getTitle() + "%n" + getAuthor() + "%n" + p + "%n" + getGenre() + "%n" + getISBN() + "%n" + getPublisher() + "%n" + getVendor() + "%n" + getPromoCode() + "%n" + pp + "%n%n");
+	}
+	
+	//compare inputted promoCode with recorded promoCode and
+		//return the appropriate price
+	public double checkPromoPrice(String promoCode) {
+		if (promoCode == getPromoCode()){
+			return promoPrice;
+		}
+		else
+			return getPrice();
 	}
 
 	public int getISBN() {
@@ -45,11 +57,11 @@ public class Book
 		this.isbn = isbn;
 	}
 
-	public float getPrice() {
+	public double getPrice() {
 		return price;
 	}
 
-	public void setPrice(float price) {
+	public void setPrice(double price) {
 		this.price = price;
 	}
 
@@ -109,17 +121,11 @@ public class Book
 		this.promoCode = promoCode;
 	}
 
-	//compare inputted promoCode with recorded promoCode and
-	//return the appropriate price
-	public float getPromoPrice(String promoCode) {
-		if (promoCode == getPromoCode()){
-			return promoPrice;
-		}
-		else
-			return getPrice();
+	public double getPromoPrice() {
+		return promoPrice;
 	}
 
-	public void setPromoPrice(float promoPrice) {
+	public void setPromoPrice(double promoPrice) {
 		this.promoPrice = promoPrice;
 	}
 	
