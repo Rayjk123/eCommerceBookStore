@@ -12,15 +12,13 @@ public class Query {
 	
 	private static DbAccess database = new DbAccess();
 	
-	/*
-	 * This method is called from the Login_Servlet, and it creates a query to that is executed to enter a new user into the database.
-	 */
-	public static int insertNewUser(HttpServletRequest request, HttpServletResponse response, String name, String email, String password) {
+	public static boolean insertNewUser(String email, String password, String firstName, String lastName, String permission) {
 		// TODO Update Not Correct
-		String query = "INSERT INTO users (name, email, password) Values('"+name+"', '"+email+"', '"+password+"')";
-		int r = 0;
+		String query = "INSERT INTO user "
+				+ "(email, password, first_name, last_name, permissions) "
+				+ "Values('"+ email +"', '"+ password +"', '"+ firstName +"', '"+ lastName + "', '" + permission + "')";
 		
-		return database.insert(query);
+		return database.insert(query) == 1;
 	}
 	
 	/**
