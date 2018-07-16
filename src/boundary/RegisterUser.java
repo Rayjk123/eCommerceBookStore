@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import logic_layer.Query;
 
-@WebServlet("/SignUpServlet")
+@WebServlet("/RegisterUser")
 public class RegisterUser extends HttpServlet {
 
 	/**
