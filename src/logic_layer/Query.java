@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import domain_layer.Book;
+import domain_layer.Customer;
+
 public class Query {
 	
 	private static DbAccess database = new DbAccess();
@@ -17,6 +20,15 @@ public class Query {
 		String query = "INSERT INTO user "
 				+ "(email, password, first_name, last_name, permissions) "
 				+ "Values('"+ email +"', '"+ password +"', '"+ firstName +"', '"+ lastName + "', '" + permission + "')";
+		
+		return database.insert(query) == 1;
+	}
+	
+	public static boolean insertCart(Book book, Customer customer) {
+		// TODO Cart insert logic
+		String query = "INSERT INTO cart " 
+				+ "(accountID, isbn) "
+				+ "Values('" + customer.getAccountID() + "', '" + book.getISBN() + "')";
 		
 		return database.insert(query) == 1;
 	}
