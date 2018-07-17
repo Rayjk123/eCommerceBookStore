@@ -10,6 +10,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.Cookie;
 
 import logic_layer.Query;
 
@@ -42,10 +43,12 @@ public class AddToCart extends HttpServlet {
 	}
 	
 	private void addToCart(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		
+		
 		String email = request.getParameter("email").trim();
 		
-		//the request identifies the user
-		//accountID (Users DB key) associates to the users cart in the Cart DB
-	
+		//TODO identify the user from cookie?? 
+		
+		//create book object 
 	}
 }
