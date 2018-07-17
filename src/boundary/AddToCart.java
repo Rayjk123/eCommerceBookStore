@@ -37,7 +37,7 @@ public class AddToCart extends HttpServlet {
 		}
 		
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/bookDetail.html"); //TODO what actually should be here?
+		dispatcher = request.getRequestDispatcher("/bookDetail.jsp"); //TODO what actually should be here?
 		dispatcher.forward(request, response); 
 	}
 	

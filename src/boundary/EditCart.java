@@ -17,7 +17,7 @@ import logic_layer.Query;
 import domain_layer.Book;
 import domain_layer.Customer;
 
-@WebServlet("/AddToCart")
+@WebServlet("/EditCart")
 public class EditCart extends HttpServlet {
 
 	/**
@@ -27,17 +27,17 @@ public class EditCart extends HttpServlet {
 		super(); //HttpServlet constructor
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			EditCart(request, response, session);
+			EditCart(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/bookDetail.html"); //TODO what actually should be here?
+		dispatcher = request.getRequestDispatcher("/shoppingCart.html"); //TODO what actually should be here?
 		dispatcher.forward(request, response); 
 	}
 	
@@ -45,9 +45,9 @@ public class EditCart extends HttpServlet {
 			doGet(request, response);
 	}
 	
-	private void EditCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws SQLException {
+	private void EditCart(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+		HttpSession session = request.getSession();
 		Customer customer = (Customer)session.getAttribute("customer");
-		
 		
 	}
 }

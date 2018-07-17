@@ -12,13 +12,15 @@ public class Book
 	private int stock;
 	private String promoCode;
 	private double promoPrice;
-	private int hold; //
+	private int hold; 
+	private String image; //URL or fully qualified path to image file
+	private String description; //long string of book description
 	
 	public Book(int isbn) {
 		setISBN(isbn);
 	}
 	
-	public Book(int isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice, int hold){
+	public Book(int isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice, int hold, String image, String description){
 		setISBN(isbn);
 		setPrice(price);
 		setTitle(title);
@@ -30,6 +32,8 @@ public class Book
 		setPromoCode(promoCode);
 		setPromoPrice(promoPrice);
 		setHold(hold);
+		setImage(image);
+		setDescription(description);
 	}
 	
 	public String displayCustomerInfo()
@@ -141,6 +145,22 @@ public class Book
 
 	public void setHold(int hold) {
 		this.hold = hold;
+	}
+	
+	public String getIamge() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+	
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public boolean checkInfo()

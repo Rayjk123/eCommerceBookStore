@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 
+import java.sql.ResultSet;
+
 import domain_layer.Book;
 import domain_layer.Customer;
 
@@ -49,6 +51,13 @@ public class Query {
 		
 		return database.update(query) == 1; 
 	}*/
+	
+	public ResultSet getBook(int isbn) {
+		String query = "Select * from book WHERE isbn = '"
+				+ isbn + "'";
+		
+		return database.retrieve(query);
+	}
 	
 	/**
 	 * Method checks if the email already exists in the system
