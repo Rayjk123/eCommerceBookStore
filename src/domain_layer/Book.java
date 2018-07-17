@@ -12,8 +12,13 @@ public class Book
 	private int stock;
 	private String promoCode;
 	private double promoPrice;
+	private int hold; //
 	
-	Book(int isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice){
+	public Book(int isbn) {
+		setISBN(isbn);
+	}
+	
+	public Book(int isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice, int hold){
 		setISBN(isbn);
 		setPrice(price);
 		setTitle(title);
@@ -24,6 +29,7 @@ public class Book
 		setStock(stock);
 		setPromoCode(promoCode);
 		setPromoPrice(promoPrice);
+		setHold(hold);
 	}
 	
 	public String displayCustomerInfo()
@@ -127,6 +133,14 @@ public class Book
 
 	public void setPromoPrice(double promoPrice) {
 		this.promoPrice = promoPrice;
+	}
+	
+	public double getHold() {
+		return hold;
+	}
+
+	public void setHold(int hold) {
+		this.hold = hold;
 	}
 	
 	public boolean checkInfo()

@@ -23,15 +23,32 @@ public class Query {
 		
 		return database.insert(query) == 1;
 	}
-	
-	public static boolean addToCart(String accountID, String isbn) {
-		//Cart database is association between Customer and Book database
+	/**
+	 * method adds an entry to cart database
+	 * @param customer, accountID
+	 * @param book, isbn
+	 * @param quantity, number of same book in cart
+	 * @return
+	 */
+	public static boolean addToCart(Customer customer, Book book, int quantity) {
 		String query = "INSERT INTO cart " 
-				+ "(accountID, isbn) "
-				+ "Values('" + accountID + "', '" + isbn + "')";
+				+ "(accountID, isbn, quantity) "
+				+ "Values('" + customer.getAccountID() + "', '" 
+				+ book.getISBN() + "', '" 
+				+ quantity + "')";
 		
 		return database.insert(query) == 1;
 	}
+	
+	/* hold book for pickup, hold is a value in the book table
+	public static boolean holdBook(Book book) {
+		int hold = book.getHold(); 
+				
+		String query = "UPDATE book " 
+				+ "set hold = "  + " where isbn " + book.getISBN(); 
+		
+		return database.update(query) == 1; 
+	}*/
 	
 	/**
 	 * Method checks if the email already exists in the system

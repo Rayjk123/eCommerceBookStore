@@ -27,10 +27,10 @@ public class AddToCart extends HttpServlet {
 		super(); //HttpServlet constructor
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws ServletException, IOException {
 		
 		try {
-			addToCart(request, response);
+			addToCart(request, response, session);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -47,12 +47,15 @@ public class AddToCart extends HttpServlet {
 	
 	private void addToCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws SQLException {
 		Customer customer = (Customer)session.getAttribute("customer");
+		Book book = new Book(Integer.parseInt(request.getParameter("isbn")));
 		
-		//TODO Sold out logic
-		
-		String accountID = String.format("%d", customer.getAccountID());
-		String isbn = request.getParameter("isbn").toString();
-		
-		Query.addToCart(accountID, isbn);
+		book.setStock(Integer.parseInt(request.getParameter("stock")));
+		int quantity = Integer.parseInt(request.getParameter("quantity")); //quantity the user wants to add to cart 
+																		//TODO need a default quantity of 1 in bookDetail.html
+																		//TODO edit cart will have a field to set quantity in cart
+		//can't add more than what's in stock to cart
+		if (book.getStock() - quantity > 0) {
+			Query.addToCart(customer, book, quantity); 
+		}
 	}
 }
