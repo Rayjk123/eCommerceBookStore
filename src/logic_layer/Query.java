@@ -24,11 +24,11 @@ public class Query {
 		return database.insert(query) == 1;
 	}
 	
-	public static boolean addToCart(Book book, Customer customer) {
-		// TODO Cart insert logic
+	public static boolean addToCart(String accountID, String isbn) {
+		//Cart database is association between Customer and Book database
 		String query = "INSERT INTO cart " 
 				+ "(accountID, isbn) "
-				+ "Values('" + customer.getAccountID() + "', '" + book.getISBN() + "')";
+				+ "Values('" + accountID + "', '" + isbn + "')";
 		
 		return database.insert(query) == 1;
 	}

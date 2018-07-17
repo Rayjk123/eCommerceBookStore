@@ -10,11 +10,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;  
 import javax.servlet.http.Cookie;
 
 import logic_layer.Query;
+import domain_layer.Book;
+import domain_layer.Customer;
 
-@WebServlet("/CartControl")
+@WebServlet("/AddToCart")
 public class AddToCart extends HttpServlet {
 
 	/**
@@ -42,13 +45,14 @@ public class AddToCart extends HttpServlet {
 			doGet(request, response);
 	}
 	
-	private void addToCart(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	private void addToCart(HttpServletRequest request, HttpServletResponse response, HttpSession session) throws SQLException {
+		Customer customer = (Customer)session.getAttribute("customer");
 		
+		//TODO Sold out logic
 		
-		String email = request.getParameter("email").trim();
+		String accountID = String.format("%d", customer.getAccountID());
+		String isbn = request.getParameter("isbn").toString();
 		
-		//TODO identify the user from cookie?? 
-		
-		//create book object 
+		Query.addToCart(accountID, isbn);
 	}
 }
