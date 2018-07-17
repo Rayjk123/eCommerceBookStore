@@ -24,7 +24,7 @@ public class Query {
 		return database.insert(query) == 1;
 	}
 	
-	public static boolean insertCart(Book book, Customer customer) {
+	public static boolean addToCart(Book book, Customer customer) {
 		// TODO Cart insert logic
 		String query = "INSERT INTO cart " 
 				+ "(accountID, isbn) "
