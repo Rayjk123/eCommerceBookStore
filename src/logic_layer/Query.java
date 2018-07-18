@@ -1,13 +1,11 @@
 package logic_layer;
 
 import data_access_layer.DbAccess;
-
-import java.sql.SQLException;
-
-import java.sql.ResultSet;
-
 import domain_layer.Book;
 import domain_layer.Customer;
+
+import java.sql.SQLException;
+import java.sql.ResultSet;
 
 public class Query {
 	
@@ -50,7 +48,7 @@ public class Query {
 		return database.update(query) == 1; 
 	}*/
 	
-	public ResultSet getBook(String isbn) {
+	public static ResultSet getBook(String isbn) {
 		String query = "SELECT * FROM book WHERE isbn = '"
 				+ isbn + "'";
 		
