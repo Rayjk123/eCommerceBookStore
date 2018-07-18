@@ -23,7 +23,7 @@ public class Query {
 		
 		return DbAccess.insert(query) == 1;
 	}
-	/**
+	/**c
 	 * method adds an entry to cart database
 	 * @param customer, accountID
 	 * @param book, isbn
