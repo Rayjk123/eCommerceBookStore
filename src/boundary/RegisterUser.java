@@ -32,7 +32,7 @@ public class RegisterUser extends HttpServlet {
 		}
 		
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/confirm_account.jsp");
+		dispatcher = request.getRequestDispatcher("/registrationSuccess.html");
 		dispatcher.forward(request, response);
 	}
 	

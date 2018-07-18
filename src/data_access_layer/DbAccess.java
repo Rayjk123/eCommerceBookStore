@@ -8,20 +8,22 @@ import java.sql.Statement;
 
 public class DbAccess {
 	
-	static final String DRIVE_NAME = "com.mysql.jdbc.Driver";
+	private static final String DRIVE_NAME = "com.mysql.jdbc.Driver";
 		
-	static final String HOST_NAME = "bookstoredb.cxutrsepuguc.us-east-2.rds.amazonaws.com";
+	private static final String HOST_NAME = "bookstoredb.cxutrsepuguc.us-east-2.rds.amazonaws.com";
 	
-	static final String DB_CONNECTION_USERNAME = "csci4050";
+	private static final String DB_NAME = "bookstore";
 	
-	static final String DB_CONNECTION_PASSWORD = "csci4050uga";
+	private static final String DB_CONNECTION_USERNAME = "csci4050";
 	
-	Connection connection;
+	private static final String DB_CONNECTION_PASSWORD = "csci4050uga";
 	
-	public DbAccess() {
+	private static Connection connect() {
+		Connection connection = null;
+		
 		try {
 			Class.forName(DRIVE_NAME);
-			String jdbcUrl = "jdbc:mysql://" + HOST_NAME + ":" + "3306" + "/" + "bookStore" + "?user=" + "root" + "&password=" + "emanSaleh17";
+			String jdbcUrl = "jdbc:mysql://" + HOST_NAME + ":" + "3306" + "/" + DB_NAME + "?user=" + DB_CONNECTION_USERNAME + "&password=" + DB_CONNECTION_PASSWORD;
 		    connection = DriverManager.getConnection(jdbcUrl);
 			
 			System.out.println("Established a connection.");
@@ -30,25 +32,14 @@ public class DbAccess {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public Connection connect() {
-		try {
-			Class.forName(DRIVE_NAME);
-			String jdbcUrl = "jdbc:mysql://" + HOST_NAME + ":" + "3306" + "/" + "bookStore" + "?user=" + "root" + "&password=" + "emanSaleh17";
-		    connection = DriverManager.getConnection(jdbcUrl);
-			
-			System.out.println("Established a connection.");
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
+		
 		return connection;
 	}
 	
 	//If rows = 0 after the code is ran, that means 0 rows were updated.
-	public int insert (String query){
+	public static int insert (String query) {
+		Connection connection = connect();
+		
 		int rows = 0;
 		
 		try {
@@ -60,19 +51,23 @@ public class DbAccess {
 			e.printStackTrace();
 		}
 		
+		disconnect(connection);
+		
 		return rows;
 	}
 	
-	public int delete(String query){
+	public static int delete(String query){
 		return updateAndDelete(query);
 	}
 	
-	public int update(String query){
+	public static int update(String query){
 		return updateAndDelete(query);
 	}
 	
 	// Logic to update or delete row
-	private int updateAndDelete(String query) {
+	private static int updateAndDelete(String query) {
+		Connection connection = connect();
+		
 		int rows = 0;
 		
 		try{
@@ -84,11 +79,15 @@ public class DbAccess {
 			e.printStackTrace();
 		}
 		
+		disconnect(connection);
+		
 		return rows;
 	}
 	
 	// select query stuff
-	public ResultSet retrieve (String query) {
+	public static ResultSet retrieve (String query) {
+		Connection connection = connect();
+		
 		ResultSet rset = null;
 		
 		try {
@@ -100,10 +99,12 @@ public class DbAccess {
 			e.printStackTrace();
 		}
 		
+		disconnect(connection);
+		
 		return rset;
 	}
 	
-	public void disconnect() {
+	public static void disconnect(Connection connection) {
 		try {
 			if (connection != null) {
 				connection.close();

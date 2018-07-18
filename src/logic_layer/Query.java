@@ -15,17 +15,15 @@ import domain_layer.Customer;
 
 public class Query {
 	
-	private static DbAccess database = new DbAccess();
-	
 	public static boolean insertNewUser(String email, String password, String firstName, String lastName, String permission) {
 		// TODO Update Not Correct
 		String query = "INSERT INTO user "
-				+ "(email, password, first_name, last_name, permissions) "
+				+ "(email, password, first_name, last_name, permission) "
 				+ "Values('"+ email +"', '"+ password +"', '"+ firstName +"', '"+ lastName + "', '" + permission + "')";
 		
-		return database.insert(query) == 1;
+		return DbAccess.insert(query) == 1;
 	}
-	/**
+	/**c
 	 * method adds an entry to cart database
 	 * @param customer
 	 * @param book
@@ -39,7 +37,7 @@ public class Query {
 				+ book.getISBN() + "', '" 
 				+ quantity + "')";
 		
-		return database.insert(query) == 1;
+		return DbAccess.insert(query) == 1;
 	}
 	
 	/* hold book for pickup, hold is a value in the book table
@@ -56,7 +54,7 @@ public class Query {
 		String query = "Select * from book WHERE isbn = '"
 				+ isbn + "'";
 		
-		return database.retrieve(query);
+		return DbAccess.retrieve(query);
 	}
 	
 	public static boolean addBookToInventory(Book book) {
@@ -77,7 +75,7 @@ public class Query {
 				book.getImage() + "', '" +
 				book.getDescription() + "')";
 			
-		return database.insert(query) == 1;
+		return DbAccess.insert(query) == 1;
 	}
 	
 	/**
@@ -86,8 +84,8 @@ public class Query {
 	 * @throws SQLException 
 	 */
 	public static boolean emailExists(String email) throws SQLException {
-		String query = "SELECT * FROM customer WHERE email =\'" + email + "\'";
+		String query = "SELECT * FROM user WHERE email =\'" + email + "\'";
 		
-		return database.retrieve(query).next();
+		return DbAccess.retrieve(query).next();
 	}
 }
