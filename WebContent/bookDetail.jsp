@@ -36,7 +36,7 @@
 <div class="container margin-top-50">
     <div class="row justify-content-center">
     <%
-    	int isbn = (int)request.getAttribute("isbn");
+    	String isbn = "9781782274209";//(int)request.getAttribute("isbn");
     	Query db = new Query();
     	ResultSet rs = db.getBook(isbn);
     
