@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="java.sql.ResultSet"%>
-<%@page import="logic_layer.Query" %>    
+<%@page import="boundary.GetBook" %>    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -35,28 +34,22 @@
 <h1>Book Details</h1>
 <div class="container margin-top-50">
     <div class="row justify-content-center">
-    <%
-    	int isbn = (int)request.getAttribute("isbn");
-    	Query db = new Query();
-    	ResultSet rs = db.getBook(isbn);
-    
-    %>
-    
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+    <c:set value="${results}" var="book" scope="session" />
     <form action="AddToCart" method="post">
-    	<input class="login-button" type="submit" value="Add To Cart"><br>
         <!-- Book Image Column -->
         <div class="col-12 col-sm-6 col-md-4">
-            <img id="image" src="<%rs.getString("image");%>"/>
+            <img id="image" src="${book.getImage()}"/>
         </div>
         <!-- Book Detail Column -->
         <div class="col-12 col-sm-6 col-md-4">
-            <p><strong><%rs.getString("title"); %></strong></p>
-            <p>Author: <%rs.getString("author"); %></p>
-            <p>ISBN: <%rs.getString("isbn"); %></p>
-            <p>Price: <%rs.getDouble("price"); %></p>
+            <p><strong>${book.getTitle()}</strong></p>
+            <p>Author: ${book.getAuthor()}</p>
+            <p>ISBN: ${book.getISBN()}</p>
+            <p>Price: $${book.getPrice()}</p>
             <p>Description:</p>
             <p class="overflow half-height">
-            	<%rs.getString("description"); %>
+            	${book.getDescription()}
             </p>
                 <input class="login-button" type="submit" value="Add To Cart"><br>
         </div>

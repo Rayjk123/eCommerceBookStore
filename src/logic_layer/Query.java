@@ -1,19 +1,17 @@
 package logic_layer;
 
 import data_access_layer.DbAccess;
-
-import java.sql.SQLException;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
-
-import java.sql.ResultSet;
-
 import domain_layer.Book;
 import domain_layer.Customer;
 
+import java.sql.SQLException;
+import java.sql.ResultSet;
+
 public class Query {
+	
+	public Query() {
+		
+	}
 	
 	public static boolean insertNewUser(String email, String password, String firstName, String lastName, String permission) {
 		// TODO Update Not Correct
@@ -50,8 +48,8 @@ public class Query {
 		return database.update(query) == 1; 
 	}*/
 	
-	public ResultSet getBook(int isbn) {
-		String query = "Select * from book WHERE isbn = '"
+	public static ResultSet getBook(String isbn) {
+		String query = "SELECT * FROM book WHERE isbn = '"
 				+ isbn + "'";
 		
 		return DbAccess.retrieve(query);
@@ -59,12 +57,12 @@ public class Query {
 	
 	public static boolean addBookToInventory(Book book) {
 		String query = "INSERT into book "
-				+ "(isbn, price, title, author, genre, publisher, vendor, stock, promocode, promoprice, holdqty, image, description) " + 
+				+ "(isbn, title, author, price, genre, publisher, vendor, stock, promocode, promoprice, hold, image, description) " + 
 				"Values('" +
 				book.getISBN() + "', '" +
-				book.getPrice() + "', '" +
 				book.getTitle() + "', '" +
 				book.getAuthor() + "', '" +
+				book.getPrice() + "', '" +
 				book.getGenre() + "', '" +
 				book.getPublisher() + "', '" +
 				book.getVendor() + "', '" +
