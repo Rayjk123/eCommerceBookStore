@@ -59,6 +59,27 @@ public class Query {
 		return database.retrieve(query);
 	}
 	
+	public static boolean addBookToInventory(Book book) {
+		String query = "INSERT into book "
+				+ "(isbn, price, title, author, genre, publisher, vendor, stock, promocode, promoprice, holdqty, image, description) " + 
+				"Values('" +
+				book.getISBN() + "', '" +
+				book.getPrice() + "', '" +
+				book.getTitle() + "', '" +
+				book.getAuthor() + "', '" +
+				book.getGenre() + "', '" +
+				book.getPublisher() + "', '" +
+				book.getVendor() + "', '" +
+				book.getStock() + "', '" +
+				book.getPromoCode() + "', '" +
+				book.getPromoPrice() + "', '" +
+				book.getHold() + "', '" +
+				book.getImage() + "', '" +
+				book.getDescription() + "')";
+			
+		return database.insert(query) == 1;
+	}
+	
 	/**
 	 * Method checks if the email already exists in the system
 	 * @return true is the email exists else false.

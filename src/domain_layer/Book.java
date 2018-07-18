@@ -16,6 +16,10 @@ public class Book
 	private String image; //URL or fully qualified path to image file
 	private String description; //long string of book description
 	
+	public Book() {
+		
+	}
+	
 	public Book(int isbn) {
 		setISBN(isbn);
 	}
@@ -147,7 +151,7 @@ public class Book
 		this.hold = hold;
 	}
 	
-	public String getIamge() {
+	public String getImage() {
 		return image;
 	}
 
