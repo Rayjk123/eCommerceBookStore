@@ -33,21 +33,21 @@
 <div id="navbar"></div>
 <div id="adminBar"></div>
 <h1 class="center-text">Add Item</h1>
-<div class="container margin-top-50">
+<div class="half-width">
 	<form action="AddToInventory" method="post">
 		<label class="reg-label">*ISBN: </label><input class="reg-input" type="number" name="isbn" required><br>
 		<label class="reg-label">*Title: </label><input class="reg-input" type="text" name="title" required><br>
-		<label class="reg-label">*Author: </label><input class="reg-input" type="number" name="author" required><br>
-		<label class="reg-label">*Price: </label><input class="reg-input" type="number" name="price" required><br>
-		<label class="reg-label">*Genre: </label><input class="reg-input" type="number" name="genre" required><br>
+		<label class="reg-label">*Author: </label><input class="reg-input" type="text" name="author" required><br>
+		<label class="reg-label">*Price: </label><input class="reg-input" type="number" step="0.01" name="price" required><br>
+		<label class="reg-label">*Genre: </label><input class="reg-input" type="text" name="genre" required><br>
 		<label class="reg-label">Publisher: </label><input class="reg-input" type="text" name="publisher"><br>
 		<label class="reg-label">Vendor: </label><input class="reg-input" type="text" name="vendor"><br>
 		<label class="reg-label">*Stock: </label><input class="reg-input" type="number" name="stock" required><br>
 		<label class="reg-label">Promo Code: </label><input class="reg-input" type="text" name="promocode"><br>
 		<label class="reg-label">Promo Price: </label><input class="reg-input" step="0.01" type="number"  name="promoprice"><br>
 		<label class="reg-label">Image: </label><input class="reg-input" type="text" name="image"><br>
-		<label class="overflow half-height">Description: </label><input class="reg-input" type="text" name="description"><br>
-		<input class="padding-top-50px" type="submit" value="Add Book">
+		<label class="reg-label">Description: </label><input class="reg-input overflow half-height" type="text" name="description"><br>
+		<input class="reg-label" type="submit" value="Add Book">
         
 	</form>
 
