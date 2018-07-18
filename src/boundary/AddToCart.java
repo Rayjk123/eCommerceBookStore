@@ -2,7 +2,6 @@ package boundary;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;  
-import javax.servlet.http.Cookie;
 
 import logic_layer.Query;
 import domain_layer.Book;
 import domain_layer.Customer;
 
+@SuppressWarnings("serial")
 @WebServlet("/AddToCart")
 public class AddToCart extends HttpServlet {
 
@@ -48,7 +47,7 @@ public class AddToCart extends HttpServlet {
 	private void addToCart(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		HttpSession session = request.getSession();
 		Customer customer = (Customer)session.getAttribute("customer"); //TODO need create a customer object at login and setAttribute
-		Book book = new Book(Integer.parseInt(request.getParameter("isbn")));
+		Book book = new Book(request.getParameter("isbn"));
 		
 		book.setStock(Integer.parseInt(request.getParameter("stock")));
 		int quantity = Integer.parseInt(request.getParameter("quantity")); //quantity the user wants to add to cart 

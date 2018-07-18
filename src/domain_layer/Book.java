@@ -2,7 +2,7 @@ package domain_layer;
 
 public class Book 
 {
-	private int isbn;
+	private String isbn;
 	private double price;
 	private String title;
 	private String author;
@@ -20,11 +20,11 @@ public class Book
 		
 	}
 	
-	public Book(int isbn) {
+	public Book(String isbn) {
 		setISBN(isbn);
 	}
 	
-	public Book(int isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice, int hold, String image, String description){
+	public Book(String isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice, int hold, String image, String description){
 		setISBN(isbn);
 		setPrice(price);
 		setTitle(title);
@@ -63,11 +63,11 @@ public class Book
 			return getPrice();
 	}
 
-	public int getISBN() {
+	public String getISBN() {
 		return isbn;
 	}
 
-	public void setISBN(int isbn) {
+	public void setISBN(String isbn) {
 		this.isbn = isbn;
 	}
 

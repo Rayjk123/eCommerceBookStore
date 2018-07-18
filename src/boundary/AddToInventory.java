@@ -45,7 +45,7 @@ public class AddToInventory extends HttpServlet {
 	private void addBookToInventory(HttpServletRequest request, HttpServletResponse response) throws SQLException {
 		Book book = new Book();
 		//TODO Error handling
-		book.setISBN(Integer.parseInt(request.getParameter("isbn")));
+		book.setISBN(request.getParameter("isbn"));
 		book.setTitle(request.getParameter("title"));
 		book.setAuthor(request.getParameter("author"));
 		book.setPrice(Double.parseDouble(request.getParameter("price")));
