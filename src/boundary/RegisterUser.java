@@ -54,8 +54,6 @@ public class RegisterUser extends HttpServlet {
 		String lastName = request.getParameter("lastname").trim();
 		String password = request.getParameter("password").trim();
 		
-		Query.insertNewUser(email, password, firstName, lastName, "customer");
-		
 		String shippingStreet = request.getParameter("street").trim();
 		String shippingCity = request.getParameter("city").trim();
 		String shippingState = request.getParameter("state").trim();
@@ -67,6 +65,8 @@ public class RegisterUser extends HttpServlet {
 		String security = request.getParameter("ccSecurity").trim();
 		
 		String confirmationCode = randomString();
+		
+		Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, shippingAddress);
 	}
 	
 	private boolean shippingInformationValid(HttpServletRequest request) {

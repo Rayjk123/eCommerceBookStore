@@ -13,7 +13,9 @@ public class Query {
 		
 	}
 	
-	public static boolean insertNewUser(String email, String password, String firstName, String lastName, String permission) {
+	public static boolean insertNewUser(String email, String password, 
+			String firstName, String lastName, String permission,
+			String shippingAddress, String billingAddress) {
 		// TODO Update Not Correct
 		String query = "INSERT INTO user "
 				+ "(email, password, first_name, last_name, permission) "
