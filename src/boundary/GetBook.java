@@ -47,7 +47,10 @@ public class GetBook extends HttpServlet {
 	}
 	
 	private void getBook(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException {
+		//Book book = new Book(request.getParameter("isbn")); // TODO need to pass isbn from browse to book detail views
 		Book book = new Book();
+		isbn = "9781782274209";
+		
 		List<Book> list = new ArrayList<>();
 		ResultSet rs = Query.getBook(isbn); //results in only one book
 		
