@@ -27,15 +27,15 @@ public class Query {
 	}
 	/**
 	 * method adds an entry to cart database
-	 * @param customer, accountID
-	 * @param book, isbn
-	 * @param quantity, number of same book in cart
-	 * @return
+	 * @param customer
+	 * @param book
+	 * @param quantity
+	 * @return true if inserted with no error
 	 */
 	public static boolean addToCart(Customer customer, Book book, int quantity) {
 		String query = "INSERT INTO cart " 
-				+ "(accountID, isbn, quantity) "
-				+ "Values('" + customer.getAccountID() + "', '" 
+				+ "(email, isbn, quantity) "
+				+ "Values('" + customer.getEmail() + "', '" 
 				+ book.getISBN() + "', '" 
 				+ quantity + "')";
 		
