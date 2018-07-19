@@ -32,19 +32,16 @@ public class AddToInventory extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/adminAddInventory.jsp"); 
-		dispatcher.forward(request, response); 
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			doGet(request, response);
 	}
 	
-	private void addBookToInventory(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	private void addBookToInventory(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		Book book = new Book();
-		//TODO Error handling
+		//TODO Empty field handling, right now they're all required to avoid empty String in query
+		//TODO Error Handling for inputs
 		book.setISBN(request.getParameter("isbn"));
 		book.setTitle(request.getParameter("title"));
 		book.setAuthor(request.getParameter("author"));
@@ -59,5 +56,9 @@ public class AddToInventory extends HttpServlet {
 		book.setDescription(request.getParameter("description"));
 		
 		Query.addBookToInventory(book);
+		
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/adminInventory.html"); 
+		dispatcher.forward(request, response); 
 	}
 }
