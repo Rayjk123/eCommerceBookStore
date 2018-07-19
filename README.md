@@ -31,9 +31,17 @@ If you don't have Java EE installed, ask Seth for more info because managed to i
 5. Click Add Library -> JRE System Library -> Next -> Workspace Default JRE
 6. Apply the changes
 
-
 ## Running
-Currently there is only an index homepage which can be run by going to index.html under the WebContent directory and clicking the green run button.
+
+### JVM Arguments to Enable Email Capabilities
+Currently Email not enabled due to JDK 9 deprecating javax email stuff. Here are the steps to re-enable them.
+1. Right-click the Project 
+2. Go to Run As -> Run Configurations
+3. Go to the Arguments Tab
+4. Look at the VM Arguments Box and add:
+  * --add-modules java.activation
+  * Add that line to the end of the arguments 
+5. Apply and restart server
 
 ## Where to Find Images:
 Images are stored remotely and grabbed remotely from an Amazon S3 bucket. This is done in order to remove a large amount of bulk from the project itself. The bucket is: 
