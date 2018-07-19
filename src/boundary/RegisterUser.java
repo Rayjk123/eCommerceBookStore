@@ -72,25 +72,26 @@ public class RegisterUser extends HttpServlet {
 		// Means that the checkbox has been set
 		if (request.getParameter("sameAsBilling") != null) {
 			Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, shippingAddress);
-			return;
+		} else {
+			String billingStreet = request.getParameter("b-street").trim();
+			String billingCity = request.getParameter("b-city").trim();
+			String billingState = request.getParameter("b-state").trim();
+			String billingZip = request.getParameter("b-zip").trim();
+			String billingAddress = billingStreet + " " + billingCity + " " + billingState + " " + billingZip;
+			
+			Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, billingAddress);
 		}
 		
-		String billingStreet = request.getParameter("b-street").trim();
-		String billingCity = request.getParameter("b-city").trim();
-		String billingState = request.getParameter("b-state").trim();
-		String billingZip = request.getParameter("b-zip").trim();
-		String billingAddress = billingStreet + " " + billingCity + " " + billingState + " " + billingZip;
-		
-		Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, billingAddress);
-		
 		if (Query.addConfirmationCode(email, confirmationCode)) {
-			dispatchToFailure(request, response);
+			System.out.println("Added Confirmation COde");
+			dispatcher = request.getRequestDispatcher("/registrationConfirmation.html");
+			dispatcher.forward(request, response);
 			sendEmail(email, confirmationCode);
 			return;
 		}
 		
-		dispatcher = request.getRequestDispatcher("/registrationConfirmation.html");
-		dispatcher.forward(request, response);
+		System.out.println("Failed Confirmation COde");
+		dispatchToFailure(request, response);
 	}
 	
 	private boolean shippingInformationValid(HttpServletRequest request) {
@@ -111,7 +112,7 @@ public class RegisterUser extends HttpServlet {
 			code.append(rand.nextInt(10));
 		}
 		
-		return rand.toString();
+		return code.toString();
 	}
 	
 	/*
@@ -139,7 +140,7 @@ public class RegisterUser extends HttpServlet {
 		try {
 
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("cs4050team10@gmail.com"));
+			message.setFrom(new InternetAddress("csci4050uga@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(email));
 			message.setSubject("Welcome to the Bookstore!");

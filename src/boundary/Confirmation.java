@@ -6,13 +6,14 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import logic_layer.Query;
 
 @WebServlet("/Confirmation")
-public class Confirmation {
+public class Confirmation extends HttpServlet {
 	
 	public Confirmation() {
 		super();
@@ -23,7 +24,7 @@ public class Confirmation {
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-			doGet(request, response);
+		doGet(request, response);
 	}
 	
 	private void confirmRegistration(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -33,7 +34,7 @@ public class Confirmation {
 		
 		try {
 			if (Query.confirmationCodeValid(confirmationCode)) {
-				dispatcher = request.getRequestDispatcher("/registrationConfirmation.html");
+				dispatcher = request.getRequestDispatcher("/registrationSuccess.html");
 				dispatcher.forward(request, response);
 			} else {
 				dispatcher = request.getRequestDispatcher("/registrationFailure.html");
