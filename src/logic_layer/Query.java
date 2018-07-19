@@ -18,8 +18,9 @@ public class Query {
 			String shippingAddress, String billingAddress) {
 		// TODO Update Not Correct
 		String query = "INSERT INTO user "
-				+ "(email, password, first_name, last_name, permission) "
-				+ "Values('"+ email +"', '"+ password +"', '"+ firstName +"', '"+ lastName + "', '" + permission + "')";
+				+ "(email, password, first_name, last_name, permission, shipping_address, billing_address) "
+				+ "Values('"+ email +"', '"+ password +"', '"+ firstName +"', '"+ lastName + "', '" + permission 
+				+ "', '" + shippingAddress + "', '" + billingAddress + "')";
 		
 		return DbAccess.insert(query) == 1;
 	}
@@ -87,5 +88,19 @@ public class Query {
 		String query = "SELECT * FROM user WHERE email =\'" + email + "\'";
 		
 		return DbAccess.retrieve(query).next();
+	}
+	
+	public static boolean confirmationCodeValid(String confirmationCode) throws SQLException {
+		String query = "SELECT * FROM confirmation WHERE confirmation_code =\'" + confirmationCode + "\'";
+		
+		return DbAccess.retrieve(query).next();
+	}
+	
+	public static boolean addConfirmationCode(String email, String confirmationCode) {
+		String query = "INSERT INTO confirmation (email, confirmation_code) VALUES ('"
+				+ email + "', '"
+				+ confirmationCode + "')";
+		
+		return DbAccess.insert(query) == 1;
 	}
 }
