@@ -52,10 +52,10 @@ $(document).ready(function(){
         "    </form>\n" +
         "\n" +
         "    <div class=\"login-area\">\n" +
-        "        <a class=\"nav-item\"><img src=\"https://s3.us-east-2.amazonaws.com/csci4050/login-logo.png\" width=\"30\" height=\"30\"/></a>\n" +
+        "        <a class=\"nav-item\" href=\"login.html\" ><img src=\"https://s3.us-east-2.amazonaws.com/csci4050/login-logo.png\" width=\"30\" height=\"30\"/></a>\n" +
         "    </div>\n" +
         "    <div class=\"cart-area\">\n" +
-        "        <a class=\"nav-item\"><img src=\"https://s3.us-east-2.amazonaws.com/csci4050/shopping-bag.png\" width=\"30\" height=\"30\"/></a>\n" +
+        "        <a class=\"nav-item\" href=\"shoppingCart.html\" ><img src=\"https://s3.us-east-2.amazonaws.com/csci4050/shopping-bag.png\" width=\"30\" height=\"30\"/></a>\n" +
         "    </div>\n" +
         "</nav>";
     
