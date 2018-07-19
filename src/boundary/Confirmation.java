@@ -11,8 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 
 import logic_layer.Query;
 
-@WebServlet("/RegisterUser")
+@WebServlet("/Confirmation")
 public class Confirmation {
+	
+	public Confirmation() {
+		super();
+	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		confirmRegistration(request, response);
