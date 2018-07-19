@@ -53,7 +53,7 @@ public class GetBookServlet extends HttpServlet {
 		//isbn = "9781782274209";
 		
 		List<Book> list = new ArrayList<>();
-		ResultSet rs = Query.getBook(isbn); //results in only one book
+		ResultSet rs = Query.getBookByIsbn(isbn); //results in only one book
 		
 		book.setISBN(isbn);
 		book.setTitle(rs.getString("title"));

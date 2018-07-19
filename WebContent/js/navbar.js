@@ -17,22 +17,7 @@ $(document).ready(function(){
         "            </li>\n" +
         "            <!--Dropdown Menu Link-->\n" +
         "            <li class=\"nav-item dropdown\">\n" +
-        "                <a class=\"nav-link dropdown-toggle shop-menu\" href=\"#\" data-toggle=\"dropdown\" aria-haspopup=\"true\" aria-expanded=\"false\">Shop</a>\n" +
-        "                <!--Actual Drop Down Menu-->\n" +
-        "                <div class=\"dropdown-menu\" aria-labelledby=\"navbarDropdown\">\n" +
-        "                    <a class=\"dropdown-item\" href=\"#\">All Books</a>\n" +
-        "                    <a class=\"dropdown-item\" href=\"#\">New Books</a>\n" +
-        "                    <a class=\"dropdown-item\" id=\"genre\" href=\"#\">Genre</a>\n" +
-        "                    <!--Sub Drop Down Menu-->\n" +
-        "                    <div class=\"dropdown-menu sub-menu\">\n" +
-        "                        <a class=\"dropdown-item\" href=\"#\">Romance</a>\n" +
-        "                        <a class=\"dropdown-item\" href=\"#\">Horror</a>\n" +
-        "                        <a class=\"dropdown-item\" href=\"#\">Fantasy</a>\n" +
-        "                        <a class=\"dropdown-item\" href=\"#\">Fiction</a>\n" +
-        "                        <a class=\"dropdown-item\" href=\"#\">Non-Fiction</a>\n" +
-        "                        <a class=\"dropdown-item\" href=\"#\">Action</a>\n" +
-        "                    </div>\n" +
-        "                </div>\n" +
+        "                <a class=\"nav-link\" href=\"BrowseAllBooks\">Browse Books<span class=\"sr-only\">(current)</span></a>\n" +
         "            </li>\n" +
         "            <li class=\"nav-item\">\n" +
         "                <a class=\"nav-link\" href=\"#\">About</a>\n" +

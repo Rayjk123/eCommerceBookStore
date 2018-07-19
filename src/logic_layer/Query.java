@@ -3,8 +3,10 @@ package logic_layer;
 import data_access_layer.DbAccess;
 import domain_layer.Book;
 import domain_layer.Customer;
+import logic_layer.QueryUtil;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.sql.ResultSet;
 
 public class Query {
@@ -51,7 +53,7 @@ public class Query {
 		return database.update(query) == 1; 
 	}*/
 	
-	public static ResultSet getBook(String isbn) {
+	public static ResultSet getBookByIsbn(String isbn) {
 		String query = "SELECT * FROM book WHERE isbn = '"
 				+ isbn + "'";
 		
@@ -77,6 +79,25 @@ public class Query {
 				book.getDescription() + "')";
 			
 		return DbAccess.insert(query) == 1;
+	}
+	
+	public static ArrayList<Book> getAllBooks() throws SQLException {
+		String query = "select * from book";
+		
+		ArrayList<Book> retList = new ArrayList<>();
+		ResultSet resultSet = DbAccess.retrieve(query);
+		
+		
+		while(resultSet.next()) {
+			Book book = QueryUtil.resultSetToBook(resultSet);
+			System.out.println(book);
+			
+			if (book != null) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
 	}
 	
 	/**
