@@ -85,7 +85,7 @@ public class Query {
 	 * @throws SQLException 
 	 */
 	public static boolean emailExists(String email) throws SQLException {
-		String query = "SELECT * FROM user WHERE email =\'" + email + "\'";
+		String query = "SELECT * FROM user WHERE email ='" + email + "'";
 		
 		return DbAccess.retrieve(query).next();
 	}
@@ -102,5 +102,11 @@ public class Query {
 				+ confirmationCode + "')";
 		
 		return DbAccess.insert(query) == 1;
+	}
+	
+	public static boolean validateLogin(String email, String password) throws SQLException {
+		String query = "SELECT * FROM user WHERE email =\'" + email + "'";
+		
+		return DbAccess.retrieve(query).next();
 	}
 }
