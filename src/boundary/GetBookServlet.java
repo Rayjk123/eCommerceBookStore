@@ -18,18 +18,19 @@ import logic_layer.Query;
 import domain_layer.Book;
 
 @SuppressWarnings("serial")
-@WebServlet("/GetBook")
-public class GetBook extends HttpServlet {
+@WebServlet(urlPatterns = "/GetBookServlet")
+public class GetBookServlet extends HttpServlet {
 
 	/**
      * @see HttpServlet#HttpServlet()
      */
-	public GetBook(){
+	public GetBookServlet(){
 		super(); //HttpServlet constructor
 	}
 	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response, String isbn) throws ServletException, IOException {
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//String isbn = request.getParameter("isbn");
+		String isbn = "9781782274209";
 		try {
 			getBook(request, response, isbn);
 		} catch (SQLException e) {
@@ -49,12 +50,12 @@ public class GetBook extends HttpServlet {
 	private void getBook(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException {
 		//Book book = new Book(request.getParameter("isbn")); // TODO need to pass isbn from browse to book detail views
 		Book book = new Book();
-		isbn = "9781782274209";
+		//isbn = "9781782274209";
 		
 		List<Book> list = new ArrayList<>();
 		ResultSet rs = Query.getBook(isbn); //results in only one book
 		
-		book.setISBN(rs.getString("isbn"));
+		book.setISBN(isbn);
 		book.setTitle(rs.getString("title"));
 		book.setAuthor(rs.getString("author"));
 		book.setPrice(rs.getDouble("price"));

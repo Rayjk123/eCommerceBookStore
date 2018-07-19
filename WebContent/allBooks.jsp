@@ -32,32 +32,35 @@
 <!--NAVBAR HTML-->
 <div id="navbar"></div>
 
-<h1>Book Details</h1>
+<!-- Books display div -->
 <div class="container margin-top-50">
-    <div class="row justify-content-center">
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <c:set value="${results}" var="book" scope="session" />
-    <form action="AddToCart" method="post">
-        <!-- Book Image Column -->
-        <div class="col-12 col-sm-6 col-md-4">
-            <img id="image" src="${book.getImage()}"/>
-        </div>
-        <!-- Book Detail Column -->
-        <div class="col-12 col-sm-6 col-md-4">
-            <p><strong>${book.getTitle()}</strong></p>
-            <p>Author: ${book.getAuthor()}</p>
-            <p>ISBN: ${book.getISBN()}</p>
-            <p>Price: $ ${book.getPrice()}</p>
-            <p>Description:</p>
-            <p class="overflow half-height">
-            	${book.getDescription()}
-            </p>
-                <input class="login-button" type="submit" value="Add To Cart"><br>
-        </div>
-    </form>
+	<table class="table table-hover">
+		<tr>
+			<td><!-- Book Image TD --></td>
+			<td><!-- Book info TD --></td>
+			<td><!-- Book Description TD --></td>
+		</tr>
+		<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+		<c:forEach items="${results}" var="book">
+			<tr>
+				<td>
+					<div class="col-12 col-sm-6 col-md-4">
+            			<img id="image" src="${book.getImage()}"/>
+        			</div>
+        		</td>
+        		<td>
+        			<p><strong>${book.getTitle()}</strong></p>
+        			<p>By: ${book.getAuthor()}</p>
+        			<p>Price: ${book.getPrice()}</p>
+        		</td>
+        		<td>
+        			<p class="overflow half-height">
+        				${book.getDescription()}
+        			</p>
+        		</td>
+        	</tr>
+        </c:forEach>	
+	</table>
 </div>
-</div>
-    
-      
 </body>
 </html>
