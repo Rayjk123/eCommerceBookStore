@@ -32,7 +32,7 @@
 <div id="navbar"></div>
 
 <div class="container margin-top-50">
-    <h3>Browse All Books</h3>
+    <h3>Shopping Cart</h3>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <table class="table table-hover">
         <!-- Table Header Row-->
@@ -40,41 +40,45 @@
             <!-- Book Image TD -->
             <td></td>
             <!-- Book Title TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Title
             </td>
             <!-- Book Author TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Author
             </td>
             <!-- Book Publisher TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Publisher
             </td>
             <!--Book Price TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Price
             </td>
             <!--Book Quantity TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Quantity
             </td>
+            <td></td>
             <td></td>
         </tr>
         <c:forEach items="${books}" var="book">
 	        <!-- Book Detail Table Row-->
 	        <tr>
+	        <form class="cart-delete-button" action="EditCart?param=${book.isbn}" method="post">
 	            <!-- Book Image TD -->
 	            <td>
 	                <div class="cart-div-height center-text">
-	                	<a href="BookDetailServlet?param=${book.getISBN()}">
+	                	<a href="BookDetail?param=${book.isbn}">
 	                    	<img class="shopping-cart-img" src="${book.image}">
-	                    </a>
+	                	</a>
 	                </div>
 	            </td>
 	            <!-- Book Title TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.title}</div>
+	                <div class="cart-div-height center-text">
+	                	<a href="BookDetailServlet?param=${book.isbn}">${book.title}</a>
+	                </div>
 	            </td>
 	            <!-- Book Author TD-->
 	            <td>
@@ -88,9 +92,6 @@
 	            <td>
 	                <div class="cart-div-height center-text">${book.price}</div>
 	            </td>
-	            <!--  
-	            <form class="cart-delete-button" action="AddToCart?param=${book.getISBN()}" method="post">
-	            -->
 	            <td>
 	            	<div class="cart-div-height center-text">
 	            		<select name="qty">
@@ -106,13 +107,11 @@
                         <option value="10">10</option>
                     </select>
 	            	</div>
+	            </td>
 	            <td>
-	            <td>
-	            	<button class="add-to-cart" type="submit">Add To Cart</button>
+	            	<button class="add-to-cart" type="submit">Edit Quantity</button>
 	            </td>
 	            <!-- 
-	            </form>
-	            
 	            <td>
 	                <div class="cart-div-height center-text">
 	                    <select>
@@ -133,17 +132,17 @@
 	                </div>
 	            </td>
 	            -->
+	        </form>
 	        </tr>
+	       
         </c:forEach>
     </table>
-    <!--  
     <div class="float-right">
         <p id="total-price">Total Price: $8.50</p>
         <form action="CheckoutServlet" method="post">
             <input type="submit" value="Proceed To Checkout"><br>
         </form>
     </div>
-    -->
 </div>
 
 </body>

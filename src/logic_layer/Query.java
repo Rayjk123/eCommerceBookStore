@@ -2,7 +2,6 @@ package logic_layer;
 
 import data_access_layer.DbAccess;
 import domain_layer.Book;
-import domain_layer.Customer;
 import logic_layer.QueryUtil;
 
 import java.sql.SQLException;
@@ -33,11 +32,11 @@ public class Query {
 	 * @param quantity
 	 * @return true if inserted with no error
 	 */
-	public static boolean addToCart(Customer customer, Book book, int quantity) {
+	public static boolean addToCart(String email, String isbn, int quantity) {
 		String query = "INSERT INTO cart " 
 				+ "(email, isbn, quantity) "
-				+ "Values('" + customer.getEmail() + "', '" 
-				+ book.getISBN() + "', '" 
+				+ "Values('" + email + "', '" 
+				+ isbn + "', '" 
 				+ quantity + "')";
 		
 		return DbAccess.insert(query) == 1;
@@ -58,9 +57,7 @@ public class Query {
 				+ isbn + "'";
 		
 		ResultSet resultSet = DbAccess.retrieve(query);
-		
-		Book book = new Book();
-		book = QueryUtil.resultSetToBook(resultSet);
+		Book book = QueryUtil.resultSetToBook(resultSet);
 		
 		return book;
 	}
@@ -88,6 +85,26 @@ public class Query {
 	
 	public static ArrayList<Book> getAllBooks() throws SQLException {
 		String query = "select * from book";
+		
+		ArrayList<Book> retList = new ArrayList<>();
+		ResultSet resultSet = DbAccess.retrieve(query);
+		
+		
+		while(resultSet.next()) {
+			Book book = QueryUtil.resultSetToBook(resultSet);
+			System.out.println(book);
+			
+			if (book != null) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public static ArrayList<Book> getBooksInCart(String email) throws SQLException {
+		String query = "select * from cart WHERE email = '"
+				+ email + "'";
 		
 		ArrayList<Book> retList = new ArrayList<>();
 		ResultSet resultSet = DbAccess.retrieve(query);

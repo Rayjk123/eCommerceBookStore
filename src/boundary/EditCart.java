@@ -2,7 +2,7 @@ package boundary;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Random;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,12 +11,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;  
-import javax.servlet.http.Cookie;
 
 import logic_layer.Query;
 import domain_layer.Book;
-import domain_layer.Customer;
 
+@SuppressWarnings("serial")
 @WebServlet("/EditCart")
 public class EditCart extends HttpServlet {
 
@@ -30,24 +29,26 @@ public class EditCart extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		try {
-			EditCart(request, response);
+			editCart(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/shoppingCart.html"); //TODO what actually should be here?
-		dispatcher.forward(request, response); 
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			doGet(request, response);
 	}
 	
-	private void EditCart(HttpServletRequest request, HttpServletResponse response) throws SQLException {
+	private void editCart(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		HttpSession session = request.getSession();
-		Customer customer = (Customer)session.getAttribute("customer");
+		String email = (String)session.getAttribute("email");
 		
+		ArrayList<Book> books = Query.getBooksInCart(email);
+		request.setAttribute("books", books);
+		
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/Cart.jsp"); //TODO what actually should be here?
+		dispatcher.forward(request, response); 
 	}
 }

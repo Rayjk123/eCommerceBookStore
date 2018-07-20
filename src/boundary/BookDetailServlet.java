@@ -2,6 +2,7 @@ package boundary;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -48,7 +49,7 @@ public class BookDetailServlet extends HttpServlet {
 		
 		request.setAttribute("book", book);
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/BookDetail.jsp");
+		dispatcher = request.getRequestDispatcher("/bookDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 }
