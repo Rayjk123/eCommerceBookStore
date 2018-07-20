@@ -53,12 +53,15 @@ public class Query {
 	}*/
 	
 	public static Book getBookByISBN(String isbn) throws SQLException {
-		String query = "SELECT * FROM book WHERE isbn = '"
+		String query = "SELECT * FROM book WHERE isbn ='" 
 				+ isbn + "'";
+		System.out.println(query);
 		
 		ResultSet resultSet = DbAccess.retrieve(query);
+		System.out.println("Test1");
+		System.out.println(resultSet.getString("title"));
 		Book book = QueryUtil.resultSetToBook(resultSet);
-		
+		System.out.println("Test2");
 		return book;
 	}
 	
@@ -103,7 +106,7 @@ public class Query {
 	}
 	
 	public static ArrayList<Book> getBooksInCart(String email) throws SQLException {
-		String query = "select * from cart WHERE email = '"
+		String query = "select * from cart WHERE email ='"
 				+ email + "'";
 		
 		ArrayList<Book> retList = new ArrayList<>();

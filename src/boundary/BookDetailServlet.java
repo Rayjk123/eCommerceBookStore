@@ -2,7 +2,6 @@ package boundary;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -24,7 +23,7 @@ public class BookDetailServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String isbn = request.getParameter("isbn");
+		String isbn = request.getParameter("param");
 		
 		try {
 			getBookByISBN(request, response, isbn);
