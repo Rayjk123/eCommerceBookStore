@@ -59,7 +59,8 @@ public class Query {
 		
 		ResultSet resultSet = DbAccess.retrieve(query);
 		System.out.println("Test1");
-		System.out.println(resultSet.getString("title"));
+		resultSet.next();
+		System.out.println(resultSet.getString("price"));
 		Book book = QueryUtil.resultSetToBook(resultSet);
 		System.out.println("Test2");
 		return book;
