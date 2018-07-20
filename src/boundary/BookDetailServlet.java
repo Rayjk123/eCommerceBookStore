@@ -2,7 +2,6 @@ package boundary;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,17 +14,19 @@ import domain_layer.Book;
 import logic_layer.Query;
 
 @SuppressWarnings("serial")
-@WebServlet("/BrowseAllBooks")
-public class BrowseAllBooks extends HttpServlet {
+@WebServlet("/BookDetailServlet")
+public class BookDetailServlet extends HttpServlet {
 	
 	
-	public BrowseAllBooks() {
+	public BookDetailServlet() {
 		super();
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String isbn = request.getParameter("isbn");
+		
 		try {
-			displayAllBooks(request, response);
+			getBookByISBN(request, response, isbn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -42,12 +43,12 @@ public class BrowseAllBooks extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void displayAllBooks(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		ArrayList<Book> books = Query.getAllBooks();
+	private void getBookByISBN(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
+		Book book = Query.getBookByISBN(isbn);
 		
-		request.setAttribute("books", books);
+		request.setAttribute("book", book);
 		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/allBooks.jsp");
+		dispatcher = request.getRequestDispatcher("/BookDetail.jsp");
 		dispatcher.forward(request, response);
 	}
 }

@@ -53,11 +53,16 @@ public class Query {
 		return database.update(query) == 1; 
 	}*/
 	
-	public static ResultSet getBookByIsbn(String isbn) {
+	public static Book getBookByISBN(String isbn) throws SQLException {
 		String query = "SELECT * FROM book WHERE isbn = '"
 				+ isbn + "'";
 		
-		return DbAccess.retrieve(query);
+		ResultSet resultSet = DbAccess.retrieve(query);
+		
+		Book book = new Book();
+		book = QueryUtil.resultSetToBook(resultSet);
+		
+		return book;
 	}
 	
 	public static boolean addBookToInventory(Book book) {

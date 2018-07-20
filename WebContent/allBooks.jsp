@@ -67,12 +67,16 @@
 	            <!-- Book Image TD -->
 	            <td>
 	                <div class="cart-div-height center-text">
-	                    <img class="shopping-cart-img" src="${book.image}">
+	                	<a href="BookDetail?param=${book.isbn}">
+	                    	<img class="shopping-cart-img" src="${book.image}">
+	                	</a>
 	                </div>
 	            </td>
 	            <!-- Book Title TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.title}</div>
+	                <div class="cart-div-height center-text">
+	                	<a href="BookDetailServlet?param=${book.isbn}">${book.title}</a>
+	                </div>
 	            </td>
 	            <!-- Book Author TD-->
 	            <td>
@@ -86,7 +90,7 @@
 	            <td>
 	                <div class="cart-div-height center-text">${book.price}</div>
 	            </td>
-	            <form class="cart-delete-button" action="AddToCart?param=${book.title}" method="post">
+	            <form class="cart-delete-button" action="AddToCart?param=${book.isbn}" method="post">
 	            <td>
 	            	<div class="cart-div-height center-text">
 	            		<select name="qty">
