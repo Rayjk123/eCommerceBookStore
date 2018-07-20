@@ -126,8 +126,15 @@ public class Query {
 	}
 	
 	public static boolean validateLogin(String email, String password) throws SQLException {
-		String query = "SELECT * FROM user WHERE email =\'" + email + "'";
+		String query = "SELECT * FROM user WHERE email ='" + email + "', ' AND password = '" + password + "'";
 		
 		return DbAccess.retrieve(query).next();
+	}
+	
+	public static String getPermission(String email) throws SQLException {
+		String query = "SELECT permission FROM user WHERE email ='" + email + "'";
+		ResultSet rs = DbAccess.retrieve(query);
+		rs.next();
+		return rs.getString("permission");
 	}
 }
