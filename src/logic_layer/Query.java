@@ -126,7 +126,7 @@ public class Query {
 	}
 	
 	public static boolean validateLogin(String email, String password) throws SQLException {
-		String query = "SELECT * FROM user WHERE email ='" + email + "', ' AND password = '" + password + "'";
+		String query = "SELECT * FROM user WHERE email ='" + email + "' AND password = '" + password + "'";
 		
 		return DbAccess.retrieve(query).next();
 	}

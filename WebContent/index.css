@@ -186,6 +186,11 @@ table, tr, td {
     font-size: 12px;
 }
 
+.error-text {
+	font-size: 12px;
+	color: red;
+}
+
 @-webkit-keyframes fontfix {
     from { opacity: 1; }
     to   { opacity: 1; }

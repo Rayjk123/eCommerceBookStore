@@ -17,6 +17,9 @@
             integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
             crossorigin="anonymous"></script>
 
+	<!-- JQuery -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
     <!--Fonts-->
     <link href="https://fonts.googleapis.com/css?family=BioRhyme+Expanded:400,700" rel="stylesheet">
 
@@ -24,6 +27,7 @@
     <link href="index.css" rel="stylesheet">
     <script src="js/index.js"></script>
     <script src="js/navbar.js"></script>
+    <script src="js/eventHandler.js"></script>
 </head>
 
 <body>
@@ -33,12 +37,13 @@
 <div class="container">
     <h1 class="center-text">Sign in</h1>
     <div class="center-div">
-        <form action="LoginValidation" method="post">
-            <label> Email: <br>
-                <input class="input-field" type="text" name="email" value=""></label><br>
-            <label> Password: <br>
-                <input class="input-field" type="password" name="password" value=""></label><br>
-            <input class="login-button" type="submit" value="Sign in"><br>
+        <form id="loginForm" action="LoginValidation" method="post">
+            <label> Email: </label><br>
+            <input id="email" class="input-field" type="text" name="email" value=""><br>
+            <label> Password: </label><br>
+                <input id="password" class="input-field" type="password" name="password" value=""><br>
+            <p id="login-error" class="error-text">Invalid email or password</p><br/>
+            <button id="login-button" type="button">Submit</button><br>
             <a href="forgot_password.jsp">Forget your password?</a>
         </form>
         <a href="register.html">Register for account</a>

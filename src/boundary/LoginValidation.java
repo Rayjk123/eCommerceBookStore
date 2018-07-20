@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -13,7 +14,7 @@ import javax.servlet.http.HttpSession;
 import logic_layer.Query;
 
 @WebServlet("/LoginValidation")
-public class LoginValidation {
+public class LoginValidation extends HttpServlet{
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
@@ -29,13 +30,14 @@ public class LoginValidation {
 	}
 	
 	private void validateLogin(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		
 		if (!Query.validateLogin(email, password)) {
-			RequestDispatcher dispatcher;
-			dispatcher = request.getRequestDispatcher("/login.html");
-			dispatcher.forward(request, response);
+			response.setContentType("text/plain");
+			response.setCharacterEncoding("UTF-8");
+			response.getWriter().write("false");
 			return;
 		}
 		
@@ -50,8 +52,8 @@ public class LoginValidation {
 		String permission = Query.getPermission(email);
 		session.setAttribute("permission", permission);
 		
-		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/index.html");
-		dispatcher.forward(request, response);
+		response.setContentType("text/plain");
+		response.setCharacterEncoding("UTF-8");
+		response.getWriter().write("true");
 	}
 }
