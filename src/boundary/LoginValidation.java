@@ -53,5 +53,15 @@ public class LoginValidation {
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher("/index.html");
 		dispatcher.forward(request, response);
+		
+		/** Can we do this so that login page returns to the soure 
+		 * 
+		String referer = "/" + request.getHeader("Referer");
+		
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher(referer);
+		dispatcher.forward(request, response);
+		 *
+		 */
 	}
 }

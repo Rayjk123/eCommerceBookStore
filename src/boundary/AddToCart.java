@@ -46,8 +46,14 @@ public class AddToCart extends HttpServlet {
 		String email = (String) session.getAttribute("email"); //TODO need create a customer object at login and setAttribute
 		String isbn = request.getParameter("isbn");
 		int quantity = Integer.parseInt(request.getParameter("qty")); //quantity the user wants to add to cart 
-																		//TODO need a default quantity of 1 in bookDetail.html
-																		//TODO edit cart will have a field to set quantity in cart
+		RequestDispatcher dispatcher;
+		
+		if (email == null)
+		{
+			dispatcher = request.getRequestDispatcher("/login.html");
+			dispatcher.forward(request, response);
+		}
+		
 		Book book = Query.getBookByISBN(isbn);
 		
 		//can't add more than what's in stock to cart
@@ -55,8 +61,8 @@ public class AddToCart extends HttpServlet {
 			Query.addToCart(email, isbn, quantity); 
 		}
 		
-		RequestDispatcher dispatcher;
-		dispatcher = request.getRequestDispatcher("/index.html"); //TODO make Cart.jsp
+		
+		dispatcher = request.getRequestDispatcher("/Cart.jsp"); 
 		dispatcher.forward(request, response); 
 	}
 }
