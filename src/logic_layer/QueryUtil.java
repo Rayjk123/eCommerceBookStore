@@ -18,12 +18,12 @@ public class QueryUtil {
 	 */
 	protected static Book resultSetToBook(ResultSet result) throws SQLException {
 		ResultSetMetaData rsmd = result.getMetaData();
+
 		if (rsmd.getColumnCount() != 13) {
 			return null;
 		}
 		
 		Book book = new Book();
-		
 		book.setISBN(result.getString("isbn"));
 		book.setTitle(result.getString("title"));
 		book.setAuthor(result.getString("author"));

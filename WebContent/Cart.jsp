@@ -32,7 +32,7 @@
 <div id="navbar"></div>
 
 <div class="container margin-top-50">
-    <h3>Browse All Books</h3>
+    <h3>Shopping Cart</h3>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <table class="table table-hover">
         <!-- Table Header Row-->
@@ -40,25 +40,26 @@
             <!-- Book Image TD -->
             <td></td>
             <!-- Book Title TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Title
             </td>
             <!-- Book Author TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Author
             </td>
             <!-- Book Publisher TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Publisher
             </td>
             <!--Book Price TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Price
             </td>
             <!--Book Quantity TD-->
-             <td class="center-text">
+            <td class="center-text">
                 Quantity
             </td>
+            <td></td>
             <td></td>
         </tr>
         <c:forEach items="${books}" var="book">
@@ -68,29 +69,29 @@
 	            <td>
 	                <div class="cart-div-height center-text">
 	                	<a href="BookDetailServlet?param=${book.getISBN()}">
-	                    	<img class="shopping-cart-img" src="${book.image}">
+	                    	<img class="shopping-cart-img" src="${book.getImage()}">
 	                    </a>
 	                </div>
 	            </td>
 	            <!-- Book Title TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.title}</div>
+	                <div class="cart-div-height center-text">${book.getTitle()}</div>
 	            </td>
 	            <!-- Book Author TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.author}</div>
+	                <div class="cart-div-height center-text">${book.getAuthor()}</div>
 	            </td>
 	            <!-- Book Author TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.publisher}</div>
+	                <div class="cart-div-height center-text">${book.getPublisher()}</div>
 	            </td>
 	            <!--Book Price TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.price}</div>
+	                <div class="cart-div-height center-text">
+	                	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+						$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${book.getPrice()}"/>
+					</div>
 	            </td>
-	            <!--  
-	            <form class="cart-delete-button" action="AddToCart?param=${book.getISBN()}" method="post">
-	            -->
 	            <td>
 	            	<div class="cart-div-height center-text">
 	            		<select name="qty">
@@ -108,42 +109,24 @@
 	            	</div>
 	            <td>
 	            <td>
-	            	<button class="add-to-cart" type="submit">Add To Cart</button>
-	            </td>
-	            <!-- 
-	            </form>
-	            
+	            	<form action="SetCartQuantity">
+	            		<button class="add-to-cart" type="submit">Set Quantity</button>
+	            	</form>
+	            </td> 
 	            <td>
-	                <div class="cart-div-height center-text">
-	                    <select>
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
-	                        <option value="4">4</option>
-	                        <option value="5">5</option>
-	                    </select>
-	                </div>
+	            	<form class="cart-delete-button" action="DeleteFromCart" method="post">
+	            		<button class="add-to-cart" type="submit">Delete</button>
+	                   </form>
 	            </td>
-	            <td>
-	                <div class="cart-div-height center-text">
-	                    <form class="cart-delete-button" action="CartServlet" method="post">
-	                        <!--<input class="fit-div submit-button" type="submit" value="delete">
-	                        <button type="submit" class="btn btn-link">Delete</button>
-	                    </form>
-	                </div>
-	            </td>
-	            -->
 	        </tr>
         </c:forEach>
     </table>
-    <!--  
     <div class="float-right">
         <p id="total-price">Total Price: $8.50</p>
         <form action="CheckoutServlet" method="post">
             <input type="submit" value="Proceed To Checkout"><br>
         </form>
     </div>
-    -->
 </div>
 
 </body>
