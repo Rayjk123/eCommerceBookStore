@@ -65,32 +65,32 @@
         <c:forEach items="${books}" var="book">
 	        <!-- Book Detail Table Row-->
 	        <tr>
-	        <form class="cart-delete-button" action="EditCart?param=${book.isbn}" method="post">
 	            <!-- Book Image TD -->
 	            <td>
 	                <div class="cart-div-height center-text">
-	                	<a href="BookDetail?param=${book.isbn}">
-	                    	<img class="shopping-cart-img" src="${book.image}">
-	                	</a>
+	                	<a href="BookDetailServlet?param=${book.getISBN()}">
+	                    	<img class="shopping-cart-img" src="${book.getImage()}">
+	                    </a>
 	                </div>
 	            </td>
 	            <!-- Book Title TD-->
 	            <td>
-	                <div class="cart-div-height center-text">
-	                	<a href="BookDetailServlet?param=${book.isbn}">${book.title}</a>
-	                </div>
+	                <div class="cart-div-height center-text">${book.getTitle()}</div>
 	            </td>
 	            <!-- Book Author TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.author}</div>
+	                <div class="cart-div-height center-text">${book.getAuthor()}</div>
 	            </td>
 	            <!-- Book Author TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.publisher}</div>
+	                <div class="cart-div-height center-text">${book.getPublisher()}</div>
 	            </td>
 	            <!--Book Price TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.price}</div>
+	                <div class="cart-div-height center-text">
+	                	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+						$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${book.getPrice()}"/>
+					</div>
 	            </td>
 	            <td>
 	            	<div class="cart-div-height center-text">
@@ -107,34 +107,18 @@
                         <option value="10">10</option>
                     </select>
 	            	</div>
-	            </td>
 	            <td>
-	            	<button class="add-to-cart" type="submit">Edit Quantity</button>
-	            </td>
-	            <!-- 
 	            <td>
-	                <div class="cart-div-height center-text">
-	                    <select>
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
-	                        <option value="4">4</option>
-	                        <option value="5">5</option>
-	                    </select>
-	                </div>
-	            </td>
+	            	<form action="SetCartQuantity">
+	            		<button class="add-to-cart" type="submit">Set Quantity</button>
+	            	</form>
+	            </td> 
 	            <td>
-	                <div class="cart-div-height center-text">
-	                    <form class="cart-delete-button" action="CartServlet" method="post">
-	                        <!--<input class="fit-div submit-button" type="submit" value="delete">
-	                        <button type="submit" class="btn btn-link">Delete</button>
-	                    </form>
-	                </div>
+	            	<form class="cart-delete-button" action="DeleteFromCart" method="post">
+	            		<button class="add-to-cart" type="submit">Delete</button>
+	                   </form>
 	            </td>
-	            -->
-	        </form>
 	        </tr>
-	       
         </c:forEach>
     </table>
     <div class="float-right">

@@ -18,16 +18,13 @@ public class QueryUtil {
 	 */
 	protected static Book resultSetToBook(ResultSet result) throws SQLException {
 		ResultSetMetaData rsmd = result.getMetaData();
-		System.out.println("Test3");
+
 		if (rsmd.getColumnCount() != 13) {
-			System.out.println("Test4");
 			return null;
 		}
-		System.out.println("Test5");
+		
 		Book book = new Book();
-		System.out.println("Test6");
 		book.setISBN(result.getString("isbn"));
-		System.out.println("Test6.1");
 		book.setTitle(result.getString("title"));
 		book.setAuthor(result.getString("author"));
 		book.setPrice(result.getDouble("price"));
@@ -40,7 +37,6 @@ public class QueryUtil {
 		book.setHold(result.getInt("hold"));
 		book.setImage(result.getString("image"));
 		book.setDescription(result.getString("description"));
-		System.out.println("Test7");
 		
 		return book;
 	}

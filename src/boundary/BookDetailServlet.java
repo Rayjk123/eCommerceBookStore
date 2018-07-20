@@ -47,10 +47,8 @@ public class BookDetailServlet extends HttpServlet {
 		Book book = Query.getBookByISBN(isbn);
 		
 		request.setAttribute("book", book);
-		System.out.println("Test 8");
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher("/bookDetail.jsp");
 		dispatcher.forward(request, response);
-		System.out.println("Test 9");
 	}
 }
