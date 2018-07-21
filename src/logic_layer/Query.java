@@ -3,6 +3,7 @@ package logic_layer;
 import data_access_layer.DbAccess;
 import domain_layer.Book;
 import domain_layer.Cart;
+import domain_layer.Customer;
 import logic_layer.QueryUtil;
 
 import java.sql.SQLException;
@@ -43,7 +44,7 @@ public class Query {
 		String query = "INSERT into book "
 				+ "(isbn, title, author, price, genre, publisher, vendor, stock, promocode, promoprice, hold, image, description) " + 
 				"Values('" +
-				book.getISBN() + "', '" +
+				book.getIsbn() + "', '" +
 				book.getTitle() + "', '" +
 				book.getAuthor() + "', '" +
 				book.getPrice() + "', '" +
@@ -89,7 +90,7 @@ public class Query {
 				+ "(email, isbn, quantity, title, author, publisher, price, stock, hold, image) "
 				+ "Values('" + 
 					email + "', '" +
-					book.getISBN() + "', '" + 
+					book.getIsbn() + "', '" + 
 					quantity + "', '" +
 					book.getTitle() + "', '" + 
 					book.getAuthor() + "', '" + 
@@ -135,14 +136,14 @@ public class Query {
 	public static boolean setCartQuantity(String email, Book book, int qty) {
 		String query = "UPDATE cart SET quantity ='" + qty + 
 				"' WHERE email ='" + email +
-				"' and isbn ='" + book.getISBN() + "'";
+				"' and isbn ='" + book.getIsbn() + "'";
 		System.out.println(query);
 		return DbAccess.insert(query) == 1;
 	}
 	
 	public static boolean deleteBookFromCart(String email, Book book) {
 		String query = "DELETE FROM cart WHERE email ='" + email +
-				"' and isbn ='" + book.getISBN() + "'";
+				"' and isbn ='" + book.getIsbn() + "'";
 		
 		return DbAccess.insert(query) == 1;
 	}
@@ -192,7 +193,13 @@ public class Query {
 		return DbAccess.insert(query) == 1;
 	}
 	
-//	public static Customer getCustomerInfo() {
-//		
-//	}
+	public static Customer getCustomerInfo(String email) throws SQLException {
+		String userQuery = "select * from user where email = '" + email + "'";
+		String creditCardInfo = "select * from credit_card where email ='" + email + "'";
+		
+		ResultSet user = DbAccess.retrieve(userQuery);
+		ResultSet creditCard = DbAccess.retrieve(creditCardInfo);
+		
+		return QueryUtil.resultSetsToCustomer(user, creditCard);
+	}
 }

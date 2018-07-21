@@ -9,6 +9,10 @@ public class RegisteredUser {
 	private String password;
 	private int permLevel;
 	
+	public RegisteredUser() {
+		
+	}
+	
 	public RegisteredUser(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel) {
 		setAccountID(accountID);
 		setFirstName(firstName);

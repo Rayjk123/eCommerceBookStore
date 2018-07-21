@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import domain_layer.Book;
 import domain_layer.Cart;
+import domain_layer.Customer;
 
 public class QueryUtil {
 	
@@ -25,7 +26,7 @@ public class QueryUtil {
 		}
 		
 		Book book = new Book();
-		book.setISBN(result.getString("isbn"));
+		book.setIsbn(result.getString("isbn"));
 		book.setTitle(result.getString("title"));
 		book.setAuthor(result.getString("author"));
 		book.setPrice(result.getDouble("price"));
@@ -60,5 +61,25 @@ public class QueryUtil {
 		cart.setQty(result.getInt("quantity"));
 
 		return cart;
+	}
+	
+	protected static Customer resultSetsToCustomer(ResultSet user, ResultSet creditCard) throws SQLException {
+		if (!user.next() || !creditCard.next()) {
+			return null;
+		}
+		
+		Customer customer = new Customer();
+		
+		customer.setEmail(user.getString("email"));
+		customer.setPassword(user.getString("password"));
+		customer.setFirstName(user.getString("first_name"));
+		customer.setLastName(user.getString("last_name"));
+		customer.setShippingAddress(user.getString("shipping_address"));
+		customer.setBillingAddress(user.getString("billing_address"));
+		customer.setCcNumber(creditCard.getString("number"));
+		customer.setSecurityCode(creditCard.getString("security_code"));
+		customer.setCcExpiration(creditCard.getString("expiration_date"));
+		
+		return customer;
 	}
 }

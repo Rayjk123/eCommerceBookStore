@@ -3,9 +3,16 @@ package domain_layer;
 public class Customer extends RegisteredUser {
 
 	private String address;
-	private int ccNumber;
+	private String billingAddress;
+	private String shippingAddress;
+	private String ccNumber;
 	private String ccExpiration;
+	private String securityCode;
 	private boolean subscripion;
+	
+	public Customer() {
+		
+	}
 	
 	//constructor for only address as it will be required
 	public Customer(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, String address) {
@@ -14,7 +21,7 @@ public class Customer extends RegisteredUser {
 	}
 	
 	//constructor for included optional cc information
-	public Customer(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, String address, int ccNumber, String ccExpiration, boolean subscription){
+	public Customer(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, String address, String ccNumber, String ccExpiration, boolean subscription){
 		super(accountID, firstName, lastName, email, 
 				dateOfBirth, password, permLevel);
 		setAddress(address);
@@ -31,11 +38,11 @@ public class Customer extends RegisteredUser {
 		this.address = address;
 	}
 
-	public int getCcNumber() {
+	public String getCcNumber() {
 		return ccNumber;
 	}
 
-	public void setCcNumber(int ccNumber) {
+	public void setCcNumber(String ccNumber) {
 		this.ccNumber = ccNumber;
 	}
 
@@ -53,5 +60,29 @@ public class Customer extends RegisteredUser {
 
 	public void setSubscripion(boolean subscripion) {
 		this.subscripion = subscripion;
+	}
+
+	public String getBillingAddress() {
+		return billingAddress;
+	}
+
+	public void setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
+	}
+
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+
+	public String getSecurityCode() {
+		return securityCode;
+	}
+
+	public void setSecurityCode(String securityCode) {
+		this.securityCode = securityCode;
 	}
 }

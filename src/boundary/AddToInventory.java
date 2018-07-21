@@ -42,7 +42,7 @@ public class AddToInventory extends HttpServlet {
 		Book book = new Book();
 		//TODO Empty field handling, right now they're all required to avoid empty String in query
 		//TODO Error Handling for inputs
-		book.setISBN(request.getParameter("isbn"));
+		book.setIsbn(request.getParameter("isbn"));
 		book.setTitle(request.getParameter("title"));
 		book.setAuthor(request.getParameter("author"));
 		book.setPrice(Double.parseDouble(request.getParameter("price")));
