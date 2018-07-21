@@ -94,8 +94,6 @@ public class Query {
 		
 		while(resultSet.next()) {
 			Book book = QueryUtil.resultSetToBook(resultSet);
-			System.out.println(book);
-			
 			if (book != null) {
 				retList.add(book);
 			}
@@ -121,6 +119,14 @@ public class Query {
 		}
 		
 		return retList;
+	}
+	
+	public static boolean setCartQuantity(String email, String isbn, int qty) {
+		String query = "UPDATE cart SET quantity ='" + qty + 
+				"' WHERE email ='" + email +
+				"' and isbn='" + isbn;
+		
+		return DbAccess.insert(query) == 1;
 	}
 	
 	/**

@@ -37,7 +37,7 @@
     	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     	<c:set value="${book}" var="book" scope="session" />
     	
-    	
+  
     		<!-- Book Image Column -->
     		<div class="col-12 col-sm-6 col-md-4">
         	    <img class="item" src="${book.getImage()}">
@@ -52,7 +52,7 @@
         	    <p class="overflow half-height">
         	    	${book.getDescription()}
         	    </p>
-        	    <form action="AddToCart?isbn=${book.getISBN()}&qty=1" method="post">
+        	    <form action="CartServlet?action=add&isbn=${book.getISBN()}&qty=1" method="post">
                 	<input class="login-button" type="submit" value="Add To Cart"><br>
                 </form>
         	</div>
