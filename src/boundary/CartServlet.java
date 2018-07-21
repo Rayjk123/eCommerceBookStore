@@ -51,43 +51,52 @@ public class CartServlet extends HttpServlet {
 		String isbn = request.getParameter("isbn");
 		int qty = Integer.parseInt(request.getParameter("qty"));
 		
-		
-		if (action.equals("add")) {
-			System.out.println("action = " + action);
-			try {
-				addToCart(request, response, email, isbn, qty);
-			} catch (SQLException | ServletException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+		if (request.getParameter("action") != null & request.getParameter("isbn") != null & request.getParameter("qty") != null) {
+			if (action.equals("add")) {
+				System.out.println("action = " + action);
+				try {
+					addToCart(request, response, email, isbn, qty);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (action.equals("edit"))
+			{
+				try {
+					changeQuantity(request, response, email, isbn, qty);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("action = " + action);
+			}
+			else if (action.equals("delete"))
+			{
+				// TODO replace with change quantity method
+				System.out.println("action = " + action);
+			}
+			else 
+			{
+				try {
+					viewCart(request, response, email);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				System.out.println("action = " + action);
+				System.out.println("Default to cart view");
 			}
 		}
-		else if (action.equals("edit"))
-		{
-			try {
-				changeQuantity(request, response, email, isbn, qty);
-			} catch (SQLException | ServletException | IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			System.out.println("action = " + action);
-		}
-		else if (action.equals("delete"))
-		{
-			// TODO replace with change quantity method
-			System.out.println("action = " + action);
-		}
-		else 
-		{
-			// TODO only print cart function
+		else {
 			try {
 				viewCart(request, response, email);
 			} catch (SQLException | ServletException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println("action = " + action);
-			System.out.println("Default to cart view");
 		}
+			
 	}
 	
 	private void addToCart(HttpServletRequest request, HttpServletResponse response, String email, String isbn, int qty) throws SQLException, ServletException, IOException {

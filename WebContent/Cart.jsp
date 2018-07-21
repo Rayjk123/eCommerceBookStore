@@ -97,27 +97,13 @@
 					</div>
 	            </td>
 	            <td>
-	            	<div class="cart-div-height center-text">
-	            		<select form="bookForm" name="qty">
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                        <option value="10">10</option>
-                        <option selected="selected">${book.getQty()}</option>
-                    </select>
-	            	</div>
+	            	<input form="bookForm" class="reg-input" type="text" name="qty" value="${book.getQty()}" required>
 	            <td>
 	            <td>
-	            	<input form="bookForm" class="login-button" type="submit" name="edit" value="Set Quantity">
+	            	<button form="bookForm" class="login-button" type="submit" name="action" value="edit">Set Quantity</button>
 	            </td> 
 	            <td>
-	            	<input form="bookForm" class="login-button" type="submit" name="delete" value="Delete">
+	            	<button form="bookForm" class="login-button" type="submit" name="action" value="delete">Delete</button>
 	            </td>
 	        </tr>
         </c:forEach>
