@@ -1,3 +1,6 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,10 +36,19 @@
 <div id="adminBar"></div>
 <div class="container margin-top-50">
     <h3>Manage Inventory</h3>
+    <form action="AdminInventoryServlet" method="post" id="InventoryForm"></form>
     <table class="table table-hover">
         <!-- Table Header Row-->
         <tr>
+        	<!-- Edit Button TD -->
+        	<td></td>
+        	<!-- Delete Button TD -->
+        	<td></td>
             <!-- Book Image TD -->
+            <td class="center-text">
+            	Image
+            </td>
+            <!-- Book ISBN TD -->
             <td class="center-text">
             	ISBN
             </td>
@@ -68,54 +80,73 @@
             <td class="center-text">
                 Quantity
             </td>
-            
-            <td></td>
+            <!--Book Quantity On Hold TD-->
+            <td class="center-text">
+                On Hold
+            </td>
         </tr>
         <!-- Book Detail Table Row-->
+        <c:forEach items="${books}" var="book">
         <tr>
-            <!-- Book Image TD -->
+        	<!-- Edit Button TD -->
+        	<td>
+                <div class="cart-div-height center-text"> 
+                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="edit">Edit</button>
+                </div>
+            </td>
+            <!-- Delete Button TD -->
+        	<td>
+                <div class="cart-div-height center-text"> 
+                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="delete">Delete</button>
+                </div>
+            </td>
+        	<!-- Book Image TD -->
             <td>
-                <div class="cart-div-height center-text">11111111</div>
+                <div class="cart-div-height center-text">
+                	<a href="AdminInventoryServlet?action=detail&isbn=${book.getIsbn()}">
+                	<img class="inventory-img" src="${book.getImage()}">
+                	</a>
+	            </div>
+            </td>
+            <!-- Book ISBN TD -->
+            <td>
+                <div class="inventory-div-height">${book.getIsbn()}</div>
             </td>
             <!-- Book Title TD-->
             <td>
-                <div class="cart-div-height center-text">Hotel Silence</div>
+                <div class="inventory-div-height">${book.getTitle()}</div>
             </td>
             <!-- Book Author TD-->
             <td>
-                <div class="cart-div-height center-text">Auður Ava Ólafsdóttir</div>
+                <div class="inventory-div-height">${book.getAuthor()}</div>
             </td>
             <!-- Book Vendor TD-->
             <td>
-                <div class="cart-div-height center-text">Books International</div>
+                <div class="inventory-div-height">${book.getVendor()}</div>
             </td>
             <!--Book Price TD-->
             <td>
-                <div class="cart-div-height center-text">$9.50</div>
+                <div class="inventory-div-height">$${book.getPrice()}</div>
             </td>
             <!--Book Promo Price TD-->
             <td>
-                <div class="cart-div-height center-text">$8.50</div>
+                <div class="inventory-div-height">$${book.getPromoPrice()}</div>
             </td>
             <!--Book Promo Code TD-->
             <td>
-                <div class="cart-div-height center-text">HOLIDAYINN</div>
+                <div class="inventory-div-height">${book.getPromoCode()}</div>
             </td>
             <!--Book Quantity TD-->
             <td>
-                <div class="cart-div-height center-text">25</div>
+                <div class="inventory-div-height">${book.getQuantity()}</div>
             </td>
+            <!--Book Quantity On Hold TD-->
             <td>
-                <div class="cart-div-height center-text">
-                    <form class="cart-delete-button" action="CartServlet" method="post">
-                        <!--<input class="fit-div submit-button" type="submit" value="edit">-->
-                        <button type="submit" class="btn btn-link">Edit</button>
-                    </form>
-                </div>
+                <div class="inventory-div-height">${book.getHold()}</div>
             </td>
         </tr>
+        </c:forEach>
     </table>
-    <!-- more rows for different inventory items -->
 </div>
 
 </body>

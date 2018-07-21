@@ -5,7 +5,7 @@ $(document).ready(function(){
         "                <a class=\"nav-link\">Admin Tools: <span class=\"sr-only\">(current)</span></a>\n" +
         "            </li>\n" +
         "            <li class=\"nav-item active\">\n" +
-        "                <a class=\"nav-link\" href=\"#\">Manage Inventory  <span class=\"sr-only\">(current)</span></a>\n" +
+        "                <a class=\"nav-link\" href=\"AdminInventoryServlet\">Manage Inventory  <span class=\"sr-only\">(current)</span></a>\n" +
         "            </li>\n" +
         "            <li class=\"nav-item active\">\n" +
         "                <a class=\"nav-link\" href=\"#\">Manage Accounts  <span class=\"sr-only\">(current)</span></a>\n" +
