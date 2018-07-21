@@ -69,7 +69,7 @@
 	            <!-- Book Image TD -->
 	            <td>
 	                <div class="cart-div-height center-text">
-	                	<a href="BookDetailServlet?param=${book.getISBN()}">
+	                	<a href="BookDetailServlet?param=${book.getIsbn()}">
 	                    	<img class="shopping-cart-img" src="${book.getImage()}">
 	                    </a>
 	                </div>
@@ -78,7 +78,7 @@
 	            <td>
 	                <div class="cart-div-height center-text">
 	                	${book.getTitle()}
-	                	<input type="hidden" form="bookForm" name="isbn" value="${book.getISBN()}" />
+	                	<input type="hidden" form="bookForm" name="isbn" value="${book.getIsbn()}" />
 	                </div>
 	            </td>
 	            <!-- Book Author TD-->

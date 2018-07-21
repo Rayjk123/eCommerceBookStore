@@ -44,13 +44,13 @@
         	<div class="col-12 col-sm-6 col-md-4">
         		<h3>${book.getTitle()}</h3>
         	    <p>Author: ${book.getAuthor()}</p>
-        	    <p>ISBN: ${book.getISBN()}</p>
+        	    <p>ISBN: ${book.getIsbn()}</p>
         	    <p>Price: $<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${book.getPrice()}"/></p>
         	    <p>Description:</p>
         	    <p class="overflow half-height">
         	    	${book.getDescription()}
         	    </p>
-        	    <form action="CartServlet?action=add&isbn=${book.getISBN()}&qty=1" method="post">
+        	    <form action="CartServlet?action=add&isbn=${book.getIsbn()}&qty=1" method="post">
                 	<input class="login-button" type="submit" value="Add To Cart"><br>
                 </form>
         	</div>
