@@ -52,6 +52,8 @@ public class CartServlet extends HttpServlet {
 			String isbn = request.getParameter("isbn");
 			int qty = Integer.parseInt(request.getParameter("qty"));
 			
+			System.out.println(action + " " + isbn + " quantity=" + qty);
+			
 			if (action.equals("add")) {
 				System.out.println("action = " + action);
 				try {
@@ -73,7 +75,12 @@ public class CartServlet extends HttpServlet {
 			}
 			else if (action.equals("delete"))
 			{
-				// TODO replace with change quantity method
+				try {
+					deleteBookFromCart(request, response, email, isbn);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 				System.out.println("action = " + action);
 			}
 			else 
@@ -130,12 +137,20 @@ public class CartServlet extends HttpServlet {
 		
 		//can't add more than what's in stock to cart
 		if (book.getStock() - qty > 0) {
-			Query.setCartQuantity(email, isbn, qty); 
+			Query.setCartQuantity(email, book, qty); 
 		}
 		else
 		{
-			Query.setCartQuantity(email, isbn, book.getStock());
+			Query.setCartQuantity(email, book, book.getStock());
 		}
+		
+		viewCart(request,response,email);
+	}
+	
+	private void deleteBookFromCart(HttpServletRequest request, HttpServletResponse response, String email, String isbn) throws SQLException, ServletException, IOException {
+		Book book = Query.getBookByISBN(isbn);
+		
+		Query.deleteBookFromCart(email, book); 
 		
 		viewCart(request,response,email);
 	}

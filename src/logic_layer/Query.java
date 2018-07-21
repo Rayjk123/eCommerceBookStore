@@ -2,7 +2,6 @@ package logic_layer;
 
 import data_access_layer.DbAccess;
 import domain_layer.Book;
-import domain_layer.Customer;
 import domain_layer.Cart;
 import logic_layer.QueryUtil;
 
@@ -133,10 +132,17 @@ public class Query {
 		return retList;
 	}
 	
-	public static boolean setCartQuantity(String email, String isbn, int qty) {
+	public static boolean setCartQuantity(String email, Book book, int qty) {
 		String query = "UPDATE cart SET quantity ='" + qty + 
 				"' WHERE email ='" + email +
-				"' and isbn='" + isbn;
+				"' and isbn ='" + book.getISBN() + "'";
+		System.out.println(query);
+		return DbAccess.insert(query) == 1;
+	}
+	
+	public static boolean deleteBookFromCart(String email, Book book) {
+		String query = "DELETE FROM cart WHERE email ='" + email +
+				"' and isbn ='" + book.getISBN() + "'";
 		
 		return DbAccess.insert(query) == 1;
 	}
