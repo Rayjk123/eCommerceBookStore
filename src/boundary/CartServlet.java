@@ -118,7 +118,7 @@ public class CartServlet extends HttpServlet {
 			 */
 		}
 		
-		Book book = Query.getBookByISBN(isbn);
+		Book book = Query.getBookByIsbn(isbn);
 		
 		//can't add more than what's in stock to cart
 		if (book.getStock() - qty > 0) {
@@ -133,7 +133,7 @@ public class CartServlet extends HttpServlet {
 	}
 
 	private void changeQuantity(HttpServletRequest request, HttpServletResponse response, String email, String isbn, int qty) throws SQLException, ServletException, IOException {
-		Book book = Query.getBookByISBN(isbn);
+		Book book = Query.getBookByIsbn(isbn);
 		
 		//can't add more than what's in stock to cart
 		if (book.getStock() - qty > 0) {
@@ -148,7 +148,7 @@ public class CartServlet extends HttpServlet {
 	}
 	
 	private void deleteBookFromCart(HttpServletRequest request, HttpServletResponse response, String email, String isbn) throws SQLException, ServletException, IOException {
-		Book book = Query.getBookByISBN(isbn);
+		Book book = Query.getBookByIsbn(isbn);
 		
 		Query.deleteBookFromCart(email, book); 
 		

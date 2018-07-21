@@ -28,7 +28,7 @@ public class Query {
 		return DbAccess.insert(query) == 1;
 	}
 	
-	public static Book getBookByISBN(String isbn) throws SQLException {
+	public static Book getBookByIsbn(String isbn) throws SQLException {
 		String query = "SELECT * FROM book WHERE isbn ='" 
 				+ isbn + "'";
 		
@@ -108,7 +108,7 @@ public class Query {
 		int hold = book.getHold(); 
 				
 		String query = "UPDATE book " 
-				+ "set hold = "  + " where isbn " + book.getISBN(); 
+				+ "set hold = "  + " where isbn " + book.getIsbn(); 
 		
 		return database.update(query) == 1; 
 	}*/
@@ -125,7 +125,7 @@ public class Query {
 			Cart cart = QueryUtil.resultSetToCart(cartResultSet);
 			System.out.println(cart.getAuthor());
 			if (cart != null) {
-				System.out.println(cart.getISBN());
+				System.out.println(cart.getIsbn());
 				retList.add(cart);
 			}
 		}

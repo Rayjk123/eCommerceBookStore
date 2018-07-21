@@ -52,7 +52,7 @@ public class QueryUtil {
 		
 		Cart cart = new Cart();
 		cart.setEmail(result.getString("email"));
-		cart.setISBN(result.getString("isbn"));
+		cart.setIsbn(result.getString("isbn"));
 		cart.setTitle(result.getString("title"));
 		cart.setAuthor(result.getString("author"));
 		cart.setPrice(result.getDouble("price"));

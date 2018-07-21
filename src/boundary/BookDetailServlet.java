@@ -26,7 +26,7 @@ public class BookDetailServlet extends HttpServlet {
 		String isbn = request.getParameter("param");
 		
 		try {
-			getBookByISBN(request, response, isbn);
+			getBookByIsbn(request, response, isbn);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,8 +43,8 @@ public class BookDetailServlet extends HttpServlet {
 		doGet(request, response);
 	}
 	
-	private void getBookByISBN(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
-		Book book = Query.getBookByISBN(isbn);
+	private void getBookByIsbn(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
+		Book book = Query.getBookByIsbn(isbn);
 		
 		request.setAttribute("book", book);
 		RequestDispatcher dispatcher;
