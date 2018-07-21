@@ -86,11 +86,11 @@
 	            </td>
 	            <!--Book Price TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.price}</div>
+	                <div class="cart-div-height center-text">
+	               	 	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+	                	$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${book.getPrice()}"/>
+	                </div>
 	            </td>
-	            <!--  
-	            <form class="cart-delete-button" action="AddToCart?param=${book.getISBN()}" method="post">
-	            -->
 	            <td>
 	            	<div class="cart-div-height center-text">
 	            		<select name="qty">
@@ -108,11 +108,13 @@
 	            	</div>
 	            <td>
 	            <td>
-	            	<button class="add-to-cart" type="submit">Add To Cart</button>
+	            	<form action="CartServlet?action=add&isbn=${book.getISBN()}&qty=1" method="post">
+                		<input class="login-button" type="submit" value="Add To Cart"><br>
+                	</form>
 	            </td>
-	            <!-- 
-	            </form>
 	            
+	            
+	            <!-- 
 	            <td>
 	                <div class="cart-div-height center-text">
 	                    <select>

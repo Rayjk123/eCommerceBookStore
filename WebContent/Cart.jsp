@@ -105,24 +105,28 @@
                         <option value="8">8</option>
                         <option value="9">9</option>
                         <option value="10">10</option>
+                        <option selected="selected">${book.getQty()}</option>
                     </select>
 	            	</div>
 	            <td>
 	            <td>
-	            	<form action="SetCartQuantity">
+	            	<form action="CartServlet?action=edit&isbn=${book.getISBN()}" method="post">
 	            		<button class="add-to-cart" type="submit">Set Quantity</button>
 	            	</form>
 	            </td> 
 	            <td>
-	            	<form class="cart-delete-button" action="DeleteFromCart" method="post">
+	            	<form class="cart-delete-button" action="CartServlet?action=delete&isbn=${book.getISBN()}" method="post">
 	            		<button class="add-to-cart" type="submit">Delete</button>
-	                   </form>
+	            	</form>
 	            </td>
 	        </tr>
         </c:forEach>
     </table>
     <div class="float-right">
-        <p id="total-price">Total Price: $8.50</p>
+        <p id="total-price">
+        	<c:set value="${cartTotal}" var="total" scope="session" />
+        	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+			$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${total}"/> 
         <form action="CheckoutServlet" method="post">
             <input type="submit" value="Proceed To Checkout"><br>
         </form>
