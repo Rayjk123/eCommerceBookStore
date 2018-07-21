@@ -21,11 +21,11 @@ public class Book
 	}
 	
 	public Book(String isbn) {
-		setISBN(isbn);
+		setIsbn(isbn);
 	}
 	
 	public Book(String isbn, double price, String title, String author, String genre, String publisher, String vendor,int stock, String promoCode, double promoPrice, int hold, String image, String description){
-		setISBN(isbn);
+		setIsbn(isbn);
 		setPrice(price);
 		setTitle(title);
 		setAuthor(author);
@@ -50,14 +50,6 @@ public class Book
 		}
 		else
 			return getPrice();
-	}
-
-	public String getISBN() {
-		return isbn;
-	}
-
-	public void setISBN(String isbn) {
-		this.isbn = isbn;
 	}
 
 	public double getPrice() {
@@ -164,5 +156,13 @@ public class Book
 	public boolean soldOut()
 	{
 		return false;
+	}
+
+	public String getIsbn() {
+		return isbn;
+	}
+
+	public void setIsbn(String isbn) {
+		this.isbn = isbn;
 	}
 }

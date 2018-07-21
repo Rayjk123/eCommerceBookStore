@@ -67,7 +67,7 @@
 	            <!-- Book Image TD -->
 	            <td>
 	                <div class="cart-div-height center-text">
-	                	<a href="BookDetailServlet?param=${book.getISBN()}">
+	                	<a href="BookDetailServlet?param=${book.isbn}">
 	                    	<img class="shopping-cart-img" src="${book.image}">
 	                    </a>
 	                </div>
