@@ -47,11 +47,11 @@ public class CartServlet extends HttpServlet {
 	}
 	
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response, String email) {
-		String action = request.getParameter("action");
-		String isbn = request.getParameter("isbn");
-		int qty = Integer.parseInt(request.getParameter("qty"));
-		
 		if (request.getParameter("action") != null & request.getParameter("isbn") != null & request.getParameter("qty") != null) {
+			String action = request.getParameter("action");
+			String isbn = request.getParameter("isbn");
+			int qty = Integer.parseInt(request.getParameter("qty"));
+			
 			if (action.equals("add")) {
 				System.out.println("action = " + action);
 				try {
