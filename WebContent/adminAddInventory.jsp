@@ -1,6 +1,5 @@
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@page import="logic_layer.Query" %>
-<%@page import="domain_layer.Book" %>    
+  
 <head>
     <meta charset="UTF-8">
     <title>Bookly</title>
@@ -34,7 +33,7 @@
 <div id="adminBar"></div>
 <h1 class="center-text">Add Item</h1>
 <div class="half-width">
-	<form action="AddToInventory" method="post">
+	<form action="AdminInventoryServlet" method="post">
 		<label class="reg-label">ISBN: </label><input class="reg-input" type="number" name="isbn" required><br>
 		<label class="reg-label">Title: </label><input class="reg-input" type="text" name="title" required><br>
 		<label class="reg-label">Author: </label><input class="reg-input" type="text" name="author" required><br>
@@ -47,7 +46,7 @@
 		<label class="reg-label">Promo Price: </label><input class="reg-input" step="0.01" type="number"  name="promoprice" required><br>
 		<label class="reg-label">Image: </label><input class="reg-input" type="text" name="image" required><br>
 		<label class="reg-label">Description: </label><input class="reg-input overflow half-height" type="text" name="description" required><br>
-		<input class="reg-label" type="submit" value="Add Book">
+		<input class="reg-label" type="submit" name="action" value="add">
         
 	</form>
 

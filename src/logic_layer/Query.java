@@ -57,6 +57,8 @@ public class Query {
 				book.getHold() + "', '" +
 				book.getImage() + "', '" +
 				book.getDescription() + "')";
+		
+		System.out.println(query);
 			
 		return DbAccess.insert(query) == 1;
 	}

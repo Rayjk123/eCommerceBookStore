@@ -34,8 +34,11 @@
 <!--NAVBAR HTML-->
 <div id="navbar"></div>
 <div id="adminBar"></div>
-<div class="container margin-top-50">
+<div class="margin-top-50">
     <h3>Manage Inventory</h3>
+    <form action="adminAddInventory.jsp" method="post">
+    	<button type="submit" class="btn btn-link" name="action" value="add">Add Book</button>
+    </form>
     <form action="AdminInventoryServlet" method="post" id="InventoryForm"></form>
     <table class="table table-hover">
         <!-- Table Header Row-->
@@ -111,6 +114,7 @@
             <!-- Book ISBN TD -->
             <td>
                 <div class="inventory-div-height">${book.getIsbn()}</div>
+                <input type="hidden" form="InventoryForm" name="isbn" value="${book.getIsbn()}" />
             </td>
             <!-- Book Title TD-->
             <td>
@@ -138,7 +142,7 @@
             </td>
             <!--Book Quantity TD-->
             <td>
-                <div class="inventory-div-height">${book.getQuantity()}</div>
+                <div class="inventory-div-height">${book.getStock()}</div>
             </td>
             <!--Book Quantity On Hold TD-->
             <td>
