@@ -112,29 +112,6 @@
                 		<input class="login-button" type="submit" value="Add To Cart"><br>
                 	</form>
 	            </td>
-	            
-	            
-	            <!-- 
-	            <td>
-	                <div class="cart-div-height center-text">
-	                    <select>
-	                        <option value="1">1</option>
-	                        <option value="2">2</option>
-	                        <option value="3">3</option>
-	                        <option value="4">4</option>
-	                        <option value="5">5</option>
-	                    </select>
-	                </div>
-	            </td>
-	            <td>
-	                <div class="cart-div-height center-text">
-	                    <form class="cart-delete-button" action="CartServlet" method="post">
-	                        <!--<input class="fit-div submit-button" type="submit" value="delete">
-	                        <button type="submit" class="btn btn-link">Delete</button>
-	                    </form>
-	                </div>
-	            </td>
-	            -->
 	        </tr>
         </c:forEach>
     </table>
