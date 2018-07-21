@@ -2,6 +2,7 @@ package logic_layer;
 
 import data_access_layer.DbAccess;
 import domain_layer.Book;
+import domain_layer.Cart;
 import logic_layer.QueryUtil;
 
 import java.sql.SQLException;
@@ -25,32 +26,6 @@ public class Query {
 		
 		return DbAccess.insert(query) == 1;
 	}
-	/**c
-	 * method adds an entry to cart database
-	 * @param customer
-	 * @param book
-	 * @param quantity
-	 * @return true if inserted with no error
-	 */
-	public static boolean addToCart(String email, String isbn, int quantity) {
-		String query = "INSERT INTO cart " 
-				+ "(email, isbn, quantity) "
-				+ "Values('" + email + "', '" 
-				+ isbn + "', '" 
-				+ quantity + "')";
-		
-		return DbAccess.insert(query) == 1;
-	}
-	
-	/* hold book for pickup, hold is a value in the book table
-	public static boolean holdBook(Book book) {
-		int hold = book.getHold(); 
-				
-		String query = "UPDATE book " 
-				+ "set hold = "  + " where isbn " + book.getISBN(); 
-		
-		return database.update(query) == 1; 
-	}*/
 	
 	public static Book getBookByISBN(String isbn) throws SQLException {
 		String query = "SELECT * FROM book WHERE isbn ='" 
@@ -102,19 +77,55 @@ public class Query {
 		return retList;
 	}
 	
-	public static ArrayList<Book> getBooksInCart(String email) throws SQLException {
+	/**
+	 * method adds an entry to cart database
+	 * @param customer
+	 * @param book
+	 * @param quantity
+	 * @return true if inserted with no error
+	 */
+	public static boolean addToCart(String email, Book book, int quantity) {
+		String query = "INSERT INTO cart " 
+				+ "(email, isbn, quantity, title, author, publisher, price, stock, hold, image) "
+				+ "Values('" + 
+					email + "', '" +
+					book.getISBN() + "', '" + 
+					quantity + "', '" +
+					book.getTitle() + "', '" + 
+					book.getAuthor() + "', '" + 
+					book.getPublisher() + "', '" +
+					book.getPrice() + "', '" +
+					book.getStock() + "', '" +
+					book.getHold() + "', '" + 
+					book.getImage() + "')";
+		
+		return DbAccess.insert(query) == 1;
+	}
+	
+	/* hold book for pickup, hold is a value in the book table
+	public static boolean holdBook(Book book) {
+		int hold = book.getHold(); 
+				
+		String query = "UPDATE book " 
+				+ "set hold = "  + " where isbn " + book.getISBN(); 
+		
+		return database.update(query) == 1; 
+	}*/
+	public static ArrayList<Cart> getBooksInCart(String email) throws SQLException {
 		String query = "SELECT * FROM cart WHERE email ='"
 				+ email + "'";
 		
-		ArrayList<Book> retList = new ArrayList<>();
+		System.out.println(query);
+		
+		ArrayList<Cart> retList = new ArrayList<>();
 		ResultSet cartResultSet = DbAccess.retrieve(query);
-		String isbn;
 		
 		while(cartResultSet.next()) {
-			isbn = cartResultSet.getString("isbn");
-			Book book = getBookByISBN(isbn);
-			if (book != null) {
-				retList.add(book);
+			Cart cart = QueryUtil.resultSetToCart(cartResultSet);
+			System.out.println(cart.getAuthor());
+			if (cart != null) {
+				System.out.println(cart.getISBN());
+				retList.add(cart);
 			}
 		}
 		

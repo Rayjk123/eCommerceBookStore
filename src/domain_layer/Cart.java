@@ -1,58 +1,88 @@
 package domain_layer;
 
 public class Cart {
-	private Book[] contents;
+	private String isbn;
+	private String email;
+	private double price;
+	private String title;
+	private String author;
+	private String publisher;
+	private String image;
+	private int hold;
+	private int qty;
 	
-	public Cart(Book[] contents){
-		setContents(contents);
-	}
-	
-	public Cart() {
-		
+	public Cart() {		
 	}
 
-	public Book[] getContents() {
-		return contents;
+	public String getISBN() {
+		return isbn;
 	}
 
-	public void setContents(Book[] contents) {
-		this.contents = contents;
+	public void setISBN(String isbn) {
+		this.isbn = isbn;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public double getPrice() {
+		return price;
+	}
+
+	public void setPrice(double price) {
+		this.price = price;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getPublisher() {
+		return publisher;
+	}
+
+	public void setPublisher(String publisher) {
+		this.publisher = publisher;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
 	}
 	
-	public Book[] addToCart(Book addedBook) {
-		//array arithmetic to add book to array
-		Book[] tempCart = new Book[getContents().length+1];
-		
-		System.arraycopy(getContents(),  0, tempCart, 0, getContents().length);
-		
-		tempCart[getContents().length] = addedBook;
-		
-		setContents(tempCart);
-		return tempCart; //contents after adding to the array
+	public int getHold() {
+		return hold;
 	}
-	
-	public Book[] removeFromCart(Book book) {
-		Book[] tempCart = new Book[getContents().length-1];
-		int j = 0; //for indexing the temporary cart
-		
-		for (int i = 0; i < getContents().length; i++){
-			if (getContents()[i] != book)
-			{
-				tempCart[j] = getContents()[i]; //copy non-removed book to tempCart
-				j++;
-			}
-		}
-		setContents(tempCart);
-		return tempCart;
-	}
-	
-	public String viewCart() {
-		StringBuilder displayCartInfo = new StringBuilder();
-		
-		for (int i = 0; i < getContents().length; i++) {
-			displayCartInfo = displayCartInfo.append(getContents()[i].displayAdminInfo());
-		}
-		
-		return displayCartInfo.toString();
+
+	public void setHold(int hold) {
+		this.hold = hold;
 	}
 }

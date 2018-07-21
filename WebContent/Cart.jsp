@@ -105,6 +105,7 @@
                         <option value="8">8</option>
                         <option value="9">9</option>
                         <option value="10">10</option>
+                        <option selected="selected">${book.getQty()}</option>
                     </select>
 	            	</div>
 	            <td>
@@ -123,8 +124,9 @@
     </table>
     <div class="float-right">
         <p id="total-price">
-			$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${cartTotal}"/>
-		</p>
+        	<c:set value="${cartTotal}" var="total" scope="session" />
+        	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+			$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${total}"/> 
         <form action="CheckoutServlet" method="post">
             <input type="submit" value="Proceed To Checkout"><br>
         </form>

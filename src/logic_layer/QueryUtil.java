@@ -5,6 +5,7 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 
 import domain_layer.Book;
+import domain_layer.Cart;
 
 public class QueryUtil {
 	
@@ -39,5 +40,25 @@ public class QueryUtil {
 		book.setDescription(result.getString("description"));
 		
 		return book;
+	}
+	protected static Cart resultSetToCart(ResultSet result) throws SQLException {
+		ResultSetMetaData rsmd = result.getMetaData();
+
+		if (rsmd.getColumnCount() != 10) {
+			System.out.println("null pointer error is a coming!");
+			return null;
+		}
+		
+		Cart cart = new Cart();
+		cart.setEmail(result.getString("email"));
+		cart.setISBN(result.getString("isbn"));
+		cart.setTitle(result.getString("title"));
+		cart.setAuthor(result.getString("author"));
+		cart.setPrice(result.getDouble("price"));
+		cart.setPublisher(result.getString("publisher"));
+		cart.setImage(result.getString("image"));
+		cart.setQty(result.getInt("quantity"));
+
+		return cart;
 	}
 }

@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import logic_layer.Query;
 import domain_layer.Book;
+import domain_layer.Cart;
 
 @SuppressWarnings("serial")
 @WebServlet("/CartServlet")
@@ -102,20 +103,22 @@ public class CartServlet extends HttpServlet {
 		
 		//can't add more than what's in stock to cart
 		if (book.getStock() - qty > 0) {
-			Query.addToCart(email, isbn, qty); 
+			Query.addToCart(email, book, qty); 
 		}
 		else
 		{
-			Query.addToCart(email, isbn, book.getStock());
+			Query.addToCart(email, book, book.getStock());
 		}
 		
-		//
-		ArrayList<Book> books = Query.getBooksInCart(email);
+		ArrayList<Cart> books = Query.getBooksInCart(email);
+		for (int i = 0; i < books.size(); i++) {
+			System.out.println(books.get(i).getTitle());
+		}
 		request.setAttribute("books", books);
 		
 		double cartTotal = 0.00;
 		for (int i=0; i < books.size(); i++) {
-			cartTotal = cartTotal + books.get(i).getPrice();
+			cartTotal = cartTotal + books.get(i).getPrice() * books.get(i).getQty();
 		}
 		request.setAttribute("total", cartTotal);
 		dispatcher = request.getRequestDispatcher("/Cart.jsp"); 
@@ -136,16 +139,23 @@ public class CartServlet extends HttpServlet {
 			Query.setCartQuantity(email, isbn, book.getStock());
 		}
 		
-		ArrayList<Book> books = Query.getBooksInCart(email);
+		ArrayList<Cart> books = Query.getBooksInCart(email);
 		request.setAttribute("books", books);
+		
 		
 		double cartTotal = 0.00;
 		for (int i=0; i < books.size(); i++) {
-			cartTotal = cartTotal + books.get(i).getPrice();
+			cartTotal = cartTotal + books.get(i).getPrice() * books.get(i).getQty();
 		}
 		request.setAttribute("total", cartTotal);
 		dispatcher = request.getRequestDispatcher("/Cart.jsp"); 
 		dispatcher.forward(request, response); 
 		System.out.println("add to cart end");
+	}
+	
+	private double getCartTotal(ArrayList<Cart> cart) {
+		double total=0.00;
+		
+		return total;
 	}
 }

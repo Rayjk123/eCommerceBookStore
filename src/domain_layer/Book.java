@@ -40,18 +40,7 @@ public class Book
 		setDescription(description);
 	}
 	
-	public String displayCustomerInfo()
-	{
-		String p = String.format("%.2f", getPrice());
-		return String.format(getTitle() + "%n" + getAuthor() + "%n" + p + "%n" + getGenre() + "%n" + getISBN() + "%n" + getPublisher() + "%n" + getVendor() + "%n%n");
-	}
 	
-	public String displayAdminInfo()
-	{
-		String p = String.format("%.2f", getPrice());
-		String pp = String.format("%.2f", getPromoPrice());
-		return String.format(getTitle() + "%n" + getAuthor() + "%n" + p + "%n" + getGenre() + "%n" + getISBN() + "%n" + getPublisher() + "%n" + getVendor() + "%n" + getPromoCode() + "%n" + pp + "%n%n");
-	}
 	
 	//compare inputted promoCode with recorded promoCode and
 		//return the appropriate price
