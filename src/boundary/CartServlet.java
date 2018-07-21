@@ -28,9 +28,6 @@ public class CartServlet extends HttpServlet {
 	}
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");
-		String isbn = request.getParameter("isbn");
-		int qty = Integer.parseInt(request.getParameter("qty"));
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("email"); 
 
@@ -42,19 +39,19 @@ public class CartServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		
-		System.out.println("EMAIL = " + email);
-		System.out.println("QTY = " + request.getParameter("qty"));
-		System.out.println("ACTION = " + action);
-		System.out.println("ISBN = " + isbn);
-		
-		servletHelper(request, response, action, email, isbn, qty);
+		servletHelper(request, response, email);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 			doGet(request, response);
 	}
 	
-	private void servletHelper(HttpServletRequest request, HttpServletResponse response, String action, String email, String isbn, int qty) {
+	private void servletHelper(HttpServletRequest request, HttpServletResponse response, String email) {
+		String action = request.getParameter("action");
+		String isbn = request.getParameter("isbn");
+		int qty = Integer.parseInt(request.getParameter("qty"));
+		
+		
 		if (action.equals("add")) {
 			System.out.println("action = " + action);
 			try {
@@ -82,6 +79,12 @@ public class CartServlet extends HttpServlet {
 		else 
 		{
 			// TODO only print cart function
+			try {
+				viewCart(request, response, email);
+			} catch (SQLException | ServletException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			System.out.println("action = " + action);
 			System.out.println("Default to cart view");
 		}
@@ -110,24 +113,10 @@ public class CartServlet extends HttpServlet {
 			Query.addToCart(email, book, book.getStock());
 		}
 		
-		ArrayList<Cart> books = Query.getBooksInCart(email);
-		for (int i = 0; i < books.size(); i++) {
-			System.out.println(books.get(i).getTitle());
-		}
-		request.setAttribute("books", books);
-		
-		double cartTotal = 0.00;
-		for (int i=0; i < books.size(); i++) {
-			cartTotal = cartTotal + books.get(i).getPrice() * books.get(i).getQty();
-		}
-		request.setAttribute("total", cartTotal);
-		dispatcher = request.getRequestDispatcher("/Cart.jsp"); 
-		dispatcher.forward(request, response); 
+		viewCart(request,response,email);
 	}
 
 	private void changeQuantity(HttpServletRequest request, HttpServletResponse response, String email, String isbn, int qty) throws SQLException, ServletException, IOException {
-		RequestDispatcher dispatcher;
-		System.out.println("change quantity");
 		Book book = Query.getBookByISBN(isbn);
 		
 		//can't add more than what's in stock to cart
@@ -139,23 +128,25 @@ public class CartServlet extends HttpServlet {
 			Query.setCartQuantity(email, isbn, book.getStock());
 		}
 		
+		viewCart(request,response,email);
+	}
+	
+	private void viewCart(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
+		RequestDispatcher dispatcher;
 		ArrayList<Cart> books = Query.getBooksInCart(email);
 		request.setAttribute("books", books);
 		
 		
+		request.setAttribute("total", getCartTotal(books));
+		dispatcher = request.getRequestDispatcher("/Cart.jsp"); 
+		dispatcher.forward(request, response); 
+	}
+	
+	private double getCartTotal(ArrayList<Cart> books) {
 		double cartTotal = 0.00;
 		for (int i=0; i < books.size(); i++) {
 			cartTotal = cartTotal + books.get(i).getPrice() * books.get(i).getQty();
 		}
-		request.setAttribute("total", cartTotal);
-		dispatcher = request.getRequestDispatcher("/Cart.jsp"); 
-		dispatcher.forward(request, response); 
-		System.out.println("add to cart end");
-	}
-	
-	private double getCartTotal(ArrayList<Cart> cart) {
-		double total=0.00;
-		
-		return total;
+		return cartTotal;
 	}
 }

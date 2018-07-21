@@ -36,8 +36,6 @@
     	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
     	<c:set value="${book}" var="book" scope="session" />
-    	
-  
     		<!-- Book Image Column -->
     		<div class="col-12 col-sm-6 col-md-4">
         	    <img class="item" src="${book.getImage()}">

@@ -34,6 +34,7 @@
 <div class="container margin-top-50">
     <h3>Shopping Cart</h3>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <form action="CartServlet" method="post" id="bookForm"></form>
     <table class="table table-hover">
         <!-- Table Header Row-->
         <tr>
@@ -75,7 +76,10 @@
 	            </td>
 	            <!-- Book Title TD-->
 	            <td>
-	                <div class="cart-div-height center-text">${book.getTitle()}</div>
+	                <div class="cart-div-height center-text">
+	                	${book.getTitle()}
+	                	<input type="hidden" form="bookForm" name="isbn" value="${book.getISBN()}" />
+	                </div>
 	            </td>
 	            <!-- Book Author TD-->
 	            <td>
@@ -94,7 +98,7 @@
 	            </td>
 	            <td>
 	            	<div class="cart-div-height center-text">
-	            		<select name="qty">
+	            		<select form="bookForm" name="qty">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -110,14 +114,10 @@
 	            	</div>
 	            <td>
 	            <td>
-	            	<form action="CartServlet?action=edit&isbn=${book.getISBN()}" method="post">
-	            		<button class="add-to-cart" type="submit">Set Quantity</button>
-	            	</form>
+	            	<input form="bookForm" class="login-button" type="submit" name="edit" value="Set Quantity">
 	            </td> 
 	            <td>
-	            	<form class="cart-delete-button" action="CartServlet?action=delete&isbn=${book.getISBN()}" method="post">
-	            		<button class="add-to-cart" type="submit">Delete</button>
-	            	</form>
+	            	<input form="bookForm" class="login-button" type="submit" name="delete" value="Delete">
 	            </td>
 	        </tr>
         </c:forEach>
