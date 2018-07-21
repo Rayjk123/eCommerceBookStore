@@ -2,6 +2,7 @@ package logic_layer;
 
 import data_access_layer.DbAccess;
 import domain_layer.Book;
+import domain_layer.Customer;
 import logic_layer.QueryUtil;
 
 import java.sql.SQLException;
@@ -160,4 +161,15 @@ public class Query {
 		rs.next();
 		return rs.getString("permission");
 	}
+	
+	public static boolean insertCreditCard(String email, String number, String securityCode, String expiration) {
+		String query = "INSERT INTO credit_card (email, number, security_code, expiration_date) "
+				+ "VALUES ('" + email + "', '" + number + "', '" + securityCode + "', '" + expiration + "')";
+		
+		return DbAccess.insert(query) == 1;
+	}
+	
+//	public static Customer getCustomerInfo() {
+//		
+//	}
 }

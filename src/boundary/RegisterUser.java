@@ -82,6 +82,11 @@ public class RegisterUser extends HttpServlet {
 			Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, billingAddress);
 		}
 		
+		if (!Query.insertCreditCard(email, cardNumber, security, expDate)) {
+			dispatchToFailure(request, response);
+			return;
+		}
+		
 		if (Query.addConfirmationCode(email, confirmationCode)) {
 			System.out.println("Added Confirmation COde");
 			dispatcher = request.getRequestDispatcher("/registrationConfirmation.html");
