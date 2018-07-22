@@ -268,6 +268,12 @@ public class Query {
 		return DbAccess.insert(query) == 1;
 	}
 	
+	public static boolean deleteCart(String email) {
+		String query = "DELETE FROM cart WHERE email ='" + email + "'";
+		
+		return DbAccess.delete(query) == 1;
+	}
+	
 	/**
 	 * Method checks if the email already exists in the system
 	 * @return true is the email exists else false.

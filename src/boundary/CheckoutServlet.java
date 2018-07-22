@@ -177,6 +177,8 @@ public class CheckoutServlet extends HttpServlet {
 					Query.updateBookStock(book, stock);
 				}
 				
+				Query.deleteCart(email);
+				
 				String orderMessage = "Your order has been successfully processed and will be delivered to you in a jiffy!";
 				
 				request.setAttribute("orderMessage", orderMessage);
