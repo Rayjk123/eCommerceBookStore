@@ -95,6 +95,7 @@
             <td>
                 <div class="cart-div-height center-text">
                 	<div class="inventory-div-height">${users.getEmail()}</div>
+                	<input type="hidden" form="AccountsForm" name="email" value="${users.getEmail()}" />
 	            </div>
             </td>
             <!-- User First Name -->

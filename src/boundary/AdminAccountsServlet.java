@@ -81,6 +81,14 @@ public class AdminAccountsServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			if (request.getParameter("action").equals("edit")) {
+				try {
+					editAccountPage(request,response,request.getParameter("email"));
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
 		}
 		else {
 			try {
@@ -117,9 +125,17 @@ public class AdminAccountsServlet extends HttpServlet {
 		String shippingState = request.getParameter("state").trim();
 		String shippingZip = request.getParameter("zip").trim();
 		String shippingAddress = shippingStreet + " " + shippingCity + " " + shippingState + " " + shippingZip;
+		customer.setStreetShipping(shippingStreet);
+		customer.setCityShipping(shippingCity);
+		customer.setStateShipping(shippingState);
+		customer.setZipShipping(shippingZip);
 		customer.setShippingAddress(shippingAddress);
 		
 		if (request.getParameter("sameAsBilling") != null) {
+			customer.setStreetBilling(shippingStreet);
+			customer.setCityBilling(shippingCity);
+			customer.setStateBilling(shippingState);
+			customer.setZipBilling(shippingZip);
 			customer.setBillingAddress(shippingAddress);
 			Query.addCustomer(customer);
 		} else {
@@ -128,23 +144,30 @@ public class AdminAccountsServlet extends HttpServlet {
 			String billingState = request.getParameter("b-state").trim();
 			String billingZip = request.getParameter("b-zip").trim();
 			String billingAddress = billingStreet + " " + billingCity + " " + billingState + " " + billingZip;
+			
+			customer.setStreetBilling(billingStreet);
+			customer.setCityBilling(billingCity);
+			customer.setStateBilling(billingState);
+			customer.setZipBilling(billingZip);
 			customer.setBillingAddress(billingAddress);
+			
 			Query.addCustomer(customer);
 		}
 		
 		viewUsers(request,response);
 	}
 
-	/* TODO Change to suit Accounts view
-	private void editItemPage(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
+	
+	private void editAccountPage(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher;
-		Book book = Query.getBookByIsbn(isbn);
-		request.setAttribute("book", book);
+		Customer user = Query.getUserByEmail(email);
 		
-		dispatcher = request.getRequestDispatcher("/adminEditInventory.jsp"); 
+		request.setAttribute("user", user);
+		
+		dispatcher = request.getRequestDispatcher("/adminEditAccount.jsp"); 
 		dispatcher.forward(request, response); 
 	}
-	
+	/* TODO Change to suit Accounts view
 	private void editItemSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		
 	}

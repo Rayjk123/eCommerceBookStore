@@ -31,35 +31,168 @@
 <!--NAVBAR HTML-->
 <div id="navbar"></div>
 <div id="adminBar"></div>
-<h1 class="center-text">Edit Item</h1>
+<h1 class="center-text">Add Item</h1>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<c:set value="${book}" var="book" scope="session" />
-<div class="center-div half-width">
-	<form action="AdminInventoryServlet" method="post">
-		<label class="reg-label">ISBN: </label><input class="reg-input" type="number" name="isbn" required value="${book.getIsbn()}"><br>
-		<label class="reg-label">Title: </label><input class="reg-input" type="text" name="title" required value="${book.getTitle()}"><br>
-		<label class="reg-label">Author: </label><input class="reg-input" type="text" name="author" required value="${book.getAuthor()}"><br>
-		<label class="reg-label">Price: </label><input class="reg-input" type="number" step="0.01" name="price" required value="${book.getPrice()}"><br>
-		<label class="reg-label">Genre: </label><input class="reg-input" type="text" name="genre" required value="${book.getGenre()}"><br>
-		<label class="reg-label">Publisher: </label><input class="reg-input" type="text" name="publisher" required value="${book.getPublisher()}"><br>
-		<label class="reg-label">Vendor: </label><input class="reg-input" type="text" name="vendor" required value="${book.getVendor()}"><br>
-		<label class="reg-label">Stock: </label><input class="reg-input" type="number" name="stock" required value="${book.getStock()}"><br>
-		<label class="reg-label">Promo Code: </label><input class="reg-input" type="text" name="promocode" required value="${book.getPromoCode()}"><br>
-		<label class="reg-label">Promo Price: </label><input class="reg-input" step="0.01" type="number"  name="promoprice" required value="${book.getPromoPrice()}"><br>
-		<label class="reg-label">Image: </label><input class="reg-input" type="text" name="image" required value="${book.getImage()}"><br>
-		<label class="reg-label">Description: </label><textarea class="reg-input" name="description" style="width:250px;height:150px;" required>${book.getDescription()}</textarea><br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<br>
-		<div class="center-text">
-			<input class="reg-label" type="submit" name="action" value="Cancel Changes">
-			<input class="reg-label" type="submit" name="action" value="Submit Changes">
+<c:set value="${user}" var="user" scope="session" />
+<div class="half-width">
+	<form action="AdminAccountsServlet" method="post">
+		<label class="reg-label">Email:</label><input class="reg-input" type="text" name="email" required value="${user.getEmail()}"><br>
+        <label class="reg-label">Password: </label><input class="reg-input" type="password" name="password" required value="${user.getPassword()}"><br>
+        <label class="reg-label">First name: </label><input class="reg-input" type="text" name="firstname" required value="${user.getFirstName()}"><br>
+        <label class="reg-label">Last name: </label><input class="reg-input" type="text" name="lastname" required value="${user.getLastName()}"><br>
+        <label class="reg-label">Permission: </label><select class="reg-input" name="permission" required>
+            	<option selected="selected">${user.getPermission()}</option>
+            	<option value="AL">customer</option>
+           		<option value="AK">admin</option>
+            </select>
+        <br>
+        <label class="reg-label">Subscription: </label><select class="reg-input" name="subscription" required>
+            	<option selected="selected">${user.getSubscription()}</option>
+            	<option value="AL">yes</option>
+            	<option value="AK">no</option>
+            </select>
+        <br>
+        <br>
+        <br>
+        <b>Shipping Address:</b><br/>
+        <label class="reg-label">Street: </label><input class="reg-input" type="text" name="street" required value="${user.getStreetShipping()}"><br>
+        <label class="reg-label">City: </label><input class="reg-input" type="text" name="city" required value="${user.getCityShipping()}"><br>
+        <label class="reg-label">State: </label>
+        <select class="reg-input" name="state" required>
+        	<option selected="selected">${user.getStateShipping()}</option>
+            <option value="AL">Alabama</option>
+            <option value="AK">Alaska</option>
+            <option value="AZ">Arizona</option>
+            <option value="AR">Arkansas</option>
+            <option value="CA">California</option>
+            <option value="CO">Colorado</option>
+            <option value="CT">Connecticut</option>
+            <option value="DE">Delaware</option>
+            <option value="DC">District Of Columbia</option>
+            <option value="FL">Florida</option>
+            <option value="GA">Georgia</option>
+            <option value="HI">Hawaii</option>
+            <option value="ID">Idaho</option>
+            <option value="IL">Illinois</option>
+            <option value="IN">Indiana</option>
+            <option value="IA">Iowa</option>
+            <option value="KS">Kansas</option>
+            <option value="KY">Kentucky</option>
+            <option value="LA">Louisiana</option>
+            <option value="ME">Maine</option>
+            <option value="MD">Maryland</option>
+            <option value="MA">Massachusetts</option>
+            <option value="MI">Michigan</option>
+            <option value="MN">Minnesota</option>
+            <option value="MS">Mississippi</option>
+            <option value="MO">Missouri</option>
+            <option value="MT">Montana</option>
+            <option value="NE">Nebraska</option>
+            <option value="NV">Nevada</option>
+            <option value="NH">New Hampshire</option>
+            <option value="NJ">New Jersey</option>
+            <option value="NM">New Mexico</option>
+            <option value="NY">New York</option>
+            <option value="NC">North Carolina</option>
+            <option value="ND">North Dakota</option>
+            <option value="OH">Ohio</option>
+            <option value="OK">Oklahoma</option>
+            <option value="OR">Oregon</option>
+            <option value="PA">Pennsylvania</option>
+            <option value="RI">Rhode Island</option>
+            <option value="SC">South Carolina</option>
+            <option value="SD">South Dakota</option>
+            <option value="TN">Tennessee</option>
+            <option value="TX">Texas</option>
+            <option value="UT">Utah</option>
+            <option value="VT">Vermont</option>
+            <option value="VA">Virginia</option>
+            <option value="WA">Washington</option>
+            <option value="WV">West Virginia</option>
+            <option value="WI">Wisconsin</option>
+            <option value="WY">Wyoming</option>
+        </select>
+        <br>
+        <label class="reg-label">Zip Code: </label><input class="reg-input" type="text" name="zip" required value="${user.getZipShipping()}">
+        <br>
+        <br>
+        <br>
+        <b>Billing Address:</b>
+        <br>
+        <div id="billing-address">
+            <label class="reg-label">Street: </label><input class="reg-input" type="text" name="b-street" value="${user.getStreetBilling()}"><br>
+            <label class="reg-label">City: </label><input class="reg-input" type="text" name="b-city" value="${user.getCityBilling()}"><br>
+            <label class="reg-label">State: </label>
+            <select class="reg-input" name="b-state">
+            	<option selected="selected">${user.getStateBilling()}</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="DC">District Of Columbia</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
+            </select>
+            <br>
+            <label class="reg-label">Zip Code: </label><input class="reg-input" type="text" name="b-zip"  value="${user.getZipBilling()}">
         </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="center-text">
+            <button class="reg-label" type="submit" name="action" value="edit">Confirm</button>
+			<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
+        </div>
+        
 	</form>
-</div>
 
+
+
+</div>
     
