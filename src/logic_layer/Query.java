@@ -3,11 +3,13 @@ package logic_layer;
 import data_access_layer.DbAccess;
 import domain_layer.Book;
 import domain_layer.Cart;
+import domain_layer.CreditCard;
 import domain_layer.Customer;
 import logic_layer.QueryUtil;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+
 import java.sql.ResultSet;
 
 public class Query {
@@ -316,5 +318,13 @@ public class Query {
 		ResultSet creditCard = DbAccess.retrieve(creditCardInfo);
 		
 		return QueryUtil.resultSetsToCustomer(user, creditCard);
+	}
+	
+	public static CreditCard getCreditCardInfo(String email) throws SQLException {
+		String query = "select * from credit_card where email = '" + email + "'";
+		
+		ResultSet card = DbAccess.retrieve(query);
+		
+		return QueryUtil.resultSetToCreditCard(card);
 	}
 }

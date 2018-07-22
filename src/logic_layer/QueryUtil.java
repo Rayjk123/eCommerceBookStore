@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import domain_layer.Book;
 import domain_layer.Cart;
+import domain_layer.CreditCard;
 import domain_layer.Customer;
 
 public class QueryUtil {
@@ -75,11 +76,16 @@ public class QueryUtil {
 		customer.setLastName(user.getString("last_name"));
 		customer.setShippingAddress(user.getString("shipping_address"));
 		customer.setBillingAddress(user.getString("billing_address"));
-		customer.setCcNumber(creditCard.getString("number"));
-		customer.setSecurityCode(creditCard.getString("security_code"));
-		customer.setCcExpiration(creditCard.getString("expiration_date"));
 		customer.setPermission(user.getString("permission"));
 		customer.setSubscripion(user.getString("subscription"));
+		customer.setStreetShipping(user.getString("shipping_street"));
+		customer.setCityShipping(user.getString("shipping_city"));
+		customer.setStateShipping(user.getString("shipping_state"));
+		customer.setZipShipping(user.getString("shipping_zip"));
+		customer.setStreetBilling(user.getString("billing_street"));
+		customer.setCityBilling(user.getString("billing_city"));
+		customer.setStateBilling(user.getString("billing_state"));
+		customer.setZipBilling(user.getString("billing_zip"));
 		
 		return customer;
 	}
@@ -112,6 +118,22 @@ public class QueryUtil {
 		customer.setZipBilling(user.getString("billing_zip"));
 		
 		return customer;
+	}
+	
+	protected static CreditCard resultSetToCreditCard(ResultSet resultSet) throws SQLException {
+		ResultSetMetaData rsmd = resultSet.getMetaData();
+
+		if (rsmd.getColumnCount() != 4) {
+			return null;
+		}
+		
+		CreditCard card = new CreditCard();
+		
+		card.setCardNumber(resultSet.getString("number"));
+		card.setCardExpiration(resultSet.getString("expiration_date"));
+		card.setCardSecurityCode(resultSet.getString("security_code"));
+		
+		return card;
 	}
 	
 	protected static String userResultSetToEmail(ResultSet user) throws SQLException {
