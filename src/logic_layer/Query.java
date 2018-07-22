@@ -80,6 +80,40 @@ public class Query {
 		return retList;
 	}
 	
+	public static ArrayList<Customer> getAllUsers() throws SQLException {
+		String userQuery = "SELECT * FROM user";
+		
+		ArrayList<Customer> retList = new ArrayList<>();
+		ResultSet userSet = DbAccess.retrieve(userQuery);
+		
+		while(userSet.next()) {
+			Customer customer = QueryUtil.resultSetsToCustomer(userSet);
+			if (customer != null) {
+				retList.add(customer);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public static boolean addCustomer(Customer customer) {
+		String query = "INSERT into user "
+				+ "(email, password, first_name, last_name, shipping_address, billing_address, permission, subscription) " + 
+				"Values('" +
+				customer.getEmail() + "', '" +
+				customer.getPassword() + "', '" +
+				customer.getFirstName() + "', '" +
+				customer.getLastName() + "', '" +
+				customer.getShippingAddress() + "', '" +
+				customer.getBillingAddress() + "', '" +
+				customer.getPermission() + "', '" +
+				customer.getSubscription() + "')";
+		
+		System.out.println(query);
+			
+		return DbAccess.insert(query) == 1;
+	}
+	
 	/**
 	 * method adds an entry to cart database
 	 * @param customer

@@ -46,7 +46,6 @@ public class QueryUtil {
 		ResultSetMetaData rsmd = result.getMetaData();
 
 		if (rsmd.getColumnCount() != 10) {
-			System.out.println("null pointer error is a coming!");
 			return null;
 		}
 		
@@ -79,7 +78,41 @@ public class QueryUtil {
 		customer.setCcNumber(creditCard.getString("number"));
 		customer.setSecurityCode(creditCard.getString("security_code"));
 		customer.setCcExpiration(creditCard.getString("expiration_date"));
+		customer.setPermission(user.getString("permission"));
+		customer.setSubscripion(user.getString("subscription"));
 		
 		return customer;
+	}
+	
+	//OVERLOADED method
+	protected static Customer resultSetsToCustomer(ResultSet user) throws SQLException {
+		ResultSetMetaData rsmd = user.getMetaData();
+
+		if (rsmd.getColumnCount() != 8) {
+			return null;
+		}
+		
+		Customer customer = new Customer();
+		
+		customer.setEmail(user.getString("email"));
+		customer.setPassword(user.getString("password"));
+		customer.setFirstName(user.getString("first_name"));
+		customer.setLastName(user.getString("last_name"));
+		customer.setShippingAddress(user.getString("shipping_address"));
+		customer.setBillingAddress(user.getString("billing_address"));
+		customer.setPermission(user.getString("permission"));
+		customer.setSubscripion(user.getString("subscription"));
+		
+		return customer;
+	}
+	
+	protected static String userResultSetToEmail(ResultSet user) throws SQLException {
+		if (!user.next()) {
+			return null;
+		}
+		
+		String email = user.getString("email");
+		
+		return email;
 	}
 }

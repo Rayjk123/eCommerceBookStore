@@ -8,8 +8,9 @@ public class Customer extends RegisteredUser {
 	private String ccNumber;
 	private String ccExpiration;
 	private String securityCode;
-	private boolean subscripion;
-	
+	private String subscription;
+	private String permission; 
+
 	public Customer() {
 		
 	}
@@ -21,13 +22,13 @@ public class Customer extends RegisteredUser {
 	}
 	
 	//constructor for included optional cc information
-	public Customer(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, String address, String ccNumber, String ccExpiration, boolean subscription){
+	public Customer(int accountID, String firstName, String lastName, String email, String dateOfBirth,String password, int permLevel, String address, String ccNumber, String ccExpiration, String subscription){
 		super(accountID, firstName, lastName, email, 
 				dateOfBirth, password, permLevel);
 		setAddress(address);
 		setCcNumber(ccNumber);
 		setCcExpiration(ccExpiration);
-		setSubscripion(subscripion);
+		setSubscripion(subscription);
 	}
 
 	public String getAddress() {
@@ -54,12 +55,12 @@ public class Customer extends RegisteredUser {
 		this.ccExpiration = ccExpiration;
 	}
 
-	public boolean isSubscripion() {
-		return subscripion;
+	public String getSubscription() {
+		return subscription;
 	}
 
-	public void setSubscripion(boolean subscripion) {
-		this.subscripion = subscripion;
+	public void setSubscripion(String subscription) {
+		this.subscription = subscription;
 	}
 
 	public String getBillingAddress() {
@@ -84,5 +85,13 @@ public class Customer extends RegisteredUser {
 
 	public void setSecurityCode(String securityCode) {
 		this.securityCode = securityCode;
+	}
+	
+	public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
 	}
 }
