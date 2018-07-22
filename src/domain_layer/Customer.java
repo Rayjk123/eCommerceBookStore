@@ -20,7 +20,7 @@ public class Customer extends RegisteredUser {
 	private String zipShipping;
 
 	public Customer() {
-		
+		super();
 	}
 	
 	//constructor for only address as it will be required

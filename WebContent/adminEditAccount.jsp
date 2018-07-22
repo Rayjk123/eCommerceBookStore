@@ -119,6 +119,7 @@
         <br>
         <b>Billing Address:</b>
         <br>
+        <label class="reg-label">Same as Shipping</label><input id="billing-check-box" class="reg-input" type="checkbox" name="sameAsBilling">
         <div id="billing-address">
             <label class="reg-label">Street: </label><input class="reg-input" type="text" name="b-street" value="${user.getStreetBilling()}"><br>
             <label class="reg-label">City: </label><input class="reg-input" type="text" name="b-city" value="${user.getCityBilling()}"><br>
@@ -186,7 +187,7 @@
         <br>
         <br>
         <div class="center-text">
-            <button class="reg-label" type="submit" name="action" value="edit">Confirm</button>
+            <button class="reg-label" type="submit" name="action" value="update">Confirm</button>
 			<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
         </div>
         

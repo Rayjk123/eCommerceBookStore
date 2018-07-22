@@ -89,6 +89,7 @@ public class AdminInventoryServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
+			
 			else if (request.getParameter("action").equals("update")) {
 				try {
 					editItemSubmit(request,response);
@@ -100,6 +101,22 @@ public class AdminInventoryServlet extends HttpServlet {
 			else if (request.getParameter("action").equals("cancel")) {
 				try {
 					viewInventory(request,response);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (request.getParameter("action").equals("delete")) {
+				try {
+					deleteItem(request, response, request.getParameter("isbn"));
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else {
+				try {
+					viewInventory(request, response);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -146,7 +163,12 @@ public class AdminInventoryServlet extends HttpServlet {
 		viewInventory(request,response);
 		
 	}
-
+	
+	private void deleteItem(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
+		Query.deleteItem(isbn);
+		
+		viewInventory(request, response);
+	}
 	
 	private void editItemPage(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher;

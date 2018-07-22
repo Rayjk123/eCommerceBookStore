@@ -85,6 +85,12 @@ public class Query {
 		return DbAccess.update(query) == 1;
 	}
 	
+	public static boolean deleteItem(String isbn) {
+		String query = "DELETE FROM book WHERE isbn ='" + isbn + "'";
+		
+		return DbAccess.delete(query) == 1;
+	}
+	
 	public static ArrayList<Book> getAllBooks() throws SQLException {
 		String query = "select * from book";
 		
@@ -142,6 +148,37 @@ public class Query {
 		System.out.println(query);
 			
 		return DbAccess.insert(query) == 1;
+	}
+	
+	public static boolean updateCustomer(Customer customer) {
+		String query = "UPDATE user SET " +
+				"email ='" + customer.getEmail() + "', " +
+				"password ='" + customer.getPassword() + "', " +
+				"first_name ='" + customer.getFirstName() + "', " +
+				"last_name ='" + customer.getLastName() + "', " +
+				"shipping_address ='" + customer.getShippingAddress() + "', " +
+				"billing_address ='" + customer.getBillingAddress() + "', " +
+				"permission ='" + customer.getPermission() + "', " +
+				"subscription ='" + customer.getSubscription() + "', " +
+				"shipping_street ='" + customer.getStreetShipping() + "', " +
+				"shipping_city ='" + customer.getCityShipping() + "', " +
+				"shipping_state ='" + customer.getStateShipping() + "', " +
+				"shipping_zip ='" + customer.getZipShipping() + "', " +
+				"billing_street ='" + customer.getStreetBilling() + "', " +
+				"billing_city ='" + customer.getCityBilling() + "', " +
+				"billing_state ='" + customer.getStateBilling() + "', " +
+				"billing_zip ='" + customer.getZipBilling() + "' " +
+				"WHERE email ='" + customer.getEmail() + "'";
+		
+		System.out.println(query);
+			
+		return DbAccess.insert(query) == 1;
+	}
+	
+	public static boolean deleteUser(String email) {
+		String query = "DELETE FROM user WHERE email ='" + email + "'";
+		
+		return DbAccess.delete(query) == 1;
 	}
 	
 	public static Customer getUserByEmail(String email) throws SQLException {

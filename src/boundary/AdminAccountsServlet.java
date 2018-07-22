@@ -81,9 +81,42 @@ public class AdminAccountsServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			if (request.getParameter("action").equals("edit")) {
+			else if (request.getParameter("action").equals("edit")) {
 				try {
 					editAccountPage(request,response,request.getParameter("email"));
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (request.getParameter("action").equals("update")) {
+				try {
+					editAccountSubmit(request,response);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (request.getParameter("action").equals("cancel")) {
+				try {
+					viewUsers(request, response);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (request.getParameter("action").equals("delete")) {
+				try {
+					deleteUser(request, response, request.getParameter("email"));
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else
+			{
+				try {
+					viewUsers(request, response);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -115,8 +148,8 @@ public class AdminAccountsServlet extends HttpServlet {
 		
 		customer.setEmail(request.getParameter("email"));
 		customer.setPassword(request.getParameter("password"));
-		customer.setFirstName(request.getParameter("first_name"));
-		customer.setLastName(request.getParameter("last_name"));
+		customer.setFirstName(request.getParameter("firstname"));
+		customer.setLastName(request.getParameter("lastname"));
 		customer.setPermission(request.getParameter("permission"));
 		customer.setSubscripion(request.getParameter("subscription"));
 		
@@ -156,8 +189,13 @@ public class AdminAccountsServlet extends HttpServlet {
 		
 		viewUsers(request,response);
 	}
-
 	
+	private void deleteUser(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
+		Query.deleteUser(email);
+		
+		viewUsers(request, response);
+	}
+
 	private void editAccountPage(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher;
 		Customer user = Query.getUserByEmail(email);
@@ -167,9 +205,51 @@ public class AdminAccountsServlet extends HttpServlet {
 		dispatcher = request.getRequestDispatcher("/adminEditAccount.jsp"); 
 		dispatcher.forward(request, response); 
 	}
-	/* TODO Change to suit Accounts view
-	private void editItemSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	
+	private void editAccountSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		Customer customer = new Customer(); 
+
+		customer.setEmail(request.getParameter("email"));
+		customer.setPassword(request.getParameter("password"));
+		customer.setFirstName(request.getParameter("firstname"));
+		customer.setLastName(request.getParameter("lastname"));
+		customer.setPermission(request.getParameter("permission"));
+		customer.setSubscripion(request.getParameter("subscription"));
 		
+		String shippingStreet = request.getParameter("street").trim();
+		String shippingCity = request.getParameter("city").trim();
+		String shippingState = request.getParameter("state").trim();
+		String shippingZip = request.getParameter("zip").trim();
+		String shippingAddress = shippingStreet + " " + shippingCity + " " + shippingState + " " + shippingZip;
+		customer.setStreetShipping(shippingStreet);
+		customer.setCityShipping(shippingCity);
+		customer.setStateShipping(shippingState);
+		customer.setZipShipping(shippingZip);
+		customer.setShippingAddress(shippingAddress);
+		
+		if (request.getParameter("sameAsBilling") != null) {
+			customer.setStreetBilling(shippingStreet);
+			customer.setCityBilling(shippingCity);
+			customer.setStateBilling(shippingState);
+			customer.setZipBilling(shippingZip);
+			customer.setBillingAddress(shippingAddress);
+			Query.updateCustomer(customer);
+		} else {
+			String billingStreet = request.getParameter("b-street").trim();
+			String billingCity = request.getParameter("b-city").trim();
+			String billingState = request.getParameter("b-state").trim();
+			String billingZip = request.getParameter("b-zip").trim();
+			String billingAddress = billingStreet + " " + billingCity + " " + billingState + " " + billingZip;
+			
+			customer.setStreetBilling(billingStreet);
+			customer.setCityBilling(billingCity);
+			customer.setStateBilling(billingState);
+			customer.setZipBilling(billingZip);
+			customer.setBillingAddress(billingAddress);
+			
+			Query.updateCustomer(customer);
+		}
+		
+		viewUsers(request,response);
 	}
-	*/
 }
