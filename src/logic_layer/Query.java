@@ -63,6 +63,28 @@ public class Query {
 		return DbAccess.insert(query) == 1;
 	}
 	
+	public static boolean updateInventory(Book book) {
+		String query = "UPDATE book SET " +
+				"isbn ='" + book.getIsbn() + "', " +
+				"title ='" + book.getTitle() + "', " +
+				"author ='" + book.getAuthor() + "', " +
+				"price ='" + book.getPrice() + "', " +
+				"genre ='" + book.getGenre() + "', " +
+				"publisher ='" + book.getPublisher() + "', " +
+				"vendor ='" + book.getVendor() + "', " +
+				"stock ='" + book.getStock() + "', " +
+				"promocode ='" + book.getPromoCode() + "', " +
+				"promoprice ='" + book.getPromoPrice() + "', " +
+				"hold ='" + book.getHold() + "', " +
+				"image ='" + book.getImage() + "', " +
+				"description ='" + book.getDescription() + "' " +
+				"WHERE isbn ='" + book.getIsbn() + "'";
+		
+		System.out.println(query);
+			
+		return DbAccess.update(query) == 1;
+	}
+	
 	public static ArrayList<Book> getAllBooks() throws SQLException {
 		String query = "select * from book";
 		
@@ -98,7 +120,7 @@ public class Query {
 	
 	public static boolean addCustomer(Customer customer) {
 		String query = "INSERT into user "
-				+ "(email, password, first_name, last_name, shipping_address, billing_address, permission, subscription) " + 
+				+ "(email, password, first_name, last_name, shipping_address, billing_address, permission, subscription, shipping_street, shipping_city, shipping_state, shipping_zip, billing_street, billing_city, billing_state, billing_zip) " + 
 				"Values('" +
 				customer.getEmail() + "', '" +
 				customer.getPassword() + "', '" +
@@ -107,11 +129,31 @@ public class Query {
 				customer.getShippingAddress() + "', '" +
 				customer.getBillingAddress() + "', '" +
 				customer.getPermission() + "', '" +
-				customer.getSubscription() + "')";
+				customer.getSubscription() + "', '" +
+				customer.getStreetShipping() + "', '" +
+				customer.getCityShipping() + "', '" +
+				customer.getStateShipping() + "', '" +
+				customer.getZipShipping() + "', '" +
+				customer.getStreetBilling() + "', '" +
+				customer.getCityBilling() + "', '" +
+				customer.getStateBilling() + "', '" +
+				customer.getZipBilling() + "')";
 		
 		System.out.println(query);
 			
 		return DbAccess.insert(query) == 1;
+	}
+	
+	public static Customer getUserByEmail(String email) throws SQLException {
+		String query = "SELECT * FROM user WHERE email ='" 
+				+ email + "'";
+		
+		ResultSet resultSet = DbAccess.retrieve(query);
+		resultSet.next();
+
+		Customer user = QueryUtil.resultSetsToCustomer(resultSet);
+
+		return user;
 	}
 	
 	/**

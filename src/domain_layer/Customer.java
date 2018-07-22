@@ -10,6 +10,14 @@ public class Customer extends RegisteredUser {
 	private String securityCode;
 	private String subscription;
 	private String permission; 
+	private String streetBilling;
+	private String cityBilling;
+	private String stateBilling;
+	private String zipBilling;
+	private String streetShipping;
+	private String cityShipping;
+	private String stateShipping;
+	private String zipShipping;
 
 	public Customer() {
 		
@@ -94,4 +102,70 @@ public class Customer extends RegisteredUser {
 	public void setPermission(String permission) {
 		this.permission = permission;
 	}
+
+	public String getStreetBilling() {
+		return streetBilling;
+	}
+
+	public void setStreetBilling(String streetBilling) {
+		this.streetBilling = streetBilling;
+	}
+
+	public String getCityBilling() {
+		return cityBilling;
+	}
+
+	public void setCityBilling(String cityBilling) {
+		this.cityBilling = cityBilling;
+	}
+
+	public String getStateBilling() {
+		return stateBilling;
+	}
+
+	public void setStateBilling(String stateBilling) {
+		this.stateBilling = stateBilling;
+	}
+
+	public String getZipBilling() {
+		return zipBilling;
+	}
+
+	public void setZipBilling(String zipBilling) {
+		this.zipBilling = zipBilling;
+	}
+
+	public String getStreetShipping() {
+		return streetShipping;
+	}
+
+	public void setStreetShipping(String streetShipping) {
+		this.streetShipping = streetShipping;
+	}
+
+	public String getCityShipping() {
+		return cityShipping;
+	}
+
+	public void setCityShipping(String cityShipping) {
+		this.cityShipping = cityShipping;
+	}
+
+	public String getStateShipping() {
+		return stateShipping;
+	}
+
+	public void setStateShipping(String stateShipping) {
+		this.stateShipping = stateShipping;
+	}
+
+	public String getZipShipping() {
+		return zipShipping;
+	}
+
+	public void setZipShipping(String zipShipping) {
+		this.zipShipping = zipShipping;
+	}
+	
+	
 }

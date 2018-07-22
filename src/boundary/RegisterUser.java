@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain_layer.Customer;
 import logic_layer.Query;
 
 @WebServlet("/RegisterUser")
@@ -69,9 +70,28 @@ public class RegisterUser extends HttpServlet {
 		
 		String confirmationCode = randomString();
 		
+		Customer customer = new Customer();
+		
+		customer.setEmail(email);
+		customer.setFirstName(firstName);
+		customer.setLastName(lastName);
+		customer.setPassword(password);
+		customer.setStreetShipping(shippingStreet);
+		customer.setCityShipping(shippingCity);
+		customer.setStateShipping(shippingState);
+		customer.setZipShipping(shippingZip);
+		customer.setShippingAddress(shippingAddress);
+		
 		// Means that the checkbox has been set
 		if (request.getParameter("sameAsBilling") != null) {
-			Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, shippingAddress);
+			customer.setStreetBilling(shippingStreet);
+			customer.setCityBilling(shippingCity);
+			customer.setStateBilling(shippingState);
+			customer.setZipBilling(shippingZip);
+			customer.setBillingAddress(shippingAddress);
+			
+			//Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, shippingAddress);
+			Query.addCustomer(customer);
 		} else {
 			String billingStreet = request.getParameter("b-street").trim();
 			String billingCity = request.getParameter("b-city").trim();
@@ -79,7 +99,14 @@ public class RegisterUser extends HttpServlet {
 			String billingZip = request.getParameter("b-zip").trim();
 			String billingAddress = billingStreet + " " + billingCity + " " + billingState + " " + billingZip;
 			
-			Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, billingAddress);
+			customer.setStreetBilling(billingStreet);
+			customer.setCityBilling(billingCity);
+			customer.setStateBilling(billingState);
+			customer.setZipBilling(billingZip);
+			customer.setBillingAddress(billingAddress);
+			
+			//Query.insertNewUser(email, password, firstName, lastName, "customer", shippingAddress, billingAddress);
+			Query.addCustomer(customer);
 		}
 		
 		if (!Query.insertCreditCard(email, cardNumber, security, expDate)) {

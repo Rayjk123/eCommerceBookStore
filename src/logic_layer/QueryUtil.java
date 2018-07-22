@@ -88,7 +88,7 @@ public class QueryUtil {
 	protected static Customer resultSetsToCustomer(ResultSet user) throws SQLException {
 		ResultSetMetaData rsmd = user.getMetaData();
 
-		if (rsmd.getColumnCount() != 8) {
+		if (rsmd.getColumnCount() != 16) {
 			return null;
 		}
 		
@@ -102,6 +102,14 @@ public class QueryUtil {
 		customer.setBillingAddress(user.getString("billing_address"));
 		customer.setPermission(user.getString("permission"));
 		customer.setSubscripion(user.getString("subscription"));
+		customer.setStreetShipping(user.getString("shipping_street"));
+		customer.setCityShipping(user.getString("shipping_city"));
+		customer.setStateShipping(user.getString("shipping_state"));
+		customer.setZipShipping(user.getString("shipping_zip"));
+		customer.setStreetBilling(user.getString("billing_street"));
+		customer.setCityBilling(user.getString("billing_city"));
+		customer.setStateBilling(user.getString("billing_state"));
+		customer.setZipBilling(user.getString("billing_zip"));
 		
 		return customer;
 	}

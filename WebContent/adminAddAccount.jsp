@@ -181,7 +181,8 @@
         <br>
         <br>
         <div class="center-text">
-            <input class="padding-top-50px" type="submit" name="action" value="add">
+            <button class="reg-label" type="submit" name="action" value="add">Add</button>
+			<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
         </div>
         
 	</form>
