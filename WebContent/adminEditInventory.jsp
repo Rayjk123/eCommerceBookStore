@@ -56,8 +56,8 @@
 		<br>
 		<br>
 		<div class="center-text">
-			<input class="reg-label" type="submit" name="action" value="Cancel Changes">
-			<input class="reg-label" type="submit" name="action" value="Submit Changes">
+			<button class="reg-label" type="submit" name="action" value="update">Confirm</button>
+			<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
         </div>
 	</form>
 </div>

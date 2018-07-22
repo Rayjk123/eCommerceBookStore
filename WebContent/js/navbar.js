@@ -22,7 +22,7 @@ $(document).ready(function(){
         "            <li class=\"nav-item\">\n" +
         "                <a class=\"nav-link\" href=\"#\">About</a>\n" +
         "			<li class=\"nav-item active\">\n" +
-        "                <a class=\"nav-link\" href=\"adminHome.html\">Mangager Store  <span class=\"sr-only\">(current)</span></a>\n" +
+        "                <a class=\"nav-link\" href=\"adminHome.html\">Mangage Store  <span class=\"sr-only\">(current)</span></a>\n" +
         "            </li>\n" +	
         "            </li>\n" +
         "        </ul>\n" +

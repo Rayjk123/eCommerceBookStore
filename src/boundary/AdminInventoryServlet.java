@@ -89,9 +89,17 @@ public class AdminInventoryServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			else if (request.getParameter("action").equals("editSubmit")) {
+			else if (request.getParameter("action").equals("update")) {
 				try {
-					editItemPage(request,response, request.getParameter("isbn"));
+					editItemSubmit(request,response);
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (request.getParameter("action").equals("cancel")) {
+				try {
+					viewInventory(request,response);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -150,6 +158,23 @@ public class AdminInventoryServlet extends HttpServlet {
 	}
 	
 	private void editItemSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		Book book = new Book();
 		
+		book.setIsbn(request.getParameter("isbn"));
+		book.setTitle(request.getParameter("title"));
+		book.setAuthor(request.getParameter("author"));
+		book.setPrice(Double.parseDouble(request.getParameter("price")));
+		book.setGenre(request.getParameter("genre"));
+		book.setPublisher(request.getParameter("publisher"));
+		book.setVendor(request.getParameter("vendor"));
+		book.setStock(Integer.parseInt(request.getParameter("stock")));
+		book.setPromoCode(request.getParameter("promocode"));
+		book.setPromoPrice(Double.parseDouble(request.getParameter("promoprice")));
+		book.setImage(request.getParameter("image"));
+		book.setDescription(request.getParameter("description"));
+		
+		Query.updateInventory(book);
+		
+		viewInventory(request,response);
 	}
 }

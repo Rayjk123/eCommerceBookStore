@@ -45,8 +45,17 @@
 		<label class="reg-label">Promo Code: </label><input class="reg-input" type="text" name="promocode" required><br>
 		<label class="reg-label">Promo Price: </label><input class="reg-input" step="0.01" type="number"  name="promoprice" required><br>
 		<label class="reg-label">Image: </label><input class="reg-input" type="text" name="image" required><br>
-		<label class="reg-label">Description: </label><input class="reg-input overflow half-height" type="text" name="description" required><br>
-		<input class="reg-label" type="submit" name="action" value="add">
+		<label class="reg-label">Description: </label><textarea class="reg-input" maxlength="1000" name="description" style="width:250px;height:150px;" required></textarea><br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<br>
+		<button class="reg-label" type="submit" name="action" value="add">Add</button>
+		<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
         
 	</form>
 
