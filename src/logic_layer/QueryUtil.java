@@ -132,6 +132,8 @@ public class QueryUtil {
 		card.setCardNumber(resultSet.getString("number"));
 		card.setCardExpiration(resultSet.getString("expiration_date"));
 		card.setCardSecurityCode(resultSet.getString("security_code"));
+		card.setExpirationMonth(resultSet.getString("expiration_month"));
+		card.setExpirationYear(resultSet.getString("expiration_year"));
 		
 		return card;
 	}

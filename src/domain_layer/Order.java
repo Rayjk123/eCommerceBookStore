@@ -1,68 +1,71 @@
 package domain_layer;
 
 public class Order {
-	
-	private int orderID;
-	private Cart orderContents;
-
-	public Order(int orderID, Cart orderContents) {
-		setOrderID(orderID);
-		setOrderContents(orderContents);
-	}
-	
-	public void checkout() {
+	public Order() {
 		
 	}
 	
-	public boolean cardDeclined() {
-		return false;
+	private int orderNumber;
+	private String email;
+	private double total;
+	private double tax;
+	private double subTotal;
+	private double shippingCost;
+	private String paymentCard;
+	private String shippingAddress;
+	private String billingAddress;
+	public int getOrderNumber() {
+		return orderNumber;
 	}
-	
-	public boolean holdOrder() {
-		return false;
+	public void setOrderNumber(int orderNumber) {
+		this.orderNumber = orderNumber;
 	}
-	
-	public void usePromotion() {
-		
+	public String getEmail() {
+		return email;
 	}
-	
-	public boolean missingInfo() {
-		return false;
+	public void setEmail(String email) {
+		this.email = email;
 	}
-	
-	public void createOrder() {
-		
+	public double getTotal() {
+		return total;
 	}
-	
-	public void displayOrder() {
-		
+	public void setTotal(double total) {
+		this.total = total;
 	}
-	
-	public void editOrder() {
-
+	public double getTax() {
+		return tax;
 	}
-	
-	public void cancelOrder() {
-		
+	public void setTax(double tax) {
+		this.tax = tax;
 	}
-	
-	public void searchOrder() {
-		
+	public double getSubTotal() {
+		return subTotal;
 	}
-
-	public int getOrderID() {
-		return orderID;
+	public void setSubTotal(double subTotal) {
+		this.subTotal = subTotal;
 	}
-
-	public void setOrderID(int orderID) {
-		this.orderID = orderID;
+	public double getShippingCost() {
+		return shippingCost;
 	}
-
-	public Cart getOrderContents() {
-		return orderContents;
+	public void setShippingCost(double shippingCost) {
+		this.shippingCost = shippingCost;
 	}
-
-	public void setOrderContents(Cart orderContents) {
-		this.orderContents = orderContents;
+	public String getPaymentCard() {
+		return paymentCard;
+	}
+	public void setPaymentCard(String paymentCard) {
+		this.paymentCard = paymentCard;
+	}
+	public String getShippingAddress() {
+		return shippingAddress;
+	}
+	public void setShippingAddress(String shippingAddress) {
+		this.shippingAddress = shippingAddress;
+	}
+	public String getBillingAddress() {
+		return billingAddress;
+	}
+	public void setBillingAddress(String billingAddress) {
+		this.billingAddress = billingAddress;
 	}
 }

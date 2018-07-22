@@ -15,15 +15,18 @@ import javax.servlet.http.HttpSession;
 import logic_layer.Query;
 import domain_layer.Book;
 import domain_layer.Cart;
+import domain_layer.CreditCard;
+import domain_layer.Customer;
+import domain_layer.Order;
 
 @SuppressWarnings("serial")
-@WebServlet("/CartServlet")
-public class CartServlet extends HttpServlet {
+@WebServlet("/CheckoutServlet")
+public class CheckoutServlet extends HttpServlet {
 
 	/**
      * @see HttpServlet#HttpServlet()
      */
-	public CartServlet(){
+	public CheckoutServlet(){
 		super(); //HttpServlet constructor
 	}
 	
@@ -52,18 +55,9 @@ public class CartServlet extends HttpServlet {
 			String isbn = request.getParameter("isbn");
 			int qty = Integer.parseInt(request.getParameter("qty"));
 			
-			System.out.println(action + " " + isbn + " quantity=" + qty);
-			
-			if (action.equals("add")) {
-				System.out.println("action = " + action);
-				try {
-					addToCart(request, response, email, isbn, qty);
-				} catch (SQLException | ServletException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			else if (action.equals("edit"))
+			//TODO make a "process" order button and method 
+			//TODO make a cancel button and method
+			if (action.equals("edit"))
 			{
 				try {
 					changeQuantity(request, response, email, isbn, qty);
@@ -71,7 +65,6 @@ public class CartServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("action = " + action);
 			}
 			else if (action.equals("delete"))
 			{
@@ -81,23 +74,20 @@ public class CartServlet extends HttpServlet {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("action = " + action);
 			}
 			else 
 			{
 				try {
-					viewCart(request, response, email);
+					viewCheckout(request, response, email);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				System.out.println("action = " + action);
-				System.out.println("Default to cart view");
 			}
 		}
 		else {
 			try {
-				viewCart(request, response, email);
+				viewCheckout(request, response, email);
 			} catch (SQLException | ServletException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -106,32 +96,6 @@ public class CartServlet extends HttpServlet {
 			
 	}
 	
-	private void addToCart(HttpServletRequest request, HttpServletResponse response, String email, String isbn, int qty) throws SQLException, ServletException, IOException {
-		RequestDispatcher dispatcher;
-		System.out.println("add to cart");
-		if (email == null)
-		{
-			dispatcher = request.getRequestDispatcher("/login.html");
-			dispatcher.forward(request, response);
-			/*
-			 * TODO allow carts with session ID
-			 */
-		}
-		
-		Book book = Query.getBookByIsbn(isbn);
-		
-		//can't add more than what's in stock to cart
-		if (book.getStock() - qty > 0) {
-			Query.addToCart(email, book, qty); 
-		}
-		else
-		{
-			Query.addToCart(email, book, book.getStock());
-		}
-		
-		viewCart(request,response,email);
-	}
-
 	private void changeQuantity(HttpServletRequest request, HttpServletResponse response, String email, String isbn, int qty) throws SQLException, ServletException, IOException {
 		Book book = Query.getBookByIsbn(isbn);
 		
@@ -144,7 +108,7 @@ public class CartServlet extends HttpServlet {
 			Query.setCartQuantity(email, book, book.getStock());
 		}
 		
-		viewCart(request,response,email);
+		viewCheckout(request,response,email);
 	}
 	
 	private void deleteBookFromCart(HttpServletRequest request, HttpServletResponse response, String email, String isbn) throws SQLException, ServletException, IOException {
@@ -152,17 +116,42 @@ public class CartServlet extends HttpServlet {
 		
 		Query.deleteBookFromCart(email, book); 
 		
-		viewCart(request,response,email);
+		viewCheckout(request,response,email);
 	}
 	
-	private void viewCart(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
+	private void viewCheckout(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher;
 		ArrayList<Cart> books = Query.getBooksInCart(email);
-		request.setAttribute("books", books);
 		
-		request.setAttribute("total", getCartTotal(books));
-		dispatcher = request.getRequestDispatcher("/Cart.jsp"); 
+		Customer customer = Query.getUserByEmail(email);
+		CreditCard card = Query.getCreditCardInfo(email);
+		double cartTotal = getCartTotal(books);
+		double shipping = getShippingCost(customer.getAddress());
+		double taxes = getTaxes(customer.getAddress(), cartTotal);
+		double total = cartTotal + shipping + taxes;
+		
+		request.setAttribute("books", books);
+		request.setAttribute("cartTotal", cartTotal);
+		request.setAttribute("shippingCost", shipping);
+		request.setAttribute("taxesCost", taxes);
+		request.setAttribute("orderTotal", total);
+		request.setAttribute("user", customer);
+		request.setAttribute("card", card);
+		
+		dispatcher = request.getRequestDispatcher("/checkout.jsp"); 
 		dispatcher.forward(request, response); 
+	}
+	
+	private void submitOrder(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException {
+		RequestDispatcher dispatcher;
+		ArrayList<Cart> books = Query.getBooksInCart(email);
+		
+		Customer customer = Query.getUserByEmail(email);
+		CreditCard card = Query.getCreditCardInfo(email);
+		
+		double total;
+		
+		Order order = new Order();
 	}
 	
 	private double getCartTotal(ArrayList<Cart> books) {
@@ -171,5 +160,22 @@ public class CartServlet extends HttpServlet {
 			cartTotal = cartTotal + books.get(i).getPrice() * books.get(i).getQty();
 		}
 		return cartTotal;
+	}
+	
+	private double getShippingCost(String shippingAddress) {
+		double shippingCost = 3.25; //flat rate
+		
+		// TODO calculate shipping method given destination address
+		
+		return shippingCost;
+	}
+	
+	private double getTaxes(String address, double cartTotal) {
+		double taxPercentage = 0.06;
+		double taxes = cartTotal * taxPercentage;
+		
+		//TODO calculate taxes based on regulations given the address
+		
+		return taxes;
 	}
 }
