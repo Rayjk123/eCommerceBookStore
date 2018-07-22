@@ -38,6 +38,16 @@
         <label class="reg-label">Password: </label><input class="reg-input" type="password" name="password" required><br>
         <label class="reg-label">First name: </label><input class="reg-input" type="text" name="firstname" required><br>
         <label class="reg-label">Last name: </label><input class="reg-input" type="text" name="lastname" required><br>
+        <label class="reg-label">Permission: </label><select class="reg-input" name="permission" required>
+            <option value="AL">customer</option>
+            <option value="AK">admin</option>
+            </select>
+        <br>
+        <label class="reg-label">Subscription: </label><select class="reg-input" name="subscription" required>
+            <option value="AL">yes</option>
+            <option value="AK">no</option>
+            </select>
+        <br>
         <br>
         <br>
         <b>Shipping Address:</b><br/>
