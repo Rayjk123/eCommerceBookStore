@@ -2,7 +2,9 @@ package boundary;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -50,35 +52,20 @@ public class CheckoutServlet extends HttpServlet {
 	}
 	
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response, String email) {
-		if (request.getParameter("action") != null & request.getParameter("isbn") != null & request.getParameter("qty") != null) {
+		if (request.getParameter("action") != null) {
 			String action = request.getParameter("action");
-			String isbn = request.getParameter("isbn");
-			int qty = Integer.parseInt(request.getParameter("qty"));
 			
-			//TODO make a "process" order button and method 
-			//TODO make a cancel button and method
-			if (action.equals("edit"))
-			{
+			if (action.equals("submit")) {
 				try {
-					changeQuantity(request, response, email, isbn, qty);
+					submitOrder(request, response, email);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			else if (action.equals("delete"))
-			{
+			else {
 				try {
-					deleteBookFromCart(request, response, email, isbn);
-				} catch (SQLException | ServletException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			else 
-			{
-				try {
-					viewCheckout(request, response, email);
+					viewCheckout(request,response,email);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -93,38 +80,15 @@ public class CheckoutServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-			
-	}
-	
-	private void changeQuantity(HttpServletRequest request, HttpServletResponse response, String email, String isbn, int qty) throws SQLException, ServletException, IOException {
-		Book book = Query.getBookByIsbn(isbn);
-		
-		//can't add more than what's in stock to cart
-		if (book.getStock() - qty > 0) {
-			Query.setCartQuantity(email, book, qty); 
-		}
-		else
-		{
-			Query.setCartQuantity(email, book, book.getStock());
-		}
-		
-		viewCheckout(request,response,email);
-	}
-	
-	private void deleteBookFromCart(HttpServletRequest request, HttpServletResponse response, String email, String isbn) throws SQLException, ServletException, IOException {
-		Book book = Query.getBookByIsbn(isbn);
-		
-		Query.deleteBookFromCart(email, book); 
-		
-		viewCheckout(request,response,email);
 	}
 	
 	private void viewCheckout(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher;
-		ArrayList<Cart> books = Query.getBooksInCart(email);
 		
+		ArrayList<Cart> books = Query.getBooksInCart(email);
 		Customer customer = Query.getUserByEmail(email);
 		CreditCard card = Query.getCreditCardInfo(email);
+		
 		double cartTotal = getCartTotal(books);
 		double shipping = getShippingCost(customer.getAddress());
 		double taxes = getTaxes(customer.getAddress(), cartTotal);
@@ -142,16 +106,89 @@ public class CheckoutServlet extends HttpServlet {
 		dispatcher.forward(request, response); 
 	}
 	
-	private void submitOrder(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException {
-		RequestDispatcher dispatcher;
+	private void submitOrder(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
 		ArrayList<Cart> books = Query.getBooksInCart(email);
 		
-		Customer customer = Query.getUserByEmail(email);
-		CreditCard card = Query.getCreditCardInfo(email);
-		
-		double total;
-		
 		Order order = new Order();
+		
+		String shippingStreet = request.getParameter("street").trim();
+		String shippingCity = request.getParameter("city").trim();
+		String shippingState = request.getParameter("state").trim();
+		String shippingZip = request.getParameter("zip").trim();
+		String shippingAddress = shippingStreet + " " + shippingCity + " " + shippingState + " " + shippingZip;
+		String billingAddress;
+		if (request.getParameter("sameAsBilling") != null) {
+			billingAddress = shippingAddress;
+		} else {
+			String billingStreet = request.getParameter("b-street").trim();
+			String billingCity = request.getParameter("b-city").trim();
+			String billingState = request.getParameter("b-state").trim();
+			String billingZip = request.getParameter("b-zip").trim();
+			billingAddress = billingStreet + " " + billingCity + " " + billingState + " " + billingZip;
+		}
+		double cartTotal = getCartTotal(books);
+		double shipping = getShippingCost(shippingAddress);
+		double taxes = getTaxes(shippingAddress, cartTotal);
+		double total = cartTotal + shipping + taxes;
+		
+		SimpleDateFormat formatter = new SimpleDateFormat("MMM dd yyyy");  
+		Date dateObject = new Date(); 
+		String date = formatter.format(dateObject);
+		
+		order.setEmail(email);
+		order.setDate(date);
+		order.setTotal(total);
+		order.setSubTotal(cartTotal);
+		order.setTax(taxes);
+		order.setShippingCost(shipping);
+		order.setShippingAddress(shippingAddress);
+		order.setBillingAddress(billingAddress);
+		
+		if (request.getParameter("storePickup") != null) {
+			order.setStatus("Hold for Pickup");
+			
+			Query.addPickupOrder(order);
+			for (int i = 0; i < books.size(); i++) {
+				int hold = books.get(i).getQty();
+				Query.setHold(books.get(i), hold);
+			}
+			
+			String pickupMessage = "Your order has been successfully processed! You will have 5 days from today, " 
+			+ date + ",  to pickup your order before it is purged from our systems.";
+			
+			request.setAttribute("orderMessage", pickupMessage);
+			
+			RequestDispatcher dispatcher;
+			dispatcher = request.getRequestDispatcher("/orderConfirmation.jsp"); 
+			dispatcher.forward(request, response);
+		}
+		else {
+			order.setStatus("Process Credit Card Payment");
+			//TODO replace with credit card validity test, right now we just test null
+			if (request.getParameter("ccNumber") != null & request.getParameter("ccSecurity") != null & request.getParameter("exp-month") != null & request.getParameter("exp-year") != null) {
+				order.setPaymentCard(request.getParameter("ccNumber"));
+				
+				Query.addCardOrder(order);
+				for (int i = 0; i < books.size(); i++) {
+					Book book = Query.getBookByIsbn(books.get(i).getIsbn());
+					
+					int orderAmount = books.get(i).getQty();
+					int stock = book.getStock() - orderAmount;
+					Query.updateBookStock(book, stock);
+				}
+				
+				String orderMessage = "Your order has been successfully processed and will be delivered to you in a jiffy!";
+				
+				request.setAttribute("orderMessage", orderMessage);
+				
+				RequestDispatcher dispatcher;
+				dispatcher = request.getRequestDispatcher("/orderConfirmation.jsp"); 
+				dispatcher.forward(request, response);
+			}
+			else {
+				viewCheckout(request, response, email);
+			}
+		}
 	}
 	
 	private double getCartTotal(ArrayList<Cart> books) {

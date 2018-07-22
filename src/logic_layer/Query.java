@@ -5,6 +5,7 @@ import domain_layer.Book;
 import domain_layer.Cart;
 import domain_layer.CreditCard;
 import domain_layer.Customer;
+import domain_layer.Order;
 import logic_layer.QueryUtil;
 
 import java.sql.SQLException;
@@ -147,8 +148,6 @@ public class Query {
 				customer.getStateBilling() + "', '" +
 				customer.getZipBilling() + "')";
 		
-		System.out.println(query);
-			
 		return DbAccess.insert(query) == 1;
 	}
 	
@@ -172,8 +171,6 @@ public class Query {
 				"billing_zip ='" + customer.getZipBilling() + "' " +
 				"WHERE email ='" + customer.getEmail() + "'";
 		
-		System.out.println(query);
-			
 		return DbAccess.insert(query) == 1;
 	}
 	
@@ -220,15 +217,21 @@ public class Query {
 		return DbAccess.insert(query) == 1;
 	}
 	
-	/* hold book for pickup, hold is a value in the book table
-	public static boolean holdBook(Book book) {
-		int hold = book.getHold(); 
-				
-		String query = "UPDATE book " 
-				+ "set hold = "  + " where isbn " + book.getIsbn(); 
+	
+	public static boolean setHold(Cart book, int hold) {
+		String query = "UPDATE book set hold ='" + hold + "' where isbn ='" + book.getIsbn() + "'"; 
 		
-		return database.update(query) == 1; 
-	}*/
+		System.out.println(query);
+		
+		return DbAccess.update(query) == 1; 
+	}
+	
+	public static boolean updateBookStock(Book book, int stock) {
+		String query = "UPDATE book set stock ='" + stock + "' where isbn ='" + book.getIsbn() + "'"; 
+		
+		return DbAccess.update(query) == 1; 
+	}
+	
 	public static ArrayList<Cart> getBooksInCart(String email) throws SQLException {
 		String query = "SELECT * FROM cart WHERE email ='"
 				+ email + "'";
@@ -326,5 +329,55 @@ public class Query {
 		ResultSet card = DbAccess.retrieve(query);
 		
 		return QueryUtil.resultSetToCreditCard(card);
+	}
+	
+	public static boolean addPickupOrder(Order order) {
+		String total = String.format("%.2f", order.getTotal());
+		String subTotal = String.format("%.2f", order.getSubTotal());
+		String tax = String.format("%.2f", order.getTax());
+		String shippingCost = String.format("%.2f", order.getShippingCost());
+		
+		String query = "INSERT into order " + 
+				"(email, date, total, subtotal, tax, shipping_cost, shipping_address, payment_card, billing_address, status) " + 
+				"VALUES ('" +
+				order.getEmail() + "', '" +
+				order.getDate() + "', '" +
+				total + "', '" + 
+				subTotal + "', '" +
+				tax + "', '" +
+				shippingCost + "', '" +
+				order.getShippingAddress() + 
+				"', 'pickup', '" +
+				order.getBillingAddress() + "', '" +
+				order.getStatus() + "')";
+		
+		System.out.println(query);
+			
+		return DbAccess.insert(query) == 1;
+	}
+	
+	public static boolean addCardOrder(Order order) {
+		String total = String.format("%.2f", order.getTotal());
+		String subTotal = String.format("%.2f", order.getSubTotal());
+		String tax = String.format("%.2f", order.getTax());
+		String shippingCost = String.format("%.2f", order.getShippingCost());
+		
+		String query = "INSERT into order " + 
+				"(email, date, total, subtotal, tax, shipping_cost, shipping_address, payment_card, billing_address, status) " + 
+				"VALUES ('" +
+				order.getEmail() + "', '" +
+				order.getDate() + "', '" +
+				total + "', '" + 
+				subTotal + "', '" +
+				tax + "', '" +
+				shippingCost + "', '" +
+				order.getShippingAddress() + "', '" +
+				order.getPaymentCard() + "', '" +
+				order.getBillingAddress() + "', '" +
+				order.getStatus() + "')";
+		
+		System.out.println(query);
+			
+		return DbAccess.insert(query) == 1;
 	}
 }

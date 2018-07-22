@@ -33,107 +33,103 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <form action="CheckoutServlet" id="CheckoutForm" method="post"></form>
-<form action="CheckoutServlet" id="bookForm" method="post" ></form>
-<form action="PromoServlet" id="PromoForm" method="post"></form>
+<form action="CartServlet" id="bookForm" method="post" ></form>
 <h1>Please Review Order Information</h1>
 <div class="container margin-top-50">
 	
 	<h3>Payment and Shipping Information</h3>
 	<c:set value="${user}" var="user" scope="session" />
-		<label class="reg-label">First name: </label><input class="reg-input" type="text" name="firstname" required value="${user.getFirstName()}"><br>
-        <label class="reg-label">Last name: </label><input class="reg-input" type="text" name="lastname" required value="${user.getLastName()}"><br>
-        <br>
         <br>
         <b>Shipping Address:</b><br/>
-        <label class="reg-label">First name: </label><input class="reg-input" type="text" name="firstname" required value="${user.getFirstName()}"><br>
-        <label class="reg-label">Last name: </label><input class="reg-input" type="text" name="lastname" required value="${user.getLastName()}"><br>
-        <label class="reg-label">Street: </label><input class="reg-input" type="text" name="street" required value="${user.getStreetShipping()}"><br>
-        <label class="reg-label">City: </label><input class="reg-input" type="text" name="city" required value="${user.getCityShipping()}"><br>
+        <label class="reg-label">First name: </label><input form="CheckoutForm" class="reg-input" type="text" name="firstname" required value="${user.getFirstName()}"><br>
+        <label class="reg-label">Last name: </label><input  form="CheckoutForm" class="reg-input" type="text" name="lastname" required value="${user.getLastName()}"><br>
+        <label class="reg-label">Street: </label><input  form="CheckoutForm" class="reg-input" type="text" name="street" required value="${user.getStreetShipping()}"><br>
+        <label class="reg-label">City: </label><input form="CheckoutForm" class="reg-input" type="text" name="city" required value="${user.getCityShipping()}"><br>
         <label class="reg-label">State: </label>
-        <select class="reg-input" name="state" required>
-        	<option selected="selected">${user.getStateShipping()}</option>
-            <option value="AL">Alabama</option>
-            <option value="AK">Alaska</option>
-            <option value="AZ">Arizona</option>
-            <option value="AR">Arkansas</option>
-            <option value="CA">California</option>
-            <option value="CO">Colorado</option>
-            <option value="CT">Connecticut</option>
-            <option value="DE">Delaware</option>
-            <option value="DC">District Of Columbia</option>
-            <option value="FL">Florida</option>
-            <option value="GA">Georgia</option>
-            <option value="HI">Hawaii</option>
-            <option value="ID">Idaho</option>
-            <option value="IL">Illinois</option>
-            <option value="IN">Indiana</option>
-            <option value="IA">Iowa</option>
-            <option value="KS">Kansas</option>
-            <option value="KY">Kentucky</option>
-            <option value="LA">Louisiana</option>
-            <option value="ME">Maine</option>
-            <option value="MD">Maryland</option>
-            <option value="MA">Massachusetts</option>
-            <option value="MI">Michigan</option>
-            <option value="MN">Minnesota</option>
-            <option value="MS">Mississippi</option>
-            <option value="MO">Missouri</option>
-            <option value="MT">Montana</option>
-            <option value="NE">Nebraska</option>
-            <option value="NV">Nevada</option>
-            <option value="NH">New Hampshire</option>
-            <option value="NJ">New Jersey</option>
-            <option value="NM">New Mexico</option>
-            <option value="NY">New York</option>
-            <option value="NC">North Carolina</option>
-            <option value="ND">North Dakota</option>
-            <option value="OH">Ohio</option>
-            <option value="OK">Oklahoma</option>
-            <option value="OR">Oregon</option>
-            <option value="PA">Pennsylvania</option>
-            <option value="RI">Rhode Island</option>
-            <option value="SC">South Carolina</option>
-            <option value="SD">South Dakota</option>
-            <option value="TN">Tennessee</option>
-            <option value="TX">Texas</option>
-            <option value="UT">Utah</option>
-            <option value="VT">Vermont</option>
-            <option value="VA">Virginia</option>
-            <option value="WA">Washington</option>
-            <option value="WV">West Virginia</option>
-            <option value="WI">Wisconsin</option>
-            <option value="WY">Wyoming</option>
+        <select form="CheckoutForm" class="reg-input" name="state" required>
+        	<option selected="selected">${user.getStateBilling()}</option>
+            <option value="AL" label="Alabama"></option>
+            <option value="AK" label="Alaska"></option>
+            <option value="AZ" label="Arizona"></option>
+            <option value="AR" label="Arkansas"></option>
+            <option value="CA" label="California"></option>
+            <option value="CO" label="Colorado"></option>
+            <option value="CT" label="Connecticut"></option>
+            <option value="DE" label="Delaware"></option>
+            <option value="DC" label="District Of Columbia"></option>
+            <option value="FL" label="Florida"></option>
+            <option value="GA" label="Georgia"></option>
+            <option value="HI" label="Hawaii"></option>
+            <option value="ID" label="Idaho"></option>
+            <option value="IL" label="Illinois"></option>
+            <option value="IN" label="Indiana"></option>
+            <option value="IA" label="Iowa"></option>
+            <option value="KS" label="Kansas"></option>
+            <option value="KY" label="Kentucky"></option>
+            <option value="LA" label="Louisiana"></option>
+            <option value="ME" label="Maine"></option>
+            <option value="MD" label="Maryland"></option>
+            <option value="MA" label="Massachusetts"></option>
+            <option value="MI" label="Michigan"></option>
+            <option value="MN" label="Minnesota"></option>
+            <option value="MS" label="Mississippi"></option>
+            <option value="MO" label="Missouri"></option>
+            <option value="MT" label="Montana"></option>
+            <option value="NE" label="Nebraska"></option>
+            <option value="NV" label="Nevada"></option>
+            <option value="NH" label="New Hampshire"></option>
+            <option value="NJ" label="New Jersey"></option>
+            <option value="NM" label="New Mexico"></option>
+            <option value="NY" label="New York"></option>
+            <option value="NC" label="North Carolina"></option>
+            <option value="ND" label="North Dakota"></option>
+            <option value="OH" label="Ohio"></option>
+            <option value="OK" label="Oklahoma"></option>
+            <option value="OR" label="Oregon"></option>
+            <option value="PA" label="Pennsylvania"></option>
+            <option value="RI" label="Rhode Island"></option>
+            <option value="SC" label="South Carolina"></option>
+            <option value="SD" label="South Dakota"></option>
+            <option value="TN" label="Tennessee"></option>
+            <option value="TX" label="Texas"></option>
+            <option value="UT" label="Utah"></option>
+            <option value="VT" label="Vermont"></option>
+            <option value="VA" label="Virginia"></option>
+            <option value="WA" label="Washington"></option>
+            <option value="WV" label="West Virginia"></option>
+            <option value="WI" label="Wisconsin"></option>
+            <option value="WY" label="Wyoming"></option>
         </select>
         <br>
-        <label class="reg-label">Zip Code: </label><input class="reg-input" type="text" name="zip" required value="${user.getZipShipping()}">
+        <label class="reg-label">Zip Code: </label><input form="CheckoutForm" class="reg-input" type="text" name="zip" required value="${user.getZipShipping()}">
         <br>
         <br>
         <br>
         <b>Payment Method:</b>
         <br>
-        <label class="reg-label">Reserve For Pickup and Cash Payment</label><input class="reg-input" type="checkbox" name="storePickup">
+        <label class="reg-label">Reserve For Pickup and Cash Payment</label><input form="CheckoutForm" class="reg-input" type="checkbox" name="storePickup" value="yes">
         <br>
         <c:set value="${card}" var="card" scope="session" />
-        <label class="reg-label">Credit Card Number</label><input class="reg-input" type="text" name="ccNumber" value="${card.getCardNumber()}"><br>
-        <label class="reg-label">Security Code</label><input class="reg-input" type="text" name="ccSecurity" value="${card.getCardSecurityCode()}"><br>
+        <label class="reg-label">Credit Card Number</label><input form="CheckoutForm" class="reg-input" type="text" name="ccNumber" value="${card.getCardNumber()}"><br>
+        <label class="reg-label">Security Code</label><input form="CheckoutForm" class="reg-input" type="text" name="ccSecurity" value="${card.getCardSecurityCode()}"><br>
         <label class="reg-label">Expiration: </label>
         <div class="reg-input">
-        	<select name="exp-month" required>
+        	<select form="CheckoutForm" name="exp-month">
         		<option selected="selected">${card.getExpirationMonth()}</option>
-	            <option value="1">01</option>
-	            <option value="2">02</option>
-	            <option value="3">03</option>
-	            <option value="4">04</option>
-	            <option value="5">05</option>
-	            <option value="6">06</option>
-	            <option value="7">07</option>
-	            <option value="8">08</option>
-	            <option value="9">09</option>
+	            <option value="01">01</option>
+	            <option value="02">02</option>
+	            <option value="03">03</option>
+	            <option value="04">04</option>
+	            <option value="05">05</option>
+	            <option value="06">06</option>
+	            <option value="07">07</option>
+	            <option value="08">08</option>
+	            <option value="09">09</option>
 	            <option value="10">10</option>
 	            <option value="11">11</option>
 	            <option value="12">12</option>
 	        </select>
-	        <select name="exp-year" required>
+	        <select form="CheckoutForm" name="exp-year">
 	        	<option selected="selected">${card.getExpirationYear()}</option>
 	            <option value="2018">18</option>
 	            <option value="2019">19</option>
@@ -150,15 +146,13 @@
         <br>
         <b>Billing Address:</b>
         <br>
-        <label class="reg-label">Same as Shipping</label><input id="billing-check-box" class="reg-input" type="checkbox" name="sameAsBilling">
+        <label class="reg-label">Same as Shipping</label><input form="CheckoutForm" id="billing-check-box" class="reg-input" type="checkbox" name="sameAsBilling">
         <div id="billing-address">
-        	<label class="reg-label">First name: </label><input class="reg-input" type="text" name="firstname" required value="${user.getFirstName()}"><br>
-        	<label class="reg-label">Last name: </label><input class="reg-input" type="text" name="lastname" required value="${user.getLastName()}"><br>
-            <label class="reg-label">Street: </label><input class="reg-input" type="text" name="b-street" required value="${user.getStreetBilling()}"><br>
-            <label class="reg-label">City: </label><input class="reg-input" type="text" name="b-city" required value="${user.getCityBilling()}"><br>
+        	<label class="reg-label">Street: </label><input form="CheckoutForm" class="reg-input" type="text" name="b-street" required value="${user.getStreetBilling()}"><br>
+            <label class="reg-label">City: </label><input form="CheckoutForm" class="reg-input" type="text" name="b-city" required value="${user.getCityBilling()}"><br>
             <label class="reg-label">State: </label>
-            <select class="reg-input" name="b-state">
-            <option selected="selected"> value="${user.getStateBilling()}"</option>
+            <select form="CheckoutForm" class="reg-input" name="b-state">
+            	<option selected="selected">${user.getStateBilling()}</option>
                 <option value="AL">Alabama</option>
                 <option value="AK">Alaska</option>
                 <option value="AZ">Arizona</option>
@@ -212,7 +206,7 @@
                 <option value="WY">Wyoming</option>
             </select>
             <br>
-            <label class="reg-label">Zip Code: </label><input class="reg-input" type="text" name="b-zip" value="${user.getZipBilling()}">
+            <label class="reg-label">Zip Code: </label><input form="CheckoutForm" class="reg-input" type="text" name="b-zip" value="${user.getZipBilling()}">
             <br>
             <br>
             <br>
@@ -246,8 +240,6 @@
             <td class="center-text">
                 Quantity
             </td>
-            <td></td>
-            <td></td>
         </tr>
         <c:forEach items="${books}" var="book">
 	        <!-- Book Detail Table Row-->
@@ -283,14 +275,8 @@
 					</div>
 	            </td>
 	            <td>
-	            	<input form="bookForm" class="reg-input" type="text" name="qty" value="${book.getQty()}" required>
+	            	<div class="cart-div-height center-text">${book.getQty()}</div>
 	            <td>
-	            <td>
-	            	<button form="bookForm" class="login-button" type="submit" name="action" value="edit">Set Quantity</button>
-	            </td> 
-	            <td>
-	            	<button form="bookForm" class="login-button" type="submit" name="action" value="delete">Delete</button>
-	            </td>
 	        </tr>
         </c:forEach>
     </table>
@@ -303,8 +289,9 @@
 	<c:set value="${shippingCost}" var="shipping" scope="session" />
 	<p>Shipping: 	$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${shipping}"/></p>
 	<c:set value="${orderTotal}" var="total" scope="session" />
-	<p>Total		$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${total}"/></p>
+	<p>Total:		$<fmt:formatNumber type="number" minFractionDigits="2" maxFractionDigits="2" value="${total}"/></p>
 	<button form="CheckoutForm" class="login-button" type="submit" name="action" value="submit">Submit Order</button>
+	<button form="bookForm" class="login-button" type="submit">Back to Cart</button>
 </div>
 
 </body>

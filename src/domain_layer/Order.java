@@ -7,6 +7,7 @@ public class Order {
 	
 	private int orderNumber;
 	private String email;
+	private String date;
 	private double total;
 	private double tax;
 	private double subTotal;
@@ -14,6 +15,15 @@ public class Order {
 	private String paymentCard;
 	private String shippingAddress;
 	private String billingAddress;
+	private String status;
+	
+	
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public int getOrderNumber() {
 		return orderNumber;
 	}
@@ -67,5 +77,11 @@ public class Order {
 	}
 	public void setBillingAddress(String billingAddress) {
 		this.billingAddress = billingAddress;
+	}
+	public String getDate() {
+		return date;
+	}
+	public void setDate(String date) {
+		this.date = date;
 	}
 }
