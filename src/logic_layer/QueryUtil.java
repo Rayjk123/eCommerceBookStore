@@ -123,9 +123,11 @@ public class QueryUtil {
 	protected static CreditCard resultSetToCreditCard(ResultSet resultSet) throws SQLException {
 		ResultSetMetaData rsmd = resultSet.getMetaData();
 
-		if (rsmd.getColumnCount() != 4) {
+		if (rsmd.getColumnCount() != 6) {
 			return null;
 		}
+		
+		resultSet.next();
 		
 		CreditCard card = new CreditCard();
 		

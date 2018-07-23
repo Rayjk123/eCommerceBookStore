@@ -30,10 +30,11 @@
 <body>
 <!--NAVBAR HTML-->
 <div id="navbar"></div>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<c:set value="${message}" var="message" scope="session"/>
 <div class="container margin-top-50">
-    <h3>Browse All Books</h3>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+    <h3>${message}</h3>
+    
     <table class="table table-hover">
         <!-- Table Header Row-->
         <tr>

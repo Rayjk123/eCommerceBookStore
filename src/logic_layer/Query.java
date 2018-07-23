@@ -100,6 +100,73 @@ public class Query {
 		ArrayList<Book> retList = new ArrayList<>();
 		ResultSet resultSet = DbAccess.retrieve(query);
 		
+		while(resultSet.next()) {
+			Book book = QueryUtil.resultSetToBook(resultSet);
+			if (book != null) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public static ArrayList<Book> getBooksByGenre(String genre) throws SQLException {
+		String query = "select * from book where genre ='" + 
+				genre + "'";
+		
+		ArrayList<Book> retList = new ArrayList<>();
+		ResultSet resultSet = DbAccess.retrieve(query);
+		
+		while(resultSet.next()) {
+			Book book = QueryUtil.resultSetToBook(resultSet);
+			if (book != null) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public static ArrayList<Book> getBooksByTitle(String title) throws SQLException {
+		String query = "select * from book where title ='" + 
+				title + "'";
+		
+		ArrayList<Book> retList = new ArrayList<>();
+		ResultSet resultSet = DbAccess.retrieve(query);
+		
+		while(resultSet.next()) {
+			Book book = QueryUtil.resultSetToBook(resultSet);
+			if (book != null) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public static ArrayList<Book> getBooksByAuthor(String author) throws SQLException {
+		String query = "select * from book where author ='" + 
+				author + "'";
+		
+		ArrayList<Book> retList = new ArrayList<>();
+		ResultSet resultSet = DbAccess.retrieve(query);
+		
+		while(resultSet.next()) {
+			Book book = QueryUtil.resultSetToBook(resultSet);
+			if (book != null) {
+				retList.add(book);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public static ArrayList<Book> getBooksByIsbn(String isbn) throws SQLException {
+		String query = "select * from book where  ='" + 
+				isbn + "'";
+		
+		ArrayList<Book> retList = new ArrayList<>();
+		ResultSet resultSet = DbAccess.retrieve(query);
 		
 		while(resultSet.next()) {
 			Book book = QueryUtil.resultSetToBook(resultSet);

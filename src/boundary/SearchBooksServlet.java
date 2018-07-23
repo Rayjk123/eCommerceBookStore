@@ -15,11 +15,11 @@ import domain_layer.Book;
 import logic_layer.Query;
 
 @SuppressWarnings("serial")
-@WebServlet("/BrowseAllBooks")
-public class BrowseAllBooks extends HttpServlet {
+@WebServlet("/SearchBooksServlet")
+public class SearchBooksServlet extends HttpServlet {
 	
 	
-	public BrowseAllBooks() {
+	public SearchBooksServlet() {
 		super();
 	}
 	
@@ -38,13 +38,29 @@ public class BrowseAllBooks extends HttpServlet {
 	}
 	
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response) {
-		if (request.getParameter("genre") != null) {
-			String genre = request.getParameter("genre");
-			System.out.println("genre = " + genre);
-			//TODO genre logic
-			if (genre.equals("Fantasy") || genre.equals("Romance") || genre.equals("Horror")) {
+		if (request.getParameter("action") != null) {
+			String action = request.getParameter("action");
+			System.out.println("action = " + action);
+			if (action.equals("title"))
+			{
 				try {
-					displayByGenre(request,response,genre);
+					searchByTitle(request, response, request.getParameter("search"));
+				} catch (SQLException | ServletException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (action.equals("author")) {
+				try {
+					searchByAuthor(request,response, request.getParameter("search"));
+				} catch (ServletException | IOException | SQLException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			else if (action.equals("isbn")) {
+				try {
+					searchByIsbn(request, response, request.getParameter("search"));
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -60,6 +76,7 @@ public class BrowseAllBooks extends HttpServlet {
 			}
 		}
 		else {
+			System.out.println("else");
 			try {
 				displayAllBooks(request, response);
 			} catch (SQLException | ServletException | IOException e) {
@@ -72,22 +89,34 @@ public class BrowseAllBooks extends HttpServlet {
 	private void displayAllBooks(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		ArrayList<Book> books = Query.getAllBooks();
 		
-		String message = "Browse All Books";
-		
 		request.setAttribute("books", books);
-		request.setAttribute("message", message);
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher("/allBooks.jsp");
 		dispatcher.forward(request, response);
 	}
 	
-	private void displayByGenre(HttpServletRequest request, HttpServletResponse response, String genre) throws SQLException, ServletException, IOException {
-		ArrayList<Book> books = Query.getBooksByGenre(genre);
-		
-		String message = "Browse " + genre + " Books";
+	private void searchByTitle(HttpServletRequest request, HttpServletResponse response, String title) throws ServletException, IOException, SQLException {
+		ArrayList<Book> books = Query.getBooksByTitle(title);
 		
 		request.setAttribute("books", books);
-		request.setAttribute("message", message);
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/allBooks.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void searchByAuthor(HttpServletRequest request, HttpServletResponse response, String author) throws ServletException, IOException, SQLException {
+		ArrayList<Book> books = Query.getBooksByAuthor(author);
+		
+		request.setAttribute("books", books);
+		RequestDispatcher dispatcher;
+		dispatcher = request.getRequestDispatcher("/allBooks.jsp");
+		dispatcher.forward(request, response);
+	}
+	
+	private void searchByIsbn(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
+		ArrayList<Book> books = Query.getBooksByIsbn(isbn);
+		
+		request.setAttribute("books", books);
 		RequestDispatcher dispatcher;
 		dispatcher = request.getRequestDispatcher("/allBooks.jsp");
 		dispatcher.forward(request, response);

@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var headerHtml = "<!--Nav Bar-->\n" +
         "<nav class=\"navbar sticky-top navbar-expand-lg navbar-light bg-light\">\n" +
-        "    <a class=\"navbar-brand fancy-font logo-font\" href=\"#\">Bookly</a>\n" +
+        "    <a class=\"navbar-brand fancy-font logo-font\" href=\"index.html\">Bookly</a>\n" +
         "    <!--Collapse Icon-->\n" +
         "    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarMenu\"\n" +
         "            aria-controls=\"navbarMenu\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" +
@@ -29,13 +29,13 @@ $(document).ready(function(){
         "    </div>\n" +
         "\n" +
         "    <!--Search Bar-->\n" +
-        "    <form method=\"post\" action=\"/search\" class=\"form-inline\">\n" +
-        "        <select class=\"form-control\" name=\"category\">\n" +
-        "            <option value=\"Book Title\">Book Title</option>\n" +
-        "            <option value=\"Author\">Author</option>\n" +
-        "            <option value=\"ISBN\">ISBN</option>\n" +
+        "    <form method=\"post\" action=\"SearchBooksServlet\" class=\"form-inline\">\n" +
+        "        <select name=\"action\" class=\"form-control\">\n" +
+        "            <option value=\"title\">Book Title</option>\n" +
+        "            <option value=\"author\">Author</option>\n" +
+        "            <option value=\"isbn\">ISBN</option>\n" +
         "        </select>\n" +
-        "        <input class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n" +
+        "        <input name=\"search\" class=\"form-control mr-sm-2\" type=\"search\" placeholder=\"Search\" aria-label=\"Search\">\n" +
         "        <button class=\"btn btn-outline-success my-2 my-sm-0\" type=\"submit\">Search</button>\n" +
         "    </form>\n" +
         "\n" +
