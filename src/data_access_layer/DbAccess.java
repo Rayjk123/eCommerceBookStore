@@ -45,7 +45,7 @@ public class DbAccess {
 		try {
 			java.sql.PreparedStatement stmt = connection.prepareStatement(query);
 			rows = stmt.executeUpdate();
-			
+			disconnect(connection);
 			return rows;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -73,7 +73,7 @@ public class DbAccess {
 		try{
 			java.sql.PreparedStatement stmt = connection.prepareStatement(query);
 			rows = stmt.executeUpdate();
-			
+			disconnect(connection);
 			return rows;
 		}catch (SQLException e) {
 			e.printStackTrace();
@@ -93,7 +93,7 @@ public class DbAccess {
 		try {
 			Statement stmt = connection.createStatement();
 			rset = stmt.executeQuery(query);
-			
+			disconnect(connection);
 			return rset;
 		} catch (SQLException e) {
 			e.printStackTrace();
