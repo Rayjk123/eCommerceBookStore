@@ -46,6 +46,10 @@
             <td class="center-text">
                 Status
             </td>
+            <!-- Order Number TD -->
+            <td class="center-text">
+            	Order Number
+            </td>
             <!-- Email TD -->
             <td class="center-text">
             	Email
@@ -77,26 +81,32 @@
         	<!-- Update Button TD -->
         	<td>
                 <div class="cart-div-height center-text"> 
-                	<button form="OrderForm" type="submit" class="btn btn-link" name="action" value="update">Edit</button>
+                	<button form="OrderForm" type="submit" class="btn btn-link" name="action" value="update_${order.getOrderNumber()}">Update</button>
                 </div>
             </td>
             <!-- Status TD-->
             <td>
                 <div class="inventory-div-height">
-                	<select form="OrderForm" class="reg-input" name="status" required>
+                	<select form="OrderForm" class="reg-input" name="status_${order.getOrderNumber()}" required>
                 		<option selected="selected">${order.getStatus()}</option>
                 		<option value="Hold">Hold</option>
                 		<option value="Purge">Purge</option>
                 		<option value="Online Payment Processed">Online Payment Processed</option>
                 		<option value="Shipped">Shipped</option>
+                		<option value="Complete">Complete</option>
                 		<option value="Cancelled">Cancelled</option>
                 	</select>
                 </div>
             </td>
+            <!-- Email TD -->
+            <td>
+                <div class="cart-div-height center-text">${order.getOrderNumber()}</div>
+                <input type="hidden" form="OrderForm" name="email" value="${order.getOrderNumber()}" />
+            </td>
         	<!-- Email TD -->
             <td>
                 <div class="cart-div-height center-text">${order.getEmail()}</div>
-                <input type="hidden" form="OrderForm" name="date" value="${order.getEmail()}" />
+                <input type="hidden" form="OrderForm" name="email" value="${order.getEmail()}" />
             </td>
             <!-- Date TD -->
             <td>

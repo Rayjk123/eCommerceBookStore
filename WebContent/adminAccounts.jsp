@@ -82,13 +82,13 @@
         	<!-- Edit Button TD -->
         	<td>
                 <div class="cart-div-height center-text"> 
-                	<button form="AccountsForm" type="submit" class="btn btn-link" name="action" value="edit">Edit</button>
+                	<button form="AccountsForm" type="submit" class="btn btn-link" name="action" value="edit_${users.getEmail()}">Edit</button>
                 </div>
             </td>
             <!-- Delete Button TD -->
         	<td>
                 <div class="cart-div-height center-text"> 
-                	<button form="AccountsForm" type="submit" class="btn btn-link" name="action" value="delete">Delete</button>
+                	<button form="AccountsForm" type="submit" class="btn btn-link" name="action" value="delete_${users.getEmail()}">Delete</button>
                 </div>
             </td>
         	<!-- User email -->

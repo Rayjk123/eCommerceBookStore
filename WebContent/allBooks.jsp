@@ -33,6 +33,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <c:set value="${message}" var="message" scope="session"/>
 <div class="container margin-top-50">
+<form action="CartServlet" method="post" id="BookForm"></form>
+
     <h3>${message}</h3>
     
     <table class="table table-hover">
@@ -71,6 +73,7 @@
 	                	<a href="BookDetailServlet?param=${book.isbn}">
 	                    	<img class="shopping-cart-img" src="${book.image}">
 	                    </a>
+	                    <input type="hidden" form="BookForm" name="isbn" value="${book.getIsbn()}" />
 	                </div>
 	            </td>
 	            <!-- Book Title TD-->
@@ -94,7 +97,7 @@
 	            </td>
 	            <td>
 	            	<div class="cart-div-height center-text">
-	            		<select name="qty">
+	            		<select form="BookForm" name="qty_${book.getIsbn()}">
                         <option value="1">1</option>
                         <option value="2">2</option>
                         <option value="3">3</option>
@@ -109,9 +112,7 @@
 	            	</div>
 	            <td>
 	            <td>
-	            	<form action="CartServlet?action=add&isbn=${book.getIsbn()}&qty=1" method="post">
-                		<input class="login-button" type="submit" value="Add To Cart"><br>
-                	</form>
+               		<button class="login-button" type="submit" form="BookForm" name="action" value="add_${book.getIsbn()}">Add to Cart</button><br>
 	            </td>
 	        </tr>
         </c:forEach>

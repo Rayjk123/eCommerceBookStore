@@ -72,10 +72,17 @@ public class AdminOrdersServlet extends HttpServlet {
 	 */
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getParameter("action") != null) { // TODO update this line with action for forms
+			String input = request.getParameter("action");
 			
-			if (request.getParameter("action").equals("update")) {
+			String[] parseAction = input.split("_", 2);
+			String action = parseAction[0];
+			int actionOrderNumber = Integer.parseInt(parseAction[1]);
+			
+			String status = request.getParameter("status_" + actionOrderNumber);
+			
+			if (action.equals("update")) {
 				try {
-					updateStatus(request,response);
+					updateStatus(request,response, actionOrderNumber, status);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -110,13 +117,9 @@ public class AdminOrdersServlet extends HttpServlet {
 	}
 	
 	
-	private void updateStatus(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		String email = request.getParameter("email");
-		String date = request.getParameter("date");
-		String total = request.getParameter("total");
-		String status = request.getParameter("status");
+	private void updateStatus(HttpServletRequest request, HttpServletResponse response, int actionOrderNumber, String status) throws SQLException, ServletException, IOException {
 		
-		Query.updateOrderStatus(email, date, total, status);
+		Query.updateOrderStatus(status, actionOrderNumber);
 		
 		viewOrders(request,response);
 	}

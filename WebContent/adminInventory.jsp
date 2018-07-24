@@ -94,13 +94,13 @@
         	<!-- Edit Button TD -->
         	<td>
                 <div class="cart-div-height center-text"> 
-                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="edit">Edit</button>
+                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="edit_${book.getIsbn()}">Edit</button>
                 </div>
             </td>
             <!-- Delete Button TD -->
         	<td>
                 <div class="cart-div-height center-text"> 
-                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="delete">Delete</button>
+                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="delete_${book.getIsbn()}">Delete</button>
                 </div>
             </td>
         	<!-- Book Image TD -->

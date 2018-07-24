@@ -32,6 +32,7 @@
 <div id="navbar"></div>
 
 <div class="container margin-top-50">
+ 
     <h3>Shopping Cart</h3>
     <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     <form action="CartServlet" method="post" id="bookForm"></form>
@@ -97,13 +98,13 @@
 					</div>
 	            </td>
 	            <td>
-	            	<input form="bookForm" class="reg-input" type="text" name="qty" value="${book.getQty()}" required>
+	            	<input form="bookForm" class="reg-input" type="text" name="qty_${book.getIsbn()}" value="${book.getQty()}" required>
 	            <td>
 	            <td>
-	            	<button form="bookForm" class="login-button" type="submit" name="action" value="edit">Set Quantity</button>
+	            	<button form="bookForm" class="login-button" type="submit" name="action" value="edit_${book.getIsbn()}">Set Quantity</button>
 	            </td> 
 	            <td>
-	            	<button form="bookForm" class="login-button" type="submit" name="action" value="delete">Delete</button>
+	            	<button form="bookForm" class="login-button" type="submit" name="action" value="delete_${book.getIsbn()}">Delete</button>
 	            </td>
 	        </tr>
         </c:forEach>
