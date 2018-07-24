@@ -102,8 +102,8 @@ public class AdminOrdersServlet extends HttpServlet {
 	
 	private void viewOrders(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher;
-		ArrayList<Order> order = Query.getAllOrders();
-		request.setAttribute("order", order);
+		ArrayList<Order> orders = Query.getAllOrders();
+		request.setAttribute("orders", orders);
 		
 		dispatcher = request.getRequestDispatcher("/adminOrders.jsp"); 
 		dispatcher.forward(request, response); 

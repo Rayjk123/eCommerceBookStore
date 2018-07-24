@@ -36,14 +36,16 @@
 <div id="adminBar"></div>
 <div class="margin-top-50">
     <h3>Manage Orders</h3>
-    <form action="AdminOrdersServlet" method="post" id="InventoryForm"></form>
+    <form action="AdminOrdersServlet" method="post" id="OrderForm"></form>
     <table class="table table-hover">
         <!-- Table Header Row-->
         <tr>
         	<!-- Update Status Button TD -->
         	<td></td>
-        	<!-- Status Select TD -->
-        	<td></td>
+        	<!-- Status -->
+            <td class="center-text">
+                Status
+            </td>
             <!-- Email TD -->
             <td class="center-text">
             	Email
@@ -68,54 +70,55 @@
             <td class="center-text">
                 Billing Address
             </td>
-            <!-- Status -->
-            <td class="center-text">
-                Status
-            </td>
         </tr>
         <!-- Order Detail Table Row-->
-        <c:forEach items="${orders}" var="orders">
+        <c:forEach items="${orders}" var="order">
         <tr>
         	<!-- Update Button TD -->
         	<td>
                 <div class="cart-div-height center-text"> 
-                	<button form="OrderForm" type="submit" class="btn btn-link" name="action" value="edit">Edit</button>
+                	<button form="OrderForm" type="submit" class="btn btn-link" name="action" value="update">Edit</button>
                 </div>
-            </td>
-            <!-- Select Button TD -->
-        	<td>
-                
-            </td>
-        	<!-- Email TD -->
-            <td>
-                <div class="cart-div-height center-text">
-                	
-	            </div>
-            </td>
-            <!-- Date TD -->
-            <td>
-                <div class="inventory-div-height">${book.getIsbn()}</div>
-                <input type="hidden" form="InventoryForm" name="isbn" value="${book.getIsbn()}" />
-            </td>
-            <!-- Total TD-->
-            <td>
-                <div class="inventory-div-height">${book.getTitle()}</div>
-            </td>
-            <!-- Shipping Address TD-->
-            <td>
-                <div class="inventory-div-height">${book.getAuthor()}</div>
-            </td>
-            <!-- Payment Card TD-->
-            <td>
-                <div class="inventory-div-height">${book.getVendor()}</div>
-            </td>
-            <!--Billing Address TD-->
-            <td>
-                <div class="inventory-div-height">$${book.getPrice()}</div>
             </td>
             <!-- Status TD-->
             <td>
-                <div class="inventory-div-height">$${book.getPromoPrice()}</div>
+                <div class="inventory-div-height">
+                	<select form="OrderForm" class="reg-input" name="status" required>
+                		<option selected="selected">${order.getStatus()}</option>
+                		<option value="Hold">Hold</option>
+                		<option value="Purge">Purge</option>
+                		<option value="Online Payment Processed">Online Payment Processed</option>
+                		<option value="Shipped">Shipped</option>
+                		<option value="Cancelled">Cancelled</option>
+                	</select>
+                </div>
+            </td>
+        	<!-- Email TD -->
+            <td>
+                <div class="cart-div-height center-text">${order.getEmail()}</div>
+                <input type="hidden" form="OrderForm" name="date" value="${order.getEmail()}" />
+            </td>
+            <!-- Date TD -->
+            <td>
+                <div class="inventory-div-height">${order.getDate}</div>
+                <input type="hidden" form="OrderForm" name="date" value="${order.getDate()}" />
+            </td>
+            <!-- Total TD-->
+            <td>
+                <div class="inventory-div-height">$${order.getTotal()}</div>
+            	<input type="hidden" form="OrderForm" name="total" value="${order.getTotal()}" />
+            </td>
+            <!-- Shipping Address TD-->
+            <td>
+                <div class="inventory-div-height">${order.getShippingAddress()}</div>
+            </td>
+            <!-- Payment Card TD-->
+            <td>
+                <div class="inventory-div-height">${order.getPaymentCard()}</div>
+            </td>
+            <!--Billing Address TD-->
+            <td>
+                <div class="inventory-div-height">${order.getBillingAddress()}</div>
             </td>
         </tr>
         </c:forEach>

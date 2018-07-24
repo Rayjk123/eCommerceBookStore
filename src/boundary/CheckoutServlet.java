@@ -163,7 +163,7 @@ public class CheckoutServlet extends HttpServlet {
 			dispatcher.forward(request, response);
 		}
 		else {
-			order.setStatus("Process Credit Card Payment");
+			order.setStatus("Online Payment Processed");
 			//TODO replace with credit card validity test, right now we just test null
 			if (request.getParameter("ccNumber") != null & request.getParameter("ccSecurity") != null & request.getParameter("exp-month") != null & request.getParameter("exp-year") != null) {
 				order.setPaymentCard(request.getParameter("ccNumber"));
