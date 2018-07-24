@@ -215,6 +215,8 @@ public class Query {
 				customer.getStateBilling() + "', '" +
 				customer.getZipBilling() + "')";
 		
+		System.out.println(query);
+		
 		return DbAccess.insert(query) == 1;
 	}
 	
@@ -405,10 +407,10 @@ public class Query {
 	}
 	
 	public static boolean addPickupOrder(Order order) {
-		String total = String.format("%.2f", order.getTotal());
-		String subTotal = String.format("%.2f", order.getSubTotal());
-		String tax = String.format("%.2f", order.getTax());
-		String shippingCost = String.format("%.2f", order.getShippingCost());
+		double total = Double.parseDouble(String.format("%.2f", order.getTotal()));
+		double subTotal = Double.parseDouble(String.format("%.2f", order.getSubTotal()));
+		double tax = Double.parseDouble(String.format("%.2f", order.getTax()));
+		double shippingCost = Double.parseDouble(String.format("%.2f", order.getShippingCost()));
 		
 		String query = "INSERT into order " + 
 				"(email, date, total, subtotal, tax, shipping_cost, shipping_address, payment_card, billing_address, status) " + 
@@ -435,9 +437,9 @@ public class Query {
 		String tax = String.format("%.2f", order.getTax());
 		String shippingCost = String.format("%.2f", order.getShippingCost());
 		
-		String query = "INSERT into order " + 
+		String query = "insert into `order` " + 
 				"(email, date, total, subtotal, tax, shipping_cost, shipping_address, payment_card, billing_address, status) " + 
-				"VALUES ('" +
+				"Values('" +
 				order.getEmail() + "', '" +
 				order.getDate() + "', '" +
 				total + "', '" + 
@@ -455,8 +457,9 @@ public class Query {
 	}
 	
 	public static ArrayList<Order> getAllOrders() throws SQLException {
-		String query = "select * from order";
+		String query = "select * from `order`";
 		
+		System.out.println(query);
 		ArrayList<Order> retList = new ArrayList<>();
 		ResultSet resultSet = DbAccess.retrieve(query);
 		
@@ -471,7 +474,7 @@ public class Query {
 	}
 	
 	public static boolean updateOrderStatus(String email, String date, String total, String status) {
-		String query = "UPDATE order SET " +
+		String query = "UPDATE `order` SET " +
 				"status ='" + status + "', " +
 				"WHERE email='" + email + 
 				"' and date ='" + date + 

@@ -100,7 +100,7 @@
             </td>
             <!-- Date TD -->
             <td>
-                <div class="inventory-div-height">${order.getDate}</div>
+                <div class="inventory-div-height">${order.getDate()}</div>
                 <input type="hidden" form="OrderForm" name="date" value="${order.getDate()}" />
             </td>
             <!-- Total TD-->

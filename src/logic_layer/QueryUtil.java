@@ -158,8 +158,6 @@ public class QueryUtil {
 			return null;
 		}
 		
-		resultSet.next();
-		
 		Order order = new Order();
 		
 		order.setBillingAddress(resultSet.getString("billing_address"));
@@ -168,6 +166,9 @@ public class QueryUtil {
 		order.setPaymentCard(resultSet.getString("payment_card"));
 		order.setShippingAddress(resultSet.getString("shipping_address"));
 		order.setStatus(resultSet.getString("status"));
+		order.setSubTotal(Double.parseDouble(resultSet.getString("subtotal")));
+		order.setTax(Double.parseDouble(resultSet.getString("tax")));
+		order.setShippingCost(Double.parseDouble(resultSet.getString("shipping_cost")));
 		
 		return order;
 	}
