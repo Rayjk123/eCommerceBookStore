@@ -81,6 +81,7 @@ public class RegisterUser extends HttpServlet {
 		customer.setStateShipping(shippingState);
 		customer.setZipShipping(shippingZip);
 		customer.setShippingAddress(shippingAddress);
+		customer.setPermission("customer");
 		
 		// Means that the checkbox has been set
 		if (request.getParameter("sameAsBilling") != null) {

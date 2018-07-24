@@ -2,6 +2,7 @@ package boundary;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,15 +46,17 @@ public class EditProfile extends HttpServlet{
 			return;
 		}
 		
-		Customer customer = Query.getCustomerInfo(email);
+		ArrayList<Customer> customers = new ArrayList<>();
+		customers.add(Query.getCustomerInfo(email));
 		
-		request.setAttribute("customers", customer);
+		request.setAttribute("customers", customers);
 		dispatcher = request.getRequestDispatcher("/editProfile.jsp");
 		dispatcher.forward(request, response);
 	}
 	
 	private String getSessionEmail(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+		HttpSession session = request.getSession(false);
+		System.out.println(session);
 		
 		if (session == null) {
 			return null;
