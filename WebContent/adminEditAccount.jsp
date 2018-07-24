@@ -187,7 +187,7 @@
         <br>
         <br>
         <div class="center-text">
-            <button class="reg-label" type="submit" name="action" value="update">Confirm</button>
+            <button class="reg-label" type="submit" name="action" value="update_${user.getEmail()}">Confirm</button>
 			<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
         </div>
         

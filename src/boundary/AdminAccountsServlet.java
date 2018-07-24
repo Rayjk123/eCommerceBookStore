@@ -97,7 +97,7 @@ public class AdminAccountsServlet extends HttpServlet {
 			}
 			else if (request.getParameter("action").equals("update")) {
 				try {
-					editAccountSubmit(request,response);
+					editAccountSubmit(request,response,email);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -212,10 +212,10 @@ public class AdminAccountsServlet extends HttpServlet {
 		dispatcher.forward(request, response); 
 	}
 	
-	private void editAccountSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	private void editAccountSubmit(HttpServletRequest request, HttpServletResponse response, String email) throws SQLException, ServletException, IOException {
 		Customer customer = new Customer(); 
 
-		customer.setEmail(request.getParameter("email"));
+		customer.setEmail(email);
 		customer.setPassword(request.getParameter("password"));
 		customer.setFirstName(request.getParameter("firstname"));
 		customer.setLastName(request.getParameter("lastname"));

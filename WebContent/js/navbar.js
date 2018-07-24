@@ -1,7 +1,7 @@
 $(document).ready(function(){
     var headerHtml = "<!--Nav Bar-->\n" +
         "<nav class=\"navbar sticky-top navbar-expand-lg navbar-light bg-light\">\n" +
-        "    <a class=\"navbar-brand fancy-font logo-font\" href=\"index.html\">Bookly</a>\n" +
+        "    <a class=\"navbar-brand fancy-font logo-font\" href=\"index.jsp\">Bookly</a>\n" +
         "    <!--Collapse Icon-->\n" +
         "    <button class=\"navbar-toggler\" type=\"button\" data-toggle=\"collapse\" data-target=\"#navbarMenu\"\n" +
         "            aria-controls=\"navbarMenu\" aria-expanded=\"false\" aria-label=\"Toggle navigation\">\n" +
@@ -13,7 +13,7 @@ $(document).ready(function(){
         "\n" +
         "        <ul class=\"navbar-nav mr-auto\">\n" +
         "            <li class=\"nav-item active\">\n" +
-        "                <a class=\"nav-link\" href=\"index.html\">Home <span class=\"sr-only\">(current)</span></a>\n" +
+        "                <a class=\"nav-link\" href=\"index.jsp\">Home <span class=\"sr-only\">(current)</span></a>\n" +
         "            </li>\n" +
         "            <!--Dropdown Menu Link-->\n" +
         "            <li class=\"nav-item dropdown\">\n" +

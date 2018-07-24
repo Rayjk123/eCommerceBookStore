@@ -162,7 +162,7 @@ public class Query {
 	}
 	
 	public static ArrayList<Book> getBooksByIsbn(String isbn) throws SQLException {
-		String query = "select * from book where  ='" + 
+		String query = "select * from book where ='" + 
 				isbn + "'";
 		
 		ArrayList<Book> retList = new ArrayList<>();

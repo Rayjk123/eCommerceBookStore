@@ -32,6 +32,8 @@
 <div id="navbar"></div>
 <div id="adminBar"></div>
 <h1 class="center-text">Add Item</h1>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set value="${user}" var="user" scope="session" />
 <div class="half-width">
 	<form action="AdminAccountsServlet" method="post">
 		<label class="reg-label">Email:</label><input class="reg-input" type="text" name="email" required><br>
@@ -181,7 +183,7 @@
         <br>
         <br>
         <div class="center-text">
-            <button class="reg-label" type="submit" name="action" value="add">Add</button>
+            <button class="reg-label" type="submit" name="action" value="add_${user.getEmail()}">Add</button>
 			<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
         </div>
         

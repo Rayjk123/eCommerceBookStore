@@ -33,6 +33,9 @@
 <div id="adminBar"></div>
 <h1 class="center-text">Add Item</h1>
 <div class="half-width">
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set value="${book}" var="book" scope="session" />
 	<form action="AdminInventoryServlet" method="post">
 		<label class="reg-label">ISBN: </label><input class="reg-input" type="number" name="isbn" required><br>
 		<label class="reg-label">Title: </label><input class="reg-input" type="text" name="title" required><br>
@@ -54,11 +57,10 @@
 		<br>
 		<br>
 		<br>
-		<button class="reg-label" type="submit" name="action" value="add">Add</button>
+		<button class="reg-label" type="submit" name="action" value="add_${book.getIsbn()}">Add</button>
 		<button class="reg-label" type="submit" name="action" value="cancel">Cancel</button>
         
 	</form>
-
 
 
 </div>
