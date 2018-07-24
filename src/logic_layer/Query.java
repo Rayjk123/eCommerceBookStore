@@ -453,4 +453,32 @@ public class Query {
 			
 		return DbAccess.insert(query) == 1;
 	}
+	
+	public static ArrayList<Order> getAllOrders() throws SQLException {
+		String query = "select * from order";
+		
+		ArrayList<Order> retList = new ArrayList<>();
+		ResultSet resultSet = DbAccess.retrieve(query);
+		
+		while(resultSet.next()) {
+			Order order = QueryUtil.resultSetToOrder(resultSet);
+			if (order != null) {
+				retList.add(order);
+			}
+		}
+		
+		return retList;
+	}
+	
+	public static boolean updateOrderStatus(String email, String date, String total, String status) {
+		String query = "UPDATE order SET " +
+				"status ='" + status + "', " +
+				"WHERE email='" + email + 
+				"' and date ='" + date + 
+				"' and total ='" + total + "'";
+		
+		System.out.println(query);
+			
+		return DbAccess.update(query) == 1;
+	}
 }

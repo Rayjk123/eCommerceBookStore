@@ -35,118 +35,87 @@
 <div id="navbar"></div>
 <div id="adminBar"></div>
 <div class="margin-top-50">
-    <h3>Manage Inventory</h3>
-    <form action="adminAddInventory.jsp" method="post">
-    	<button type="submit" class="btn btn-link" name="action" value="add">Add Book</button>
-    </form>
-    <form action="AdminInventoryServlet" method="post" id="InventoryForm"></form>
+    <h3>Manage Orders</h3>
+    <form action="AdminOrdersServlet" method="post" id="InventoryForm"></form>
     <table class="table table-hover">
         <!-- Table Header Row-->
         <tr>
-        	<!-- Edit Button TD -->
+        	<!-- Update Status Button TD -->
         	<td></td>
-        	<!-- Delete Button TD -->
+        	<!-- Status Select TD -->
         	<td></td>
-            <!-- Book Image TD -->
+            <!-- Email TD -->
             <td class="center-text">
-            	Image
+            	Email
             </td>
-            <!-- Book ISBN TD -->
+            <!-- Date TD -->
             <td class="center-text">
-            	ISBN
+            	Date
             </td>
-            <!-- Book Title TD-->
-             <td class="center-text">
-                Title
-            </td>
-            <!-- Book Author TD-->
-             <td class="center-text">
-                Author
-            </td>
-            <!-- Book Vendor TD-->
+            <!-- Total TD-->
             <td class="center-text">
-                Vendor
+                Total
             </td>
-            <!--Book Price TD-->
-             <td class="center-text">
-                Price
-            </td>
-            <!-- Promo Price -->
+            <!-- Shipping TD-->
             <td class="center-text">
-                Promo Price
+                Shipping Address
             </td>
-            <!-- Promo Code -->
+            <!-- Payment Card TD-->
             <td class="center-text">
-                Promo Code
+                Payment Card
             </td>
-            <!--Book Quantity TD-->
+            <!--Billing Address TD-->
             <td class="center-text">
-                Quantity
+                Billing Address
             </td>
-            <!--Book Quantity On Hold TD-->
+            <!-- Status -->
             <td class="center-text">
-                On Hold
+                Status
             </td>
         </tr>
-        <!-- Book Detail Table Row-->
-        <c:forEach items="${books}" var="book">
+        <!-- Order Detail Table Row-->
+        <c:forEach items="${orders}" var="orders">
         <tr>
-        	<!-- Edit Button TD -->
+        	<!-- Update Button TD -->
         	<td>
                 <div class="cart-div-height center-text"> 
-                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="edit">Edit</button>
+                	<button form="OrderForm" type="submit" class="btn btn-link" name="action" value="edit">Edit</button>
                 </div>
             </td>
-            <!-- Delete Button TD -->
+            <!-- Select Button TD -->
         	<td>
-                <div class="cart-div-height center-text"> 
-                	<button form="InventoryForm" type="submit" class="btn btn-link" name="action" value="delete">Delete</button>
-                </div>
+                
             </td>
-        	<!-- Book Image TD -->
+        	<!-- Email TD -->
             <td>
                 <div class="cart-div-height center-text">
-                	<a href="AdminInventoryServlet?action=detail&isbn=${book.getIsbn()}">
-                	<img class="inventory-img" src="${book.getImage()}">
-                	</a>
+                	
 	            </div>
             </td>
-            <!-- Book ISBN TD -->
+            <!-- Date TD -->
             <td>
                 <div class="inventory-div-height">${book.getIsbn()}</div>
                 <input type="hidden" form="InventoryForm" name="isbn" value="${book.getIsbn()}" />
             </td>
-            <!-- Book Title TD-->
+            <!-- Total TD-->
             <td>
                 <div class="inventory-div-height">${book.getTitle()}</div>
             </td>
-            <!-- Book Author TD-->
+            <!-- Shipping Address TD-->
             <td>
                 <div class="inventory-div-height">${book.getAuthor()}</div>
             </td>
-            <!-- Book Vendor TD-->
+            <!-- Payment Card TD-->
             <td>
                 <div class="inventory-div-height">${book.getVendor()}</div>
             </td>
-            <!--Book Price TD-->
+            <!--Billing Address TD-->
             <td>
                 <div class="inventory-div-height">$${book.getPrice()}</div>
             </td>
-            <!--Book Promo Price TD-->
+            <!-- Status TD-->
             <td>
                 <div class="inventory-div-height">$${book.getPromoPrice()}</div>
-            </td>
-            <!--Book Promo Code TD-->
-            <td>
-                <div class="inventory-div-height">${book.getPromoCode()}</div>
-            </td>
-            <!--Book Quantity TD-->
-            <td>
-                <div class="inventory-div-height">${book.getStock()}</div>
-            </td>
-            <!--Book Quantity On Hold TD-->
-            <td>
-                <div class="inventory-div-height">${book.getHold()}</div>
             </td>
         </tr>
         </c:forEach>

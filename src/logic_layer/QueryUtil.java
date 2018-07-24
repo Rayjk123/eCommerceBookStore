@@ -8,6 +8,7 @@ import domain_layer.Book;
 import domain_layer.Cart;
 import domain_layer.CreditCard;
 import domain_layer.Customer;
+import domain_layer.Order;
 
 public class QueryUtil {
 	
@@ -148,5 +149,26 @@ public class QueryUtil {
 		String email = user.getString("email");
 		
 		return email;
+	}
+	
+	protected static Order resultSetToOrder(ResultSet resultSet) throws SQLException {
+		ResultSetMetaData rsmd = resultSet.getMetaData();
+
+		if (rsmd.getColumnCount() != 10) {
+			return null;
+		}
+		
+		resultSet.next();
+		
+		Order order = new Order();
+		
+		order.setBillingAddress(resultSet.getString("billing_address"));
+		order.setDate(resultSet.getString("date"));
+		order.setEmail(resultSet.getString("email"));
+		order.setPaymentCard(resultSet.getString("payment_card"));
+		order.setShippingAddress(resultSet.getString("shipping_address"));
+		order.setStatus(resultSet.getString("status"));
+		
+		return order;
 	}
 }

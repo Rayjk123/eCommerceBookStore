@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 
 import logic_layer.Query;
 import domain_layer.Book;
+import domain_layer.Order;
 
 @SuppressWarnings("serial")
 @WebServlet("/AdminOrdersServlet")
@@ -30,7 +31,6 @@ public class AdminOrdersServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		String email = (String) session.getAttribute("email"); 
 		String permission = (String) session.getAttribute("permission");
-		System.out.println("1" + email + " " + permission);
 		
 		/* TODO get permission and login check working
 		
@@ -72,26 +72,18 @@ public class AdminOrdersServlet extends HttpServlet {
 	 */
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getParameter("action") != null) { // TODO update this line with action for forms
-			// TODO call search and edit functions... anything that needs input
-			if (request.getParameter("action").equals("add")) {
+			
+			if (request.getParameter("action").equals("update")) {
 				try {
-					addItem(request,response);
+					updateStatus(request,response);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
-			else if (request.getParameter("action").equals("edit")) {
+			else {
 				try {
-					editItemPage(request,response,request.getParameter("isbn"));
-				} catch (SQLException | ServletException | IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			else if (request.getParameter("action").equals("editSubmit")) {
-				try {
-					editItemPage(request,response, request.getParameter("isbn"));
+					viewOrders(request,response);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -100,7 +92,7 @@ public class AdminOrdersServlet extends HttpServlet {
 		}
 		else {
 			try {
-				viewInventory(request, response);
+				viewOrders(request, response);
 			} catch (SQLException | ServletException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -108,48 +100,24 @@ public class AdminOrdersServlet extends HttpServlet {
 		}	
 	}
 	
-	private void viewInventory(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+	private void viewOrders(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
 		RequestDispatcher dispatcher;
-		ArrayList<Book> books = Query.getAllBooks();
-		request.setAttribute("books", books);
+		ArrayList<Order> order = Query.getAllOrders();
+		request.setAttribute("order", order);
 		
-		dispatcher = request.getRequestDispatcher("/adminInventory.jsp"); 
+		dispatcher = request.getRequestDispatcher("/adminOrders.jsp"); 
 		dispatcher.forward(request, response); 
 	}
 	
-	private void addItem(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
-		Book book = new Book();
-		
-		book.setIsbn(request.getParameter("isbn"));
-		book.setTitle(request.getParameter("title"));
-		book.setAuthor(request.getParameter("author"));
-		book.setPrice(Double.parseDouble(request.getParameter("price")));
-		book.setGenre(request.getParameter("genre"));
-		book.setPublisher(request.getParameter("publisher"));
-		book.setVendor(request.getParameter("vendor"));
-		book.setStock(Integer.parseInt(request.getParameter("stock")));
-		book.setPromoCode(request.getParameter("promocode"));
-		book.setPromoPrice(Double.parseDouble(request.getParameter("promoprice")));
-		book.setImage(request.getParameter("image"));
-		book.setDescription(request.getParameter("description"));
-		
-		Query.addBookToInventory(book);
-		
-		viewInventory(request,response);
-		
-	}
-
 	
-	private void editItemPage(HttpServletRequest request, HttpServletResponse response, String isbn) throws SQLException, ServletException, IOException {
-		RequestDispatcher dispatcher;
-		Book book = Query.getBookByIsbn(isbn);
-		request.setAttribute("book", book);
+	private void updateStatus(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		String email = request.getParameter("email");
+		String date = request.getParameter("date");
+		String total = request.getParameter("total");
+		String status = request.getParameter("status");
 		
-		dispatcher = request.getRequestDispatcher("/adminEditInventory.jsp"); 
-		dispatcher.forward(request, response); 
-	}
-	
-	private void editItemSubmit(HttpServletRequest request, HttpServletResponse response) throws SQLException, ServletException, IOException {
+		Query.updateOrderStatus(email, date, total, status);
 		
+		viewOrders(request,response);
 	}
 }
