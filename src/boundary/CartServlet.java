@@ -47,15 +47,23 @@ public class CartServlet extends HttpServlet {
 	}
 	
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response, String email) {
-		if (request.getParameter("action") != null & request.getParameter("isbn") != null & request.getParameter("qty") != null) {
-			String action = request.getParameter("action");
-			String isbn = request.getParameter("isbn");
-			int qty = Integer.parseInt(request.getParameter("qty"));
+		if (request.getParameter("action") != null) {
+			
+			//String action = request.getParameter("action");
+			//String isbn = request.getParameter("isbn");
+			//int qty = Integer.parseInt(request.getParameter("qty"));
+			
+			String input = request.getParameter("action");
+			
+			String[] parse = input.split("_", 2);
+			String action = parse[0];
+			String isbn = parse[1];
+			
+			int qty = Integer.parseInt(request.getParameter("qty_" + isbn));
 			
 			System.out.println(action + " " + isbn + " quantity=" + qty);
 			
 			if (action.equals("add")) {
-				System.out.println("action = " + action);
 				try {
 					addToCart(request, response, email, isbn, qty);
 				} catch (SQLException | ServletException | IOException e) {

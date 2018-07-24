@@ -31,7 +31,7 @@
 <div id="navbar"></div>
 
 <div class="container margin-top-50">
-
+<form action="CartServlet" method="post" id="BookForm"></form>
     <div class="row justify-content-center">
     	<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
     	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
@@ -50,10 +50,12 @@
         	    <p class="overflow half-height">
         	    	${book.getDescription()}
         	    </p>
-        	    <form action="CartServlet?action=add&isbn=${book.getIsbn()}&qty=1" method="post">
-                	<input class="login-button" type="submit" value="Add To Cart"><br>
-                </form>
-        	</div>
+        	    	<input type="hidden" form="BookForm" name="isbn" value="${book.getIsbn()}" />
+	               <input type="hidden" form="BookForm" name="qty_${book.getIsbn()}" value="1" />
+	               <input type="hidden" form="BookForm" name="isbn" value="${book.getIsbn()}" />
+	           
+                	<button class="login-button" type="submit" form="BookForm" name="action" value="add_${book.getIsbn()}">Add to Cart</button><br>
+	            </div>
 	</div>
 </div>
     

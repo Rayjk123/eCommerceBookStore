@@ -72,8 +72,16 @@ public class AdminInventoryServlet extends HttpServlet {
 	 */
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getParameter("action") != null) { // TODO update this line with action for forms
-			// TODO call search and edit functions... anything that needs input
-			if (request.getParameter("action").equals("add")) {
+			
+			String input = request.getParameter("action");
+			
+			String[] parse = input.split("_", 2);
+			String action = parse[0];
+			String isbn = parse[1];
+			
+			System.out.println(action + " " + isbn);
+			
+			if (action.equals("add")) {
 				try {
 					addItem(request,response);
 				} catch (SQLException | ServletException | IOException e) {
@@ -81,9 +89,9 @@ public class AdminInventoryServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			else if (request.getParameter("action").equals("edit")) {
+			else if (action.equals("edit")) {
 				try {
-					editItemPage(request,response,request.getParameter("isbn"));
+					editItemPage(request,response,isbn);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -106,9 +114,9 @@ public class AdminInventoryServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			else if (request.getParameter("action").equals("delete")) {
+			else if (action.equals("delete")) {
 				try {
-					deleteItem(request, response, request.getParameter("isbn"));
+					deleteItem(request, response, isbn);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();

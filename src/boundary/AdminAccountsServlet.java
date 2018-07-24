@@ -72,7 +72,13 @@ public class AdminAccountsServlet extends HttpServlet {
 	 */
 	private void servletHelper(HttpServletRequest request, HttpServletResponse response) {
 		if (request.getParameter("action") != null) { // TODO update this line with action for forms
-			// TODO call search and edit functions... anything that needs input
+			
+			String input = request.getParameter("action");
+			
+			String[] parse = input.split("_", 2);
+			String action = parse[0];
+			String email = parse[1];
+			
 			if (request.getParameter("action").equals("add")) {
 				try {
 					addUser(request, response);
@@ -81,9 +87,9 @@ public class AdminAccountsServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			else if (request.getParameter("action").equals("edit")) {
+			else if (action.equals("edit")) {
 				try {
-					editAccountPage(request,response,request.getParameter("email"));
+					editAccountPage(request,response,email);
 				} catch (SQLException | ServletException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -105,7 +111,7 @@ public class AdminAccountsServlet extends HttpServlet {
 					e.printStackTrace();
 				}
 			}
-			else if (request.getParameter("action").equals("delete")) {
+			else if (action.equals("delete")) {
 				try {
 					deleteUser(request, response, request.getParameter("email"));
 				} catch (SQLException | ServletException | IOException e) {

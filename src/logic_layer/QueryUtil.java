@@ -154,7 +154,7 @@ public class QueryUtil {
 	protected static Order resultSetToOrder(ResultSet resultSet) throws SQLException {
 		ResultSetMetaData rsmd = resultSet.getMetaData();
 
-		if (rsmd.getColumnCount() != 10) {
+		if (rsmd.getColumnCount() != 11) {
 			return null;
 		}
 		
@@ -169,6 +169,8 @@ public class QueryUtil {
 		order.setSubTotal(Double.parseDouble(resultSet.getString("subtotal")));
 		order.setTax(Double.parseDouble(resultSet.getString("tax")));
 		order.setShippingCost(Double.parseDouble(resultSet.getString("shipping_cost")));
+		order.setTotal(Double.parseDouble(resultSet.getString("total")));
+		order.setOrderNumber(Integer.parseInt(resultSet.getString("id")));
 		
 		return order;
 	}

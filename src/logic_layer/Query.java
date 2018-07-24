@@ -473,12 +473,10 @@ public class Query {
 		return retList;
 	}
 	
-	public static boolean updateOrderStatus(String email, String date, String total, String status) {
+	public static boolean updateOrderStatus(String status, int orderNumber) {
 		String query = "UPDATE `order` SET " +
-				"status ='" + status + "', " +
-				"WHERE email='" + email + 
-				"' and date ='" + date + 
-				"' and total ='" + total + "'";
+				"status ='" + status + "' " +
+				"WHERE id='" + orderNumber + "'";
 		
 		System.out.println(query);
 			
